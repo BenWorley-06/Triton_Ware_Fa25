@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bni15epyyxgeu"]
+
+[ext_resource type="Texture2D" uid="uid://do1k2hp5anuib" path="res://icon.svg" id="1_gu245"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3dejo"]
+
+[node name="Volcano" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3dejo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-0.5, -0.500017)
+scale = Vector2(0.164063, 0.164063)
+texture = ExtResource("1_gu245")

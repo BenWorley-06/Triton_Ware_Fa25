@@ -2,7 +2,7 @@ extends Entity
 
 class_name Character
 
-enum Action_State {IDLE,WORKING}
+enum Action_State {IDLE,WORKING,CARRIED}
 
 @export var stats: Character_Stats
 var action_state = Action_State.IDLE
@@ -11,17 +11,32 @@ var current_job=null
 var wander_timer: float = 0
 var wander_direction: Vector2 = Vector2.ZERO
 
+var selected = false
+
+
 func _ready():
 	# register self to population manager
 	get_node("/root/Game/Managers/PopulationManager").register_character(self)
 
+func _physics_process(delta: float) -> void:
+	if Input.is_action_just_released("left_click"):
+		selected = false;
+		
+	if selected:
+		global_position = lerp(global_position, get_global_mouse_position(), 100 * delta);
+		get_node("CollisionShape2D").disabled = true
+		z_index = 10
+	else:
+		get_node("CollisionShape2D").disabled = false
 func _process(delta: float) -> void:
+	
 	match action_state:
 		Action_State.IDLE:
 			idle(delta)
 		Action_State.WORKING:
 			working(delta)
-	move_and_slide()
+	if not selected:
+		move_and_slide()
 
 func idle(delta: float):
 	if wander_timer<=0:
@@ -60,3 +75,10 @@ func do_build_job(delta: float) -> void:
 	print("Built structure at", pos)
 	current_job = null
 	action_state = Action_State.IDLE
+
+# drag controller
+func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	if Input.is_action_just_pressed("left_click"):
+		selected = true
+	
+	pass # Replace with function body.
