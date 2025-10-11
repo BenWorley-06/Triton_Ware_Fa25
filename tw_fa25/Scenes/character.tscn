@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cah1gdlpwbn5i"]
+[gd_scene load_steps=8 format=3 uid="uid://cah1gdlpwbn5i"]
 
 [ext_resource type="Script" uid="uid://unpx8fm2f83l" path="res://Scripts/character - scripts/Character_Class.gd" id="1_owm7s"]
 [ext_resource type="Script" uid="uid://c3i3i32v4ta6k" path="res://Scripts/character - scripts/character_stats.gd" id="2_nytcm"]
@@ -17,10 +17,6 @@ metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owm7s"]
-radius = 37.417
-height = 109.977
-
 [node name="Character" type="CharacterBody2D"]
 scale = Vector2(0.443294, 0.366278)
 collision_layer = 4
@@ -31,12 +27,6 @@ metadata/_custom_type_script = "uid://unpx8fm2f83l"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(3.66158, 3.66158)
 shape = SubResource("CapsuleShape2D_wfnr8")
-
-[node name="drag" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="drag"]
-scale = Vector2(2.17753, 2.38533)
-shape = SubResource("CapsuleShape2D_owm7s")
 
 [node name="shadow" type="Sprite2D" parent="."]
 modulate = Color(0.10748, 0.10748, 0.10748, 0.713726)
@@ -51,5 +41,3 @@ texture = ExtResource("3_ejsiy")
 
 [node name="voicebox" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("5_ejsiy")
-
-[connection signal="input_event" from="drag" to="." method="_on_area_2d_input_event"]
