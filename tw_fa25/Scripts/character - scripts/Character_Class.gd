@@ -5,6 +5,8 @@ class_name Character
 @onready var sprite: Sprite2D = $Sprite
 @onready var voicebox: AudioStreamPlayer2D = $voicebox
 
+@export var lava_particle_scene: PackedScene
+
 enum Action_State {IDLE,WORKING,CARRIED}
 var action_state = Action_State.IDLE
 var current_job=null
@@ -19,12 +21,13 @@ var farm_timer: float = 0
 var selected = false
 var base_scale: Vector2
 
+var over_volcano: bool = false
+
 #	--- Main ---
 func _ready():
 	# register self to population manager
 	base_scale = sprite.scale
 	get_node("/root/Game/Managers/PopulationManager").register_character(self)
-
 		
 func _process(delta: float) -> void:
 	
@@ -34,6 +37,8 @@ func _process(delta: float) -> void:
 		Action_State.WORKING:
 			working(delta)
 	if not selected:
+		if over_volcano:
+			enter_volcano()
 		move_and_slide()
 
 #	--- Idle ---
@@ -126,3 +131,17 @@ func end_grab():
 	var tween2 = create_tween()
 	tween1.tween_property(sprite, "scale", base_scale, 0.2) # return to normal size over 0.2s
 	tween2.tween_property(sprite, "position:y", 0, 0.2) # move back down
+
+func _on_drag_area_entered(area: Area2D) -> void:
+	if area.is_in_group("volcano"):
+		over_volcano=true
+
+func _on_drag_area_exited(area: Area2D) -> void:
+	if area.is_in_group("volcano"):
+		over_volcano=false
+
+func enter_volcano():
+	var lava = lava_particle_scene.instantiate()
+	get_tree().current_scene.add_child(lava)
+	lava.global_position = global_position
+	queue_free()

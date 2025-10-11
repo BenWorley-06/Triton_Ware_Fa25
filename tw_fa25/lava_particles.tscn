@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://bya1y6ct6nphw"]
+
+[ext_resource type="Script" uid="uid://de37ybvf07paj" path="res://lava_particles.gd" id="1_0sa6k"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ou607"]
+particle_flag_disable_z = true
+inherit_velocity_ratio = 20.0
+spread = 180.0
+initial_velocity_max = 126.44
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -63.22
+linear_accel_max = -2.23517e-06
+scale_max = 12.49
+color = Color(0.955322, 0.802837, 0.671974, 1)
+hue_variation_min = -0.07
+hue_variation_max = 0.17
+turbulence_enabled = true
+
+[node name="lava_particles" type="Node2D"]
+script = ExtResource("1_0sa6k")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+amount = 80
+lifetime = 0.65
+speed_scale = 1.41
+explosiveness = 0.5
+randomness = 0.14
+process_material = SubResource("ParticleProcessMaterial_ou607")

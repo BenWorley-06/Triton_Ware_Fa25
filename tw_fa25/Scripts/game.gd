@@ -1,12 +1,15 @@
 extends Node
-@onready var building_manager: BuildingManager = $Managers/BuildingManager
-var character_scene = preload("res://Scenes/character.tscn")
 
-func add_character():
-	var character=character_scene.instantiate()
-	character.global_position=Vector2(200, 200)
-	add_child(character)
-	
+@export var stats: GameStats
+
+var day_timer: float = 0
+var day: int = 0
+
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		add_character()
+	day_timer+=delta
+	if day_timer>=stats.time_in_day:
+		end_day()
+
+func end_day():
+	day+=1
+	day_timer=0
