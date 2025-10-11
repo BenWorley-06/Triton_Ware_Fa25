@@ -6,6 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_op5p7"]
 
 [node name="house_scafold" type="StaticBody2D"]
+scale = Vector2(0.653095, 0.653095)
 script = ExtResource("1_ti147")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
