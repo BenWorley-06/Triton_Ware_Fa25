@@ -3,6 +3,7 @@ class_name Character
 
 @export var stats: Character_Stats
 @onready var sprite: Sprite2D = $Sprite
+@onready var voicebox: AudioStreamPlayer2D = $voicebox
 
 enum Action_State {IDLE,WORKING,CARRIED}
 var action_state = Action_State.IDLE
@@ -115,6 +116,7 @@ func initiate_grab():
 	var tween2 = create_tween()
 	tween1.tween_property(sprite, "scale", sprite.scale * 2, 0.4) # scale up over 0.2s
 	tween2.tween_property(sprite, "position:y", sprite.position.y - 100, 0.4) # move sprite up a bit
+	voicebox.request_play("pickup")
 	
 func end_grab():
 	selected = false

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bj0kuytpqv41y"]
 
-[ext_resource type="Script" uid="uid://bl7e7r1pdvlky" path="res://farm.gd" id="1_bw225"]
+[ext_resource type="Script" uid="uid://bl7e7r1pdvlky" path="res://Scripts/building scripts/farm.gd" id="1_bw225"]
 [ext_resource type="Texture2D" uid="uid://ccu5xpyd8ty6h" path="res://Art/Temporary/farm_temp.png" id="1_ju177"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tww1o"]

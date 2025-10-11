@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://c1inf813m25xt"]
 
 [ext_resource type="Texture2D" uid="uid://dl7i44f5kwsc6" path="res://Art/Temporary/house.png" id="1_hfkix"]
-[ext_resource type="Script" uid="uid://2fvg8jsg4r0s" path="res://house.gd" id="1_metfq"]
+[ext_resource type="Script" uid="uid://2fvg8jsg4r0s" path="res://Scripts/building scripts/house.gd" id="1_metfq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hfkix"]
 

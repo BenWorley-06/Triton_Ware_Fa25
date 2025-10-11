@@ -1,13 +1,12 @@
 [gd_scene load_steps=14 format=3 uid="uid://cifelub41grjx"]
 
-[ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://game.gd" id="1_1l0tm"]
+[ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
-[ext_resource type="Script" uid="uid://cf7vh241xnglu" path="res://population_manager.gd" id="2_qxrlw"]
-[ext_resource type="Script" uid="uid://d16agg3i2gglf" path="res://building_manager.gd" id="3_wrm1d"]
-[ext_resource type="Script" uid="uid://clngkkwwtpr5e" path="res://resource_manager.gd" id="4_3dryh"]
-[ext_resource type="Script" uid="uid://do1wimje71ysu" path="res://build_area.gd" id="5_wowpa"]
+[ext_resource type="Script" uid="uid://cf7vh241xnglu" path="res://Scripts/manager scripts/population_manager.gd" id="2_qxrlw"]
+[ext_resource type="Script" uid="uid://d16agg3i2gglf" path="res://Scripts/manager scripts/building_manager.gd" id="3_wrm1d"]
+[ext_resource type="Script" uid="uid://clngkkwwtpr5e" path="res://Scripts/manager scripts/resource_manager.gd" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bni15epyyxgeu" path="res://volcano.tscn" id="6_i6g32"]
-[ext_resource type="Script" uid="uid://ux8fr26o1ta2" path="res://ability_manager.gd" id="6_v158k"]
+[ext_resource type="Script" uid="uid://ux8fr26o1ta2" path="res://Scripts/manager scripts/ability_manager.gd" id="6_v158k"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ebmjs"]
 
@@ -17,6 +16,25 @@
 distance = 122.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3dryh"]
+
+[sub_resource type="GDScript" id="GDScript_1l0tm"]
+script/source = "extends Area2D
+class_name BuildArea
+
+func get_random_point() -> Vector2:
+	var shape = $CollisionShape2D.shape
+	if shape is RectangleShape2D:
+		var half_size = shape.size * 0.5
+		# random point within rectangle centered on (0,0)
+		var local_point = Vector2(
+			randf_range(-half_size.x, half_size.x),
+			randf_range(-half_size.y, half_size.y)
+		)
+		return to_global(local_point)
+	else:
+		push_warning(\"BuildArea shape must be a RectangleShape2D\")
+		return global_position
+"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6g32"]
 size = Vector2(17.5849, 20)
@@ -72,7 +90,7 @@ script = ExtResource("6_v158k")
 [node name="BuildArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 0
-script = ExtResource("5_wowpa")
+script = SubResource("GDScript_1l0tm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BuildArea"]
 position = Vector2(643.504, 320)

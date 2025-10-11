@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://b2bacbsv6vksv"]
 
-[ext_resource type="Script" uid="uid://batttehfy8jdj" path="res://house_scafold.gd" id="1_ti147"]
+[ext_resource type="Script" uid="uid://batttehfy8jdj" path="res://Scripts/building scripts/house_scafold.gd" id="1_ti147"]
 [ext_resource type="Texture2D" uid="uid://b8wvvrlufj5va" path="res://Art/Temporary/house_scafold.png" id="2_op5p7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_op5p7"]
