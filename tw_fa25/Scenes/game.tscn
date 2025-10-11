@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=18 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://clngkkwwtpr5e" path="res://Scripts/manager scripts/resource_manager.gd" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bni15epyyxgeu" path="res://volcano.tscn" id="6_i6g32"]
 [ext_resource type="Script" uid="uid://ux8fr26o1ta2" path="res://Scripts/manager scripts/ability_manager.gd" id="6_v158k"]
+[ext_resource type="PackedScene" uid="uid://ip16vgl4u7s4" path="res://demolisher.tscn" id="8_ldgsr"]
 [ext_resource type="Script" uid="uid://c8dcxb8cawtlo" path="res://Scenes/debug_helper(delete_before_submission).gd" id="8_v158k"]
 
 [sub_resource type="Resource" id="Resource_ldgsr"]
@@ -94,6 +95,7 @@ script = ExtResource("4_3dryh")
 
 [node name="AbilityManager" type="Node2D" parent="Managers"]
 script = ExtResource("6_v158k")
+demolisher_scene = ExtResource("8_ldgsr")
 
 [node name="BuildArea" type="Area2D" parent="."]
 collision_layer = 0

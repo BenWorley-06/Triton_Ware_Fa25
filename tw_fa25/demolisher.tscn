@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://ip16vgl4u7s4"]
+
+[ext_resource type="Script" uid="uid://dr7wj5sucpq80" path="res://demolisher.gd" id="1_21eog"]
+[ext_resource type="Texture2D" uid="uid://bdwbtvmdmi7yu" path="res://Art/Temporary/black_circle.png" id="2_dnaad"]
+[ext_resource type="Texture2D" uid="uid://vsj761gyofab" path="res://Art/Temporary/hand.png" id="3_pvi58"]
+[ext_resource type="AudioStream" uid="uid://du5usipmju7l8" path="res://Sounds/slam.mp3" id="4_dnaad"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5jp6u"]
+
+[node name="demolisher" type="Area2D"]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_21eog")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5jp6u")
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 0.584314)
+scale = Vector2(0.188366, 0.188366)
+texture = ExtResource("2_dnaad")
+
+[node name="hand" type="Sprite2D" parent="."]
+position = Vector2(126, -213)
+rotation = -3.04455
+scale = Vector2(0.63442, 0.63442)
+texture = ExtResource("3_pvi58")
+
+[node name="audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dnaad")

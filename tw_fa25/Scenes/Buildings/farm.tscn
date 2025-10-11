@@ -54,7 +54,7 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_bw225")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["building"]]
 scale = Vector2(7.873, 7.873)
 shape = SubResource("RectangleShape2D_tww1o")
 

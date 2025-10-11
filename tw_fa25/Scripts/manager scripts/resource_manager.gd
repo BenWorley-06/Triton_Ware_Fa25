@@ -3,7 +3,7 @@ class_name ResourceManager
 
 @export var faith: int = 0
 @export var bread: int = 10
-@export var population: int = 0
+@export var population: int = 4 #Change later
 
 func add_faith(amount: int):
 	faith += amount

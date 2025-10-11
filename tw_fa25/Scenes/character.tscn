@@ -22,7 +22,7 @@ metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 radius = 37.417
 height = 109.977
 
-[node name="Character" type="CharacterBody2D"]
+[node name="Character" type="CharacterBody2D" groups=["character"]]
 scale = Vector2(0.443294, 0.366278)
 collision_layer = 4
 script = ExtResource("1_owm7s")
