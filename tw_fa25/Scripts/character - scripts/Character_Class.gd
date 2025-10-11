@@ -11,6 +11,8 @@ var current_job=null
 var wander_timer: float = 0
 var wander_direction: Vector2 = Vector2.ZERO
 
+var build_timer: float = 0
+
 var selected = false
 
 
@@ -67,14 +69,25 @@ func working(delta:float):
 			current_job = null
 
 func do_build_job(delta: float) -> void:
-	var manager = get_node("/root/Game/Managers/BuildingManager")
-	var pos = manager.find_valid_build_spot(current_job.scene)
-	print("working")
-	if pos:
-		manager.place_building(current_job.scene, pos)
-	print("Built structure at", pos)
-	current_job = null
-	action_state = Action_State.IDLE
+	var scaffold = current_job.scafold
+	if scaffold == null or not is_instance_valid(scaffold):
+		# scaffold was removed for some reason
+		current_job = null
+		action_state = Action_State.IDLE
+		return
+
+	var distance = global_position.distance_to(scaffold.global_position)
+	if distance > 100:
+		var direction = (scaffold.global_position - global_position).normalized()
+		velocity = direction * stats.walk_speed*2
+	else:
+		velocity = Vector2.ZERO
+		build_timer += delta
+		if build_timer >= scaffold.build_time:
+			print("job done")
+			scaffold.complete_building()
+			current_job = null
+			action_state = Action_State.IDLE
 
 # drag controller
 func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:

@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=13 format=3 uid="uid://cifelub41grjx"]
 
+[ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://cf7vh241xnglu" path="res://population_manager.gd" id="2_qxrlw"]
 [ext_resource type="Script" uid="uid://d16agg3i2gglf" path="res://building_manager.gd" id="3_wrm1d"]
@@ -20,6 +21,7 @@ distance = 122.0
 size = Vector2(17.5849, 20)
 
 [node name="Game" type="Node"]
+script = ExtResource("1_1l0tm")
 
 [node name="Character" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(674, 337)
