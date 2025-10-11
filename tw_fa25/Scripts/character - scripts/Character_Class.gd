@@ -1,0 +1,62 @@
+extends Entity
+
+class_name Character
+
+enum Action_State {IDLE,WORKING}
+
+@export var stats: Character_Stats
+var action_state = Action_State.IDLE
+var current_job=null
+
+var wander_timer: float = 0
+var wander_direction: Vector2 = Vector2.ZERO
+
+func _ready():
+	# register self to population manager
+	get_node("/root/Game/Managers/PopulationManager").register_character(self)
+
+func _process(delta: float) -> void:
+	match action_state:
+		Action_State.IDLE:
+			idle(delta)
+		Action_State.WORKING:
+			working(delta)
+	move_and_slide()
+
+func idle(delta: float):
+	if wander_timer<=0:
+		print("changed")
+		wander_timer=stats.wander_time
+		var angle = randf() * TAU  # TAU = 2 * PI
+		wander_direction = Vector2.from_angle(angle)
+	velocity=wander_direction*stats.walk_speed
+	wander_timer-=delta
+	var job = get_node("/root/Game/Managers/PopulationManager").request_job(self)
+	if job:
+		assign_job(job)
+
+func is_idle() -> bool:
+	return action_state==Action_State.IDLE
+	
+func assign_job(job):
+	current_job = job
+	action_state=Action_State.WORKING
+	
+func working(delta:float):
+	match current_job.type:
+		"build":
+			do_build_job(delta)
+		_:
+			print("Unknown job type:", current_job.type)
+			action_state = Action_State.IDLE
+			current_job = null
+
+func do_build_job(delta: float) -> void:
+	var manager = get_node("/root/Game/Managers/BuildingManager")
+	var pos = manager.find_valid_build_spot(current_job.scene)
+	print("working")
+	if pos:
+		manager.place_building(current_job.scene, pos)
+	print("Built structure at", pos)
+	current_job = null
+	action_state = Action_State.IDLE

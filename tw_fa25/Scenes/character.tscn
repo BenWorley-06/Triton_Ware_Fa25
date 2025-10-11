@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cah1gdlpwbn5i"]
+
+[ext_resource type="Script" uid="uid://unpx8fm2f83l" path="res://Scripts/character - scripts/Character_Class.gd" id="1_owm7s"]
+[ext_resource type="Script" uid="uid://c3i3i32v4ta6k" path="res://Scripts/character - scripts/character_stats.gd" id="2_nytcm"]
+[ext_resource type="Texture2D" uid="uid://4ggls74chslx" path="res://Art/Temporary/minion_vance.webp" id="3_ejsiy"]
+
+[sub_resource type="Resource" id="Resource_px5sl"]
+script = ExtResource("2_nytcm")
+walk_speed = 20.0
+wander_time = 5.0
+metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]
+
+[node name="Character" type="CharacterBody2D"]
+scale = Vector2(0.374161, 0.309156)
+script = ExtResource("1_owm7s")
+stats = SubResource("Resource_px5sl")
+metadata/_custom_type_script = "uid://unpx8fm2f83l"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3.66158, 3.66158)
+shape = SubResource("CapsuleShape2D_wfnr8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+scale = Vector2(0.0986301, 0.179402)
+texture = ExtResource("3_ejsiy")
