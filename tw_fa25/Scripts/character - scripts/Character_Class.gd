@@ -144,4 +144,8 @@ func enter_volcano():
 	var lava = lava_particle_scene.instantiate()
 	get_tree().current_scene.add_child(lava)
 	lava.global_position = global_position
+	if stats.sinner:
+		get_node("/root/Game/Managers/ResourceManager").add_faith(10)
+	else:
+		get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
 	queue_free()

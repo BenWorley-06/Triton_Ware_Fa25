@@ -50,12 +50,12 @@ animations = [{
 
 [node name="Farm" type="StaticBody2D"]
 scale = Vector2(0.549819, 0.549819)
-collision_layer = 0
-collision_mask = 0
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_bw225")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(7.51771, 7.51771)
+scale = Vector2(7.873, 7.873)
 shape = SubResource("RectangleShape2D_tww1o")
 
 [node name="sprite" type="AnimatedSprite2D" parent="."]
