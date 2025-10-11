@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=14 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://clngkkwwtpr5e" path="res://resource_manager.gd" id="4_3dryh"]
 [ext_resource type="Script" uid="uid://do1wimje71ysu" path="res://build_area.gd" id="5_wowpa"]
 [ext_resource type="PackedScene" uid="uid://bni15epyyxgeu" path="res://volcano.tscn" id="6_i6g32"]
+[ext_resource type="Script" uid="uid://ux8fr26o1ta2" path="res://ability_manager.gd" id="6_v158k"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ebmjs"]
 
@@ -64,6 +65,9 @@ script = ExtResource("3_wrm1d")
 
 [node name="ResourceManager" type="Node" parent="Managers"]
 script = ExtResource("4_3dryh")
+
+[node name="AbilityManager" type="Node2D" parent="Managers"]
+script = ExtResource("6_v158k")
 
 [node name="BuildArea" type="Area2D" parent="."]
 collision_layer = 0

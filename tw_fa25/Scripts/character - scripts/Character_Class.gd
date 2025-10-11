@@ -23,10 +23,10 @@ func _ready():
 	get_node("/root/Game/Managers/PopulationManager").register_character(self)
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_released("left_click"):
+	if selected and Input.is_action_just_released("left_click"):
 		end_grab()
 	if selected:
-		global_position = lerp(global_position, get_global_mouse_position(), 40 * delta);
+		global_position = lerp(global_position, get_global_mouse_position(), 20 * delta);
 		
 func _process(delta: float) -> void:
 	
@@ -89,11 +89,6 @@ func do_build_job(delta: float) -> void:
 			current_job = null
 			action_state = Action_State.IDLE
 #	--- Draging ---
-# drag controller
-func _on_area_2d_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
-	if Input.is_action_just_pressed("left_click"):
-		initiate_grab()
-		
 func initiate_grab():
 	selected = true
 	get_node("CollisionShape2D").disabled = true

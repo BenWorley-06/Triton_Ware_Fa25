@@ -18,7 +18,7 @@ radius = 37.417
 height = 109.977
 
 [node name="Character" type="CharacterBody2D"]
-scale = Vector2(0.374161, 0.309156)
+scale = Vector2(0.443294, 0.366278)
 script = ExtResource("1_owm7s")
 stats = SubResource("Resource_px5sl")
 metadata/_custom_type_script = "uid://unpx8fm2f83l"
