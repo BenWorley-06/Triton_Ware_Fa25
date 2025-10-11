@@ -117,10 +117,10 @@ func initiate_grab():
 	selected = true
 	get_node("CollisionShape2D").disabled = true
 	z_index = 10
-	var tween1 = create_tween()
+	var tween1 = create_tween()	
 	var tween2 = create_tween()
-	tween1.tween_property(sprite, "scale", sprite.scale * 2, 0.4) # scale up over 0.2s
-	tween2.tween_property(sprite, "position:y", sprite.position.y - 100, 0.4) # move sprite up a bit
+	tween1.tween_property(sprite, "scale",base_scale * 2, 0.4) # scale up over 0.2s
+	tween2.tween_property(sprite, "position:y", -100, 0.4) # move sprite up a bit
 	voicebox.request_play("pickup")
 	
 func end_grab():
@@ -129,8 +129,9 @@ func end_grab():
 	z_index = 1
 	var tween1 = create_tween()
 	var tween2 = create_tween()
-	tween1.tween_property(sprite, "scale", base_scale, 0.2) # return to normal size over 0.2s
-	tween2.tween_property(sprite, "position:y", 0, 0.2) # move back down
+	# tween has to be same length or greater to stop bug
+	tween1.tween_property(sprite, "scale", base_scale, 0.4) # return to normal size over 0.2s
+	tween2.tween_property(sprite, "position:y", 0, 0.4) # move back down
 
 func _on_drag_area_entered(area: Area2D) -> void:
 	if area.is_in_group("volcano"):
@@ -149,3 +150,4 @@ func enter_volcano():
 	else:
 		get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
 	queue_free()
+	

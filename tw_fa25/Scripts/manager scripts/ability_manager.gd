@@ -42,6 +42,12 @@ func switch_abilities():
 
 #	--- Pickup Functionality ---
 func handle_pickup_input(delta: float) -> void:
+	# Released (always resets states cleanly)
+	if Input.is_action_just_released("left_click"):
+		click_in_progress = false
+		if grabbed_character:
+			grabbed_character.end_grab()
+			grabbed_character = null
 	# Fresh click attempt
 	if Input.is_action_just_pressed("left_click"):
 		click_in_progress = true
@@ -56,12 +62,7 @@ func handle_pickup_input(delta: float) -> void:
 			20 * delta
 		)
 
-	# Released (always resets states cleanly)
-	if Input.is_action_just_released("left_click"):
-		click_in_progress = false
-		if grabbed_character:
-			grabbed_character.end_grab()
-			grabbed_character = null
+	
 
 func try_pickup_character() -> void:
 	var mouse_pos = get_global_mouse_position()

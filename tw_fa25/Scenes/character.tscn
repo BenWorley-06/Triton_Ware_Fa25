@@ -34,12 +34,6 @@ metadata/_custom_type_script = "uid://unpx8fm2f83l"
 scale = Vector2(3.66158, 3.66158)
 shape = SubResource("CapsuleShape2D_wfnr8")
 
-[node name="drag" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="drag"]
-scale = Vector2(2.17753, 2.38533)
-shape = SubResource("CapsuleShape2D_owm7s")
-
 [node name="shadow" type="Sprite2D" parent="."]
 modulate = Color(0.10748, 0.10748, 0.10748, 0.713726)
 position = Vector2(0, 45.2846)
