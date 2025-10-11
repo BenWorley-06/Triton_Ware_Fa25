@@ -20,6 +20,7 @@ func get_available_housing_capacity(current_population: int) -> int:
 	return max(0, get_total_housing_capacity() - current_population)
 	
 func place_scaffold(position: Vector2) -> void:
+	print("scafold placed")
 	var scafold = scafold_scene.instantiate()
 	scafold.global_position = position
 	get_tree().current_scene.add_child(scafold)

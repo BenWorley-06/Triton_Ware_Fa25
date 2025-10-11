@@ -22,11 +22,6 @@ func _ready():
 	base_scale = sprite.scale
 	get_node("/root/Game/Managers/PopulationManager").register_character(self)
 
-func _physics_process(delta: float) -> void:
-	if selected and Input.is_action_just_released("left_click"):
-		end_grab()
-	if selected:
-		global_position = lerp(global_position, get_global_mouse_position(), 20 * delta);
 		
 func _process(delta: float) -> void:
 	
