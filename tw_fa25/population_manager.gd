@@ -8,8 +8,10 @@ class_name PopulationManager
 var people: Array = []          # all active people
 var jobs: Array = []            # all open jobs
 
+var request_house_timer:float=0
+
 func _process(delta: float) -> void:
-	add_house_request()
+	pass
 
 func register_character(character: Character):
 	if character not in people:
@@ -17,13 +19,6 @@ func register_character(character: Character):
 
 func add_job(job):
 	jobs.append(job)
-	
-func add_house_request()->void:
-	if building_manager.get_available_housing_capacity(resource_manager.population)<=0:
-		var job = Build_Job.new()
-		job.type="build"
-		job.scene=preload("res://Scenes/Buildings/house.tscn")
-		add_job(job)
 
 func request_job(person):
 	for job in jobs:

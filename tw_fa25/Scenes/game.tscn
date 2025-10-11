@@ -1,11 +1,19 @@
+<<<<<<< Updated upstream
 [gd_scene load_steps=12 format=3 uid="uid://cifelub41grjx"]
+=======
+[gd_scene load_steps=10 format=3 uid="uid://cifelub41grjx"]
+>>>>>>> Stashed changes
 
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://rrnndxqf77rh" path="res://game.gd" id="1_wowpa"]
 [ext_resource type="Script" uid="uid://cf7vh241xnglu" path="res://population_manager.gd" id="2_qxrlw"]
 [ext_resource type="Script" uid="uid://d16agg3i2gglf" path="res://building_manager.gd" id="3_wrm1d"]
 [ext_resource type="Script" uid="uid://clngkkwwtpr5e" path="res://resource_manager.gd" id="4_3dryh"]
+<<<<<<< Updated upstream
 [ext_resource type="Script" uid="uid://do1wimje71ysu" path="res://build_area.gd" id="5_wowpa"]
 [ext_resource type="PackedScene" uid="uid://bni15epyyxgeu" path="res://volcano.tscn" id="6_i6g32"]
+=======
+>>>>>>> Stashed changes
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ebmjs"]
 
@@ -16,10 +24,14 @@ distance = 122.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3dryh"]
 
+<<<<<<< Updated upstream
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6g32"]
 size = Vector2(17.5849, 20)
 
+=======
+>>>>>>> Stashed changes
 [node name="Game" type="Node"]
+script = ExtResource("1_wowpa")
 
 [node name="Character" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(674, 337)
@@ -62,6 +74,7 @@ script = ExtResource("3_wrm1d")
 
 [node name="ResourceManager" type="Node" parent="Managers"]
 script = ExtResource("4_3dryh")
+<<<<<<< Updated upstream
 
 [node name="BuildArea" type="Area2D" parent="."]
 collision_layer = 0
@@ -76,3 +89,5 @@ shape = SubResource("RectangleShape2D_i6g32")
 [node name="Volcano" parent="." instance=ExtResource("6_i6g32")]
 position = Vector2(84, 343)
 scale = Vector2(4.41522, 4.38919)
+=======
+>>>>>>> Stashed changes
