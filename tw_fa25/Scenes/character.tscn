@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cah1gdlpwbn5i"]
+[gd_scene load_steps=9 format=3 uid="uid://cah1gdlpwbn5i"]
 
 [ext_resource type="Script" uid="uid://unpx8fm2f83l" path="res://Scripts/character - scripts/Character_Class.gd" id="1_owm7s"]
 [ext_resource type="Script" uid="uid://c3i3i32v4ta6k" path="res://Scripts/character - scripts/character_stats.gd" id="2_nytcm"]
@@ -17,10 +17,6 @@ distance_to_harvest = 30.0
 metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_owm7s"]
-radius = 37.417
-height = 109.977
 
 [node name="Character" type="CharacterBody2D" groups=["character"]]
 scale = Vector2(0.443294, 0.366278)
@@ -47,7 +43,3 @@ texture = ExtResource("3_ejsiy")
 
 [node name="voicebox" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("5_ejsiy")
-
-[connection signal="area_entered" from="drag" to="." method="_on_drag_area_entered"]
-[connection signal="area_exited" from="drag" to="." method="_on_drag_area_exited"]
-[connection signal="input_event" from="drag" to="." method="_on_area_2d_input_event"]
