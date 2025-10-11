@@ -3,9 +3,13 @@ class_name BuildingManager
 
 @export var people_per_house:int =2
 @export var scafold_scene: PackedScene = preload("res://Scenes/Buildings/house_scafold.tscn")
+@export var farm_scene: PackedScene = preload("res://Scenes/Buildings/farm.tscn")
 var house_scafolds: Array = []
 var houses: Array = []
 var farms: Array = []
+
+func register_farm(farm: Node):
+		farms.append(farm)
 
 func register_house(house: Node):
 		houses.append(house)
@@ -18,6 +22,12 @@ func get_total_housing_capacity() -> int:
 
 func get_available_housing_capacity(current_population: int) -> int:
 	return max(0, get_total_housing_capacity() - current_population)
+	
+func place_farm(position: Vector2) -> void:
+	var farm = farm_scene.instantiate()
+	farm.global_position = position
+	get_tree().current_scene.add_child(farm)
+	register_farm(farm)
 	
 func place_scaffold(position: Vector2) -> void:
 	print("scafold placed")

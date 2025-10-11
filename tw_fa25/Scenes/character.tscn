@@ -8,7 +8,10 @@
 [sub_resource type="Resource" id="Resource_px5sl"]
 script = ExtResource("2_nytcm")
 walk_speed = 20.0
+wander_speed = 40.0
 wander_time = 5.0
+time_to_harvest = 3.0
+distance_to_harvest = 30.0
 metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]
@@ -19,6 +22,7 @@ height = 109.977
 
 [node name="Character" type="CharacterBody2D"]
 scale = Vector2(0.443294, 0.366278)
+collision_layer = 0
 script = ExtResource("1_owm7s")
 stats = SubResource("Resource_px5sl")
 metadata/_custom_type_script = "uid://unpx8fm2f83l"

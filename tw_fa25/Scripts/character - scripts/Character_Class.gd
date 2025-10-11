@@ -13,6 +13,8 @@ var wander_direction: Vector2 = Vector2.ZERO
 
 var build_timer: float = 0
 
+var farm_timer: float = 0
+
 var selected = false
 var base_scale: Vector2
 
@@ -36,11 +38,10 @@ func _process(delta: float) -> void:
 #	--- Idle ---
 func idle(delta: float):
 	if wander_timer<=0:
-		print("changed")
 		wander_timer=stats.wander_time
 		var angle = randf() * TAU  # TAU = 2 * PI
 		wander_direction = Vector2.from_angle(angle)
-	velocity=wander_direction*stats.walk_speed
+	velocity=wander_direction*stats.wander_speed
 	wander_timer-=delta
 	var job = get_node("/root/Game/Managers/PopulationManager").request_job(self)
 	if job:
@@ -58,6 +59,8 @@ func working(delta:float):
 	match current_job.type:
 		"build":
 			do_build_job(delta)
+		"farm":
+			go_harvest(delta)
 		_:
 			print("Unknown job type:", current_job.type)
 			action_state = Action_State.IDLE
@@ -74,7 +77,7 @@ func do_build_job(delta: float) -> void:
 	var distance = global_position.distance_to(scaffold.global_position)
 	if distance > 100:
 		var direction = (scaffold.global_position - global_position).normalized()
-		velocity = direction * stats.walk_speed*2
+		velocity = direction * stats.walk_speed
 	else:
 		velocity = Vector2.ZERO
 		build_timer += delta
@@ -83,6 +86,26 @@ func do_build_job(delta: float) -> void:
 			scaffold.complete_building()
 			current_job = null
 			action_state = Action_State.IDLE
+			
+func go_harvest(delta):
+	var farm = current_job.farm
+	if farm == null or not is_instance_valid(farm):
+		# farm was removed for some reason
+		current_job = null
+		action_state = Action_State.IDLE
+		return
+	var distance = global_position.distance_to(farm.global_position)
+	if distance > stats.distance_to_harvest:
+		var direction = (farm.global_position - global_position).normalized()
+		velocity = direction * stats.walk_speed
+	else:
+		velocity = Vector2.ZERO
+		farm_timer+=delta
+		if farm_timer>= stats.time_to_harvest:
+			farm.harvest()
+			current_job = null
+			action_state = Action_State.IDLE
+	
 #	--- Draging ---
 func initiate_grab():
 	selected = true

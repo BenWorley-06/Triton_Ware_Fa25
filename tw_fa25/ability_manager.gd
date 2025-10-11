@@ -3,7 +3,7 @@ class_name AbilityManager
 
 @onready var building_manager: BuildingManager = $"../BuildingManager"
 
-enum AbilityChosen { PICKUP , HOUSE }
+enum AbilityChosen { PICKUP , HOUSE , FARM}
 
 var abilitychosen: AbilityChosen = AbilityChosen.PICKUP
 var grabbed_character: Character = null
@@ -16,12 +16,16 @@ func _process(delta: float) -> void:
 			handle_pickup_input(delta)
 		AbilityChosen.HOUSE:
 			handle_house_input(delta)
+		AbilityChosen.FARM:
+			handle_farm_input(delta)
 			
 func switch_abilities():
 	if Input.is_action_just_pressed("p"):
 		abilitychosen=AbilityChosen.PICKUP
 	elif Input.is_action_just_pressed("b"):
 		abilitychosen=AbilityChosen.HOUSE
+	elif Input.is_action_just_pressed("f"):
+		abilitychosen=AbilityChosen.FARM
 
 #	--- Pickup Functionality ---
 func handle_pickup_input(delta: float) -> void:
@@ -67,9 +71,13 @@ func try_pickup_character() -> void:
 	# If nothing was grabbed, reset so another click works immediately
 	click_in_progress = false
 
-#	--- House Building Functionality ---
+#	--- Building Functionality ---
 func handle_house_input(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		var position=get_global_mouse_position()
 		building_manager.place_scaffold(position)
-		
+
+func handle_farm_input(delta: float) -> void:
+	if Input.is_action_just_pressed("left_click"):
+		var position=get_global_mouse_position()
+		building_manager.place_farm(position)
