@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=20 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ip16vgl4u7s4" path="res://demolisher.tscn" id="8_ldgsr"]
 [ext_resource type="Script" uid="uid://c8dcxb8cawtlo" path="res://Scenes/debug_helper(delete_before_submission).gd" id="8_v158k"]
 [ext_resource type="Script" uid="uid://dfn2nllek1slu" path="res://audio_manager.gd" id="9_o5yvi"]
+[ext_resource type="AudioStream" uid="uid://dgmc76h3hqsvp" path="res://Sounds/Russian Church Choir shortened.mp3" id="10_rku1e"]
 
 [sub_resource type="Resource" id="Resource_ldgsr"]
 script = ExtResource("2_h4fw4")
@@ -104,6 +105,7 @@ demolisher_scene = ExtResource("8_ldgsr")
 script = ExtResource("9_o5yvi")
 
 [node name="Music" type="AudioStreamPlayer" parent="Managers/AudioManager"]
+stream = ExtResource("10_rku1e")
 volume_db = -7.495
 autoplay = true
 

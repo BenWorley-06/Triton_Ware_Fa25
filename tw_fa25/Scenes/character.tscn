@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bya1y6ct6nphw" path="res://lava_particles.tscn" id="3_2mse5"]
 [ext_resource type="Texture2D" uid="uid://4ggls74chslx" path="res://Art/Temporary/minion_vance.webp" id="3_ejsiy"]
 [ext_resource type="Texture2D" uid="uid://bdwbtvmdmi7yu" path="res://Art/Temporary/black_circle.png" id="3_nytcm"]
-[ext_resource type="PackedScene" path="res://blood_particle.tscn" id="4_reotu"]
+[ext_resource type="PackedScene" uid="uid://cfccc0mhd2c4r" path="res://blood_particle.tscn" id="4_reotu"]
 [ext_resource type="Script" uid="uid://b1ai862ae1s1y" path="res://Scripts/character - scripts/voicebox.gd" id="5_ejsiy"]
 
 [sub_resource type="Resource" id="Resource_px5sl"]
