@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://vnuggmxedgch"]
+
+[ext_resource type="AudioStream" uid="uid://cydw2kj1fi1tc" path="res://Sounds/temporary/funny-ahh-cream.mp3" id="1_al2vg"]
+[ext_resource type="Script" uid="uid://cbvj86e0sboje" path="res://death_noise.gd" id="2_41yf7"]
+
+[node name="death_noise" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_al2vg")
+autoplay = true
+script = ExtResource("2_41yf7")

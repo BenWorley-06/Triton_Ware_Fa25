@@ -7,6 +7,7 @@ class_name Character
 
 @export var lava_particle_scene: PackedScene
 @export var blood_particle_scene: PackedScene
+@export var death_noise_scene: PackedScene
 
 enum Action_State {IDLE,WORKING,CARRIED,KILLING}
 var action_state = Action_State.IDLE
@@ -166,6 +167,9 @@ func killed():
 		get_node("/root/Game/Managers/ResourceManager").add_faith(10)
 	else:
 		get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
+	var noise=death_noise_scene.instantiate()
+	get_tree().current_scene.add_child(noise)
+	noise.global_position=global_position
 	queue_free()
 	
 func smashed():
