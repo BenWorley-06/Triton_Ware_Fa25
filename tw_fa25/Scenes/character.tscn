@@ -26,7 +26,7 @@ metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2mse5"]
 
-[node name="Character" type="CharacterBody2D" groups=["character", "pausable"]]
+[node name="Character" type="CharacterBody2D" groups=["character"]]
 scale = Vector2(0.443294, 0.366278)
 collision_layer = 4
 script = ExtResource("1_owm7s")

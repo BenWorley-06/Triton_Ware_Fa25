@@ -17,7 +17,6 @@
 script = ExtResource("2_h4fw4")
 time_in_day = 60.0
 metadata/_custom_type_script = "uid://b6i7vriwvog26"
-[ext_resource type="PackedScene" uid="uid://c4lo5nuaxreh8" path="res://Scenes/end_day.tscn" id="8_v158k"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ebmjs"]
 
@@ -90,16 +89,16 @@ position = Vector2(598, 535)
 
 [node name="Managers" type="Node" parent="."]
 
-[node name="PopulationManager" type="Node" parent="Managers" groups=["pausable"]]
+[node name="PopulationManager" type="Node" parent="Managers"]
 script = ExtResource("2_qxrlw")
 
-[node name="BuildingManager" type="Node2D" parent="Managers" groups=["pausable"]]
+[node name="BuildingManager" type="Node2D" parent="Managers"]
 script = ExtResource("3_wrm1d")
 
-[node name="ResourceManager" type="Node" parent="Managers" groups=["pausable"]]
+[node name="ResourceManager" type="Node" parent="Managers"]
 script = ExtResource("4_3dryh")
 
-[node name="AbilityManager" type="Node2D" parent="Managers" groups=["pausable"]]
+[node name="AbilityManager" type="Node2D" parent="Managers"]
 script = ExtResource("6_v158k")
 demolisher_scene = ExtResource("8_ldgsr")
 
@@ -121,7 +120,7 @@ position = Vector2(643.504, 320)
 scale = Vector2(55.9008, 30.6644)
 shape = SubResource("RectangleShape2D_i6g32")
 
-[node name="Volcano" parent="." groups=["pausable"] instance=ExtResource("6_i6g32")]
+[node name="Volcano" parent="." instance=ExtResource("6_i6g32")]
 position = Vector2(84, 343)
 scale = Vector2(4.41522, 4.38919)
 
@@ -134,6 +133,3 @@ z_index = 100
 offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(30.9419, 16.401)
-
-[node name="end_day" parent="." instance=ExtResource("8_v158k")]
-visible = false
