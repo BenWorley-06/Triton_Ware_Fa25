@@ -8,10 +8,10 @@ func add_character():
 	add_child(character)
 	
 func _process(delta: float) -> void:
-<<<<<<< Updated upstream
+
 	if Input.is_action_just_pressed("ui_accept"):
 		add_character()
-=======
+
 	day_timer+=delta
 	if day_timer>=stats.time_in_day:
 		end_day()
