@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cah1gdlpwbn5i"]
+[gd_scene load_steps=13 format=3 uid="uid://cah1gdlpwbn5i"]
 
 [ext_resource type="Script" uid="uid://unpx8fm2f83l" path="res://Scripts/character - scripts/Character_Class.gd" id="1_owm7s"]
 [ext_resource type="Script" uid="uid://c3i3i32v4ta6k" path="res://Scripts/character - scripts/character_stats.gd" id="2_nytcm"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cfccc0mhd2c4r" path="res://blood_particle.tscn" id="4_reotu"]
 [ext_resource type="PackedScene" uid="uid://vnuggmxedgch" path="res://death_noise.tscn" id="5_a5ess"]
 [ext_resource type="Script" uid="uid://b1ai862ae1s1y" path="res://Scripts/character - scripts/voicebox.gd" id="5_ejsiy"]
+[ext_resource type="Script" uid="uid://cvoucn6vtfcil" path="res://Scenes/sfx.gd" id="9_wbia7"]
 
 [sub_resource type="Resource" id="Resource_px5sl"]
 script = ExtResource("2_nytcm")
@@ -21,7 +22,7 @@ time_to_breed = 7.0
 murder_time = 2.0
 murder_distance = 40.0
 max_time_to_sin = 30.0
-sleep_time = 10.0
+sleep_time = 4.0
 metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]
@@ -61,6 +62,9 @@ script = ExtResource("5_ejsiy")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="burn_area"]
 scale = Vector2(5.08784, 6.98879)
 shape = SubResource("CircleShape2D_2mse5")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("9_wbia7")
 
 [connection signal="area_entered" from="burn_area" to="." method="_on_burn_area_area_entered"]
 [connection signal="area_exited" from="burn_area" to="." method="_on_burn_area_area_exited"]

@@ -8,8 +8,8 @@
 [node name="house" type="StaticBody2D" groups=["building", "house"]]
 z_as_relative = false
 scale = Vector2(0.859615, 0.859615)
-collision_layer = 3
-collision_mask = 3
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_metfq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

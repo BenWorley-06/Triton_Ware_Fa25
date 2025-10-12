@@ -18,12 +18,14 @@ func _process(delta: float) -> void:
 	if global_position.x<=spawn_x and not spawned:
 		drop_baby()
 		spawned=true
-	elif global_position.x<-200:
+	elif global_position.x<-600:
 		queue_free()
 		
 func drop_baby():
 	var baby = character_scene.instantiate()
 	get_tree().current_scene.add_child(baby)
+	if randf()<0.25:
+		baby.sinner=true
 	baby.global_position=global_position
 	people_manager.register_character(baby)
 	

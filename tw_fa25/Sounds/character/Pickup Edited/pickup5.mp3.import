@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://der385islaulc"
+path="res://.godot/imported/pickup5.mp3-7789ab095760995c74800ab3edb0a1e3.mp3str"
+
+[deps]
+
+source_file="res://Sounds/character/Pickup Edited/pickup5.mp3"
+dest_files=["res://.godot/imported/pickup5.mp3-7789ab095760995c74800ab3edb0a1e3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -4,6 +4,7 @@ class_name Character
 @export var stats: Character_Stats
 @onready var sprite: Sprite2D = $Sprite
 @onready var voicebox: AudioStreamPlayer2D = $voicebox
+@onready var sfx: AudioStreamPlayer2D = $SFX
 
 @export var lava_particle_scene: PackedScene
 @export var blood_particle_scene: PackedScene
@@ -123,7 +124,9 @@ func do_build_job(delta: float) -> void:
 			print("job done")
 			scaffold.complete_building()
 			current_job = null
-			action_state = Action_State.IDLE
+			action_state = Action_State.SlEEPING
+			build_timer=0
+			sfx.request_play("build")
 			
 func go_harvest(delta):
 	var farm = current_job.farm
@@ -142,7 +145,9 @@ func go_harvest(delta):
 		if farm_timer>= stats.time_to_harvest:
 			farm.harvest()
 			current_job = null
-			action_state = Action_State.IDLE
+			action_state = Action_State.SlEEPING
+			farm_timer=0
+			sfx.request_play("harvest")
 	
 #	--- Draging ---
 func initiate_grab():
@@ -206,6 +211,7 @@ func breed(target: Character, primary: bool):
 func do_breed(delta):
 	if breeding_target==null:
 		action_state=Action_State.IDLE
+		return
 	var distance = global_position.distance_to(breeding_target.global_position)
 	if distance > stats.breeding_distance:
 		var direction = (breeding_target.global_position - global_position).normalized()
@@ -218,6 +224,7 @@ func do_breed(delta):
 			breeding_target.action_state=Action_State.IDLE
 			breeding_target.fed=false
 			action_state=Action_State.IDLE
+			breeding_timer=0
 			fed=false
 
 # ------- SINS -----
@@ -256,3 +263,4 @@ func do_sleep(delta):
 	sleeping_timer+=delta
 	if sleeping_timer>=stats.sleep_time:
 		action_state=Action_State.IDLE
+		sleeping_timer=0

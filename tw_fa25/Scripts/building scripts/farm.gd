@@ -3,7 +3,7 @@ class_name Farm
 @onready var sprite: AnimatedSprite2D = $sprite
 var max_state: int = 4
 var growth_state: int = 0
-var state_change_time: float = 5
+@export var state_change_time: float = 5
 var change_timer: float = 0
 
 var harvest_amount: int = 2

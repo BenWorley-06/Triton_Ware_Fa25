@@ -1,7 +1,7 @@
 extends AudioStreamPlayer2D
 class_name VoiceBox
 
-@export var pickup_folder: String = "res://Sounds/Pickup Edited/"
+@export var pickup_folder: String = "res://Sounds/Character/Pickup Edited/"
 
 var pickup_lines: Array
 
