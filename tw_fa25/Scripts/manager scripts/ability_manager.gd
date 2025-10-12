@@ -114,7 +114,7 @@ func handle_destroy_input(delta: float) -> void:
 		return
 
 	# constantly follow mouse
-	demolisher.global_position = demolisher.global_position.lerp(get_global_mouse_position(), delta * 10)
+	demolisher.global_position = demolisher.global_position.lerp(get_global_mouse_position(), delta * 5)
 
 	# trigger smite
 	if Input.is_action_just_pressed("left_click"):

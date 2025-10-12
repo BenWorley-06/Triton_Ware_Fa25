@@ -9,13 +9,13 @@ class_name Character
 @export var blood_particle_scene: PackedScene
 @export var death_noise_scene: PackedScene
 
-enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING}
+enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING}
 var sins=["kill","sleep"]
 var action_state = Action_State.IDLE
 var current_job=null
 
 @export var sinner: bool = false
-var fed: bool = true
+@export var fed: bool = false
 
 var sin_timer:float = 0
 var time_to_sin: float = 0
@@ -32,6 +32,10 @@ var base_scale: Vector2
 
 var over_volcano: bool = false
 
+var breeding_target: Character
+var primary_breeder: bool = false
+var breeding_timer: float = 0
+
 var murder_target: Character
 var killing_timer: float = 0
 
@@ -42,6 +46,7 @@ func _ready():
 	# register self to population manager
 	base_scale = sprite.scale
 	get_node("/root/Game/Managers/PopulationManager").register_character(self)
+	z_index=1
 		
 func _process(delta: float) -> void:
 	
@@ -54,6 +59,8 @@ func _process(delta: float) -> void:
 			do_killing(delta)
 		Action_State.SlEEPING:
 			do_sleep(delta)
+		Action_State.BREEDING:
+			do_breed(delta)
 	if not selected:
 		if over_volcano:
 			enter_volcano()
@@ -189,7 +196,30 @@ func smashed():
 	get_tree().current_scene.add_child(blood)
 	blood.global_position = global_position
 	killed()
-	
+
+#	--- Breeding ---
+func breed(target: Character, primary: bool):
+	breeding_target=target
+	primary_breeder=primary
+	action_state=Action_State.BREEDING
+
+func do_breed(delta):
+	if breeding_target==null:
+		action_state=Action_State.IDLE
+	var distance = global_position.distance_to(breeding_target.global_position)
+	if distance > stats.breeding_distance:
+		var direction = (breeding_target.global_position - global_position).normalized()
+		velocity = direction * stats.walk_speed
+	else:
+		velocity = Vector2.ZERO
+		breeding_timer+=delta
+		if primary_breeder and breeding_timer>=stats.time_to_breed:
+			get_node("/root/Game/Managers/PopulationManager").request_stork()
+			breeding_target.action_state=Action_State.IDLE
+			breeding_target.fed=false
+			action_state=Action_State.IDLE
+			fed=false
+
 # ------- SINS -----
 func initiate_sins():
 	var sin: String =sins[randi() % sins.size()]
@@ -226,5 +256,3 @@ func do_sleep(delta):
 	sleeping_timer+=delta
 	if sleeping_timer>=stats.sleep_time:
 		action_state=Action_State.IDLE
-	
-	

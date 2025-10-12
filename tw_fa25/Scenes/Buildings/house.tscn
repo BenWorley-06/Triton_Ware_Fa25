@@ -3,17 +3,19 @@
 [ext_resource type="Texture2D" uid="uid://dl7i44f5kwsc6" path="res://Art/Temporary/house.png" id="1_hfkix"]
 [ext_resource type="Script" uid="uid://2fvg8jsg4r0s" path="res://Scripts/building scripts/house.gd" id="1_metfq"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_hfkix"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i6h3i"]
 
-[node name="house" type="StaticBody2D" groups=["building"]]
+[node name="house" type="StaticBody2D" groups=["building", "house"]]
+z_as_relative = false
 scale = Vector2(0.859615, 0.859615)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_metfq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(3.40195, 3.40195)
-shape = SubResource("RectangleShape2D_hfkix")
+position = Vector2(-1.16331, 29.0828)
+scale = Vector2(3.1932, -0.458127)
+shape = SubResource("CapsuleShape2D_i6h3i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
