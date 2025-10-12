@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cajn8hw5ro47n"]
+
+[ext_resource type="Texture2D" uid="uid://cl0qmplrw2qcw" path="res://Art/Temporary/cyclops_vance.webp" id="1_75tov"]
+
+[node name="stork" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(0.220383, 0.220383)
+texture = ExtResource("1_75tov")

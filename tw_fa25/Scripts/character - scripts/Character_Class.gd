@@ -181,6 +181,7 @@ func killed():
 	var noise=death_noise_scene.instantiate()
 	get_tree().current_scene.add_child(noise)
 	noise.global_position=global_position
+	get_node("/root/Game/Managers/PopulationManager").remove_character(self)
 	queue_free()
 	
 func smashed():

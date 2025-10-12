@@ -13,6 +13,9 @@ func register_character(character: Character):
 	if character not in people:
 		people.append(character)
 		
+func remove_character(character: Character):
+	people.erase(character)
+		
 func get_random_person(exclude: Character) -> Character:
 	var candidates = []
 	for c in people:
