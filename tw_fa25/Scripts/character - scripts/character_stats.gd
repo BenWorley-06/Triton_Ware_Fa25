@@ -3,8 +3,6 @@ extends Resource
 class_name Character_Stats
 
 #
-var sinner: bool = false
-var fed: bool = true
 
 @export var walk_speed: float = 50
 
@@ -13,3 +11,6 @@ var fed: bool = true
 
 @export var time_to_harvest: float = 3
 @export var distance_to_harvest: float = 30
+
+@export var murder_time: float = 1
+@export var murder_distance: float = 40

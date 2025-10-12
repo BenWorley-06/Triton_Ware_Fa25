@@ -77,3 +77,13 @@ func is_colliding_with_layer(node: Node2D, layer: int) -> bool:
 
 	var result = space_state.intersect_shape(params, 10)
 	return result.size() > 0
+
+func destroy_building(building: Node):
+	match building.type:
+		"farm":
+			farms.erase(building)
+		"house":
+			houses.erase(building)
+		"scafold":
+			house_scafolds.erase(building)
+	building.queue_free()

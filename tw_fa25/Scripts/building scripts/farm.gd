@@ -11,6 +11,8 @@ var harvest_amount: int = 2
 var growing: bool = true
 var harvestable:bool = false
 
+var type="farm"
+
 func _ready() -> void:
 	z_index=-1
 

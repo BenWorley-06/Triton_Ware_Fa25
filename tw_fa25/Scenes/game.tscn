@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=19 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://ux8fr26o1ta2" path="res://Scripts/manager scripts/ability_manager.gd" id="6_v158k"]
 [ext_resource type="PackedScene" uid="uid://ip16vgl4u7s4" path="res://demolisher.tscn" id="8_ldgsr"]
 [ext_resource type="Script" uid="uid://c8dcxb8cawtlo" path="res://Scenes/debug_helper(delete_before_submission).gd" id="8_v158k"]
+[ext_resource type="Script" uid="uid://dfn2nllek1slu" path="res://audio_manager.gd" id="9_o5yvi"]
 
 [sub_resource type="Resource" id="Resource_ldgsr"]
 script = ExtResource("2_h4fw4")
@@ -47,12 +48,14 @@ func get_random_point() -> Vector2:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i6g32"]
 size = Vector2(17.5849, 20)
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("overlay")]
 script = ExtResource("1_1l0tm")
 stats = SubResource("Resource_ldgsr")
+overlay = NodePath("Day Tint")
 
 [node name="Character" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(674, 337)
+sinner = true
 
 [node name="world_bounds" type="StaticBody2D" parent="."]
 
@@ -97,6 +100,13 @@ script = ExtResource("4_3dryh")
 script = ExtResource("6_v158k")
 demolisher_scene = ExtResource("8_ldgsr")
 
+[node name="AudioManager" type="Node" parent="Managers"]
+script = ExtResource("9_o5yvi")
+
+[node name="Music" type="AudioStreamPlayer" parent="Managers/AudioManager"]
+volume_db = -7.495
+autoplay = true
+
 [node name="BuildArea" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 0
@@ -113,3 +123,10 @@ scale = Vector2(4.41522, 4.38919)
 
 [node name="debug_helper(delete before submission)" type="Node" parent="."]
 script = ExtResource("8_v158k")
+
+[node name="Day Tint" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.282353)
+z_index = 100
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(30.9419, 16.401)

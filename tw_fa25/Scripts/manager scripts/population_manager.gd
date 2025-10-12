@@ -12,7 +12,16 @@ var jobs: Array = []            # all open jobs
 func register_character(character: Character):
 	if character not in people:
 		people.append(character)
+		
+func get_random_person(exclude: Character) -> Character:
+	var candidates = []
+	for c in people:
+		if c != exclude and is_instance_valid(c):
+			candidates.append(c)
+	if candidates.size() == 0:
+		return null
 
+	return candidates[randi() % candidates.size()]
 func add_job(job):
 	jobs.append(job)
 

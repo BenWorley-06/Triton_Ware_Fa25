@@ -11,6 +11,7 @@ var hand_start_pos: Vector2
 
 func _ready():
 	hand_start_pos = hand.position
+	hand.z_index=50
 
 func smite_buildings():
 	var tween = create_tween()
@@ -29,6 +30,6 @@ func _destroy_buildings():
 	audio.play()
 	for body in overlapping_bodies:
 		if body.is_in_group("building"):
-			body.queue_free()
+			get_node("/root/Game/Managers/BuildingManager").destroy_building(body)
 		elif body.is_in_group("character"):
-			body.enter_volcano()
+			body.smashed()
