@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://ip16vgl4u7s4" path="res://demolisher.tscn" id="8_ldgsr"]
 [ext_resource type="Script" uid="uid://c8dcxb8cawtlo" path="res://Scenes/debug_helper(delete_before_submission).gd" id="8_v158k"]
 [ext_resource type="Script" uid="uid://dfn2nllek1slu" path="res://audio_manager.gd" id="9_o5yvi"]
-[ext_resource type="AudioStream" uid="uid://dgmc76h3hqsvp" path="res://Sounds/Russian Church Choir shortened.mp3" id="10_rku1e"]
+[ext_resource type="AudioStream" uid="uid://cualnhn7f1xo0" path="res://Sounds/Choir Edited.mp3" id="10_rku1e"]
 
 [sub_resource type="Resource" id="Resource_ldgsr"]
 script = ExtResource("2_h4fw4")
