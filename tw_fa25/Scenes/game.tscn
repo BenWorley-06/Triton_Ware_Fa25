@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=14 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
@@ -7,9 +7,6 @@
 [ext_resource type="Script" uid="uid://clngkkwwtpr5e" path="res://Scripts/manager scripts/resource_manager.gd" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://bni15epyyxgeu" path="res://volcano.tscn" id="6_i6g32"]
 [ext_resource type="Script" uid="uid://ux8fr26o1ta2" path="res://Scripts/manager scripts/ability_manager.gd" id="6_v158k"]
-
-[sub_resource type="Resource" id="Resource_ldgsr"]
-metadata/_custom_type_script = "uid://b6i7vriwvog26"
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ebmjs"]
 
@@ -44,7 +41,6 @@ size = Vector2(17.5849, 20)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_1l0tm")
-stats = SubResource("Resource_ldgsr")
 
 [node name="Character" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(674, 337)
