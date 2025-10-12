@@ -57,14 +57,16 @@ func try_pickup_character() -> void:
 
 	var query = PhysicsPointQueryParameters2D.new()
 	query.position = mouse_pos
-	query.collide_with_areas = true
+	query.collide_with_areas = false
 	query.collide_with_bodies = true
 
 	var results = space_state.intersect_point(query, 1)
 
 	for result in results:
+		print(result)
 		var collider = result["collider"]
 		if collider is Character:
+			print("grab")
 			grabbed_character = collider
 			collider.initiate_grab()
 			return

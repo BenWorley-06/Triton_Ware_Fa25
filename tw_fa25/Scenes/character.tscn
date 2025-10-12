@@ -25,6 +25,7 @@ stats = SubResource("Resource_px5sl")
 metadata/_custom_type_script = "uid://unpx8fm2f83l"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
 scale = Vector2(3.66158, 3.66158)
 shape = SubResource("CapsuleShape2D_wfnr8")
 
@@ -41,3 +42,19 @@ texture = ExtResource("3_ejsiy")
 
 [node name="voicebox" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("5_ejsiy")
+<<<<<<< Updated upstream
+=======
+
+[node name="burn_area" type="Area2D" parent="."]
+scale = Vector2(0.819537, 0.819537)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="burn_area"]
+scale = Vector2(5.08784, 6.98879)
+shape = SubResource("CircleShape2D_2mse5")
+
+[node name="SFX" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("9_wbia7")
+
+[connection signal="area_entered" from="burn_area" to="." method="_on_burn_area_area_entered"]
+[connection signal="area_exited" from="burn_area" to="." method="_on_burn_area_area_exited"]
+>>>>>>> Stashed changes
