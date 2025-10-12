@@ -69,6 +69,7 @@ position = Vector2(654, 649)
 shape = SubResource("WorldBoundaryShape2D_qxrlw")
 
 [node name="left" type="CollisionShape2D" parent="world_bounds"]
+position = Vector2(-123, 0)
 rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_wrm1d")
 
@@ -127,7 +128,7 @@ scale = Vector2(4.41522, 4.38919)
 script = ExtResource("8_v158k")
 
 [node name="Day Tint" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0.282353)
+modulate = Color(1, 1, 1, 0.501961)
 z_index = 100
 offset_right = 40.0
 offset_bottom = 40.0

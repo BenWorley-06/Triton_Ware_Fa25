@@ -18,6 +18,8 @@ time_to_harvest = 3.0
 distance_to_harvest = 30.0
 murder_time = 1.0
 murder_distance = 40.0
+max_time_to_sin = 30.0
+sleep_time = 10.0
 metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]

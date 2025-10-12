@@ -14,3 +14,7 @@ class_name Character_Stats
 
 @export var murder_time: float = 1
 @export var murder_distance: float = 40
+
+@export var max_time_to_sin: float = 30
+
+@export var sleep_time: float = 10

@@ -9,12 +9,16 @@ class_name Character
 @export var blood_particle_scene: PackedScene
 @export var death_noise_scene: PackedScene
 
-enum Action_State {IDLE,WORKING,CARRIED,KILLING}
+enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING}
+var sins=["kill","sleep"]
 var action_state = Action_State.IDLE
 var current_job=null
 
 @export var sinner: bool = false
 var fed: bool = true
+
+var sin_timer:float = 0
+var time_to_sin: float = 0
 
 var wander_timer: float = 0
 var wander_direction: Vector2 = Vector2.ZERO
@@ -31,6 +35,8 @@ var over_volcano: bool = false
 var murder_target: Character
 var killing_timer: float = 0
 
+var sleeping_timer: float = 0
+
 #	--- Main ---
 func _ready():
 	# register self to population manager
@@ -46,6 +52,8 @@ func _process(delta: float) -> void:
 			working(delta)
 		Action_State.KILLING:
 			do_killing(delta)
+		Action_State.SlEEPING:
+			do_sleep(delta)
 	if not selected:
 		if over_volcano:
 			enter_volcano()
@@ -60,8 +68,11 @@ func idle(delta: float):
 	velocity=wander_direction*stats.wander_speed
 	wander_timer-=delta
 	if sinner:
-		if randf()<0.1:
-			initiate_murder()
+		sin_timer+=delta
+		if sin_timer>= time_to_sin:
+			initiate_sins()
+			sin_timer=0
+			time_to_sin=stats.max_time_to_sin*randf()
 			return
 	var job = get_node("/root/Game/Managers/PopulationManager").request_job(self)
 	if job:
@@ -179,6 +190,13 @@ func smashed():
 	killed()
 	
 # ------- SINS -----
+func initiate_sins():
+	var sin: String =sins[randi() % sins.size()]
+	if sin=="kill":
+		initiate_murder()
+	elif sin=="sleep":
+		action_state=Action_State.SlEEPING
+
 func initiate_murder():
 	murder_target=get_node("/root/Game/Managers/PopulationManager").get_random_person(self)
 	if murder_target:
@@ -201,5 +219,11 @@ func do_killing(delta):
 			killing_timer=0
 			murder_target=null
 			action_state=Action_State.IDLE
+			
+func do_sleep(delta):
+	velocity=Vector2.ZERO
+	sleeping_timer+=delta
+	if sleeping_timer>=stats.sleep_time:
+		action_state=Action_State.IDLE
 	
 	

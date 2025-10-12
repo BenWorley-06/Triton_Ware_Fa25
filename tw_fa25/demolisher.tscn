@@ -13,11 +13,12 @@ collision_mask = 7
 script = ExtResource("1_21eog")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(8.64466, 2.34908)
 shape = SubResource("CircleShape2D_5jp6u")
 
 [node name="shadow" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 0.584314)
-scale = Vector2(0.188366, 0.188366)
+scale = Vector2(0.389295, 0.123615)
 texture = ExtResource("2_dnaad")
 
 [node name="hand" type="Sprite2D" parent="."]
