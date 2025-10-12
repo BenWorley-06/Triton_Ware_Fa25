@@ -1,10 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://c4lo5nuaxreh8"]
 
-[ext_resource type="Texture2D" uid="uid://do1k2hp5anuib" path="res://icon.svg" id="1_ca7k3"]
+[ext_resource type="Texture2D" uid="uid://bjkswu5yngqad" path="res://Art/Temporary/jdChan.jpg" id="1_ca7k3"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 
 [node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -31,3 +31,20 @@ func request_job(person):
 		print("job recieved")
 		return job
 	return {}
+	
+func new_day():
+	# Feeding
+	for person in people:
+		person.fed=false
+	var total_food = resource_manager.bread
+	var availiable_food = total_food
+	for person in people:
+		if availiable_food<=0:
+			break
+		person.fed=true
+		availiable_food-=1
+	#	Praying
+	var pray_amount = min(building_manager.get_total_housing_capacity(),people.size())
+	#	Update Resources
+	resource_manager.add_bread(availiable_food-total_food)
+	resource_manager.add_faith(pray_amount)
