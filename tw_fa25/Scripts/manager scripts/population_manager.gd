@@ -9,6 +9,7 @@ const Character = preload("res://Scripts/character - scripts/Character_Class.gd"
 
 var people: Array = []          # all active people
 var jobs: Array = []            # all open jobs
+var prophet_spawned=false
 
 var breed_timer: float = 0
 var breed_cooldown: float = 10

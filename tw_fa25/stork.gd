@@ -4,6 +4,7 @@ extends Node2D
 @export var min_spawn_x: int = 400
 @export var max_spawn_x: int = 900
 @export var character_scene: PackedScene
+@export var halo_scene: PackedScene
 @onready var people_manager = get_node("/root/Game/Managers/PopulationManager")
 
 var spawn_x: int = 0
@@ -26,6 +27,12 @@ func drop_baby():
 	get_tree().current_scene.add_child(baby)
 	if randf()<0.25:
 		baby.sinner=true
+	elif not people_manager.prophet_spawned:
+		if randf()<1:
+			people_manager.prophet_spawned=true
+			baby.prophet=true
+			var halo = halo_scene.instantiate()
+			baby.add_child(halo)
 	baby.global_position=global_position
 	people_manager.register_character(baby)
 	

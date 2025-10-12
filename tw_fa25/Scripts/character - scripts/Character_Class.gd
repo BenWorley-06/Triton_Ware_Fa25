@@ -17,8 +17,9 @@ var current_job=null
 
 @export var sinner: bool = false
 @export var fed: bool = false
+var prophet: bool = false
 
-var sin_timer:float = 0
+var sin_timer:float = 20
 var time_to_sin: float = 0
 
 var wander_timer: float = 0

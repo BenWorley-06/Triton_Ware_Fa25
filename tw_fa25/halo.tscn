@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwsrp2gfx5dtn"]
+
+[ext_resource type="Texture2D" uid="uid://eg41w38eqey1" path="res://Art/Temporary/white_circle.png" id="1_6j11l"]
+[ext_resource type="Script" uid="uid://d3dj4wacnl482" path="res://halo.gd" id="1_ro5j4"]
+[ext_resource type="Texture2D" uid="uid://cmkt63mpd8ytb" path="res://Art/Temporary/halo.webp" id="2_ro5j4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6r47y"]
+
+[node name="halo" type="Area2D"]
+script = ExtResource("1_ro5j4")
+
+[node name="aura" type="Sprite2D" parent="."]
+modulate = Color(1, 0.843137, 0, 0.152941)
+position = Vector2(0, 52)
+scale = Vector2(0.294907, 0.141014)
+texture = ExtResource("1_6j11l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 52)
+scale = Vector2(18.1471, 9.05242)
+shape = SubResource("CircleShape2D_6r47y")
+
+[node name="halo" type="Sprite2D" parent="."]
+position = Vector2(0, -36)
+rotation = 3.14159
+scale = Vector2(-0.237172, -0.237172)
+texture = ExtResource("2_ro5j4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

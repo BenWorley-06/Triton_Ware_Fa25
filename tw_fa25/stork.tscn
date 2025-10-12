@@ -1,14 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cajn8hw5ro47n"]
+[gd_scene load_steps=6 format=3 uid="uid://cajn8hw5ro47n"]
 
 [ext_resource type="Texture2D" uid="uid://cl0qmplrw2qcw" path="res://Art/Temporary/cyclops_vance.webp" id="1_75tov"]
 [ext_resource type="Script" uid="uid://b8tdec4shp14d" path="res://stork.gd" id="1_b00bf"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="2_e5lgo"]
+[ext_resource type="PackedScene" uid="uid://bwsrp2gfx5dtn" path="res://halo.tscn" id="3_li8u5"]
 [ext_resource type="AudioStream" uid="uid://cnxu20j6wn6im" path="res://Sounds/stork_wings.mp3" id="4_evco4"]
 
 [node name="stork" type="Node2D"]
 script = ExtResource("1_b00bf")
 speed = 100
 character_scene = ExtResource("2_e5lgo")
+halo_scene = ExtResource("3_li8u5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 rotation = -1.5708
