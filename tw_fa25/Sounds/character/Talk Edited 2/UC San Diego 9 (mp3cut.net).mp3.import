@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://briqkosrpbc87"
+path="res://.godot/imported/UC San Diego 9 (mp3cut.net).mp3-c71cf3e9fe4928ab13966e8fcde1f7be.mp3str"
+
+[deps]
+
+source_file="res://Sounds/character/Talk Edited 2/UC San Diego 9 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/UC San Diego 9 (mp3cut.net).mp3-c71cf3e9fe4928ab13966e8fcde1f7be.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
