@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=21 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
@@ -28,6 +28,11 @@ metadata/_custom_type_script = "uid://b6i7vriwvog26"
 distance = 122.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3dryh"]
+
+[sub_resource type="Environment" id="Environment_1phco"]
+glow_enabled = true
+glow_bloom = 0.28
+glow_blend_mode = 0
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("overlay")]
 script = ExtResource("1_1l0tm")
@@ -108,3 +113,6 @@ visible = false
 
 [node name="debugger" type="Node" parent="."]
 script = ExtResource("14_1phco")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1phco")

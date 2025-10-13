@@ -68,12 +68,15 @@ func try_pickup_character() -> void:
 	var mouse_pos = get_global_mouse_position()
 	var space_state = get_world_2d().direct_space_state
 
-	var query = PhysicsPointQueryParameters2D.new()
-	query.position = mouse_pos
+	var query = PhysicsShapeQueryParameters2D.new()
+	var shape = CircleShape2D.new()
+	shape.radius = 50  # <-- increase to make it easier to grab
+	query.shape = shape
+	query.transform = Transform2D(0, mouse_pos)
 	query.collide_with_areas = true
 	query.collide_with_bodies = true
 
-	var results = space_state.intersect_point(query, 1)
+	var results = space_state.intersect_shape(query, 32)  # up to 32 results
 
 	for result in results:
 		var collider = result["collider"]
@@ -82,7 +85,6 @@ func try_pickup_character() -> void:
 			collider.initiate_grab()
 			return
 
-	# If nothing was grabbed, reset so another click works immediately
 	click_in_progress = false
 
 #	--- Building Functionality ---

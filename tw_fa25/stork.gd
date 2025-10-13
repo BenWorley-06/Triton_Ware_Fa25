@@ -25,14 +25,15 @@ func _process(delta: float) -> void:
 func drop_baby():
 	var baby = character_scene.instantiate()
 	get_tree().current_scene.add_child(baby)
-	if randf()<0.25:
-		baby.sinner=true
-	elif not people_manager.prophet_spawned:
+	
+	if not people_manager.prophet_spawned:
 		if randf()<1:
 			people_manager.prophet_spawned=true
 			baby.prophet=true
 			var halo = halo_scene.instantiate()
 			baby.add_child(halo)
+	elif randf()<0.25:
+		baby.sinner=true
 	baby.global_position=global_position
 	people_manager.register_character(baby)
 	
