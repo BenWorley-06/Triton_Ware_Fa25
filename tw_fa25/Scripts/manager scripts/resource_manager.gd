@@ -1,7 +1,7 @@
 extends Node
 class_name ResourceManager
 
-@export var faith: int = 0
+@export var faith: int = 50
 @export var bread: int = 10
 @export var population: int = 0
 

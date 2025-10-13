@@ -55,9 +55,18 @@ func try_pickup_character() -> void:
 	var mouse_pos = get_global_mouse_position()
 	var space_state = get_world_2d().direct_space_state
 
+<<<<<<< Updated upstream
 	var query = PhysicsPointQueryParameters2D.new()
 	query.position = mouse_pos
 	query.collide_with_areas = false
+=======
+	var query = PhysicsShapeQueryParameters2D.new()
+	var shape = CircleShape2D.new()
+	shape.radius = 15  # <-- increase to make it easier to grab
+	query.shape = shape
+	query.transform = Transform2D(0, mouse_pos)
+	query.collide_with_areas = true
+>>>>>>> Stashed changes
 	query.collide_with_bodies = true
 
 	var results = space_state.intersect_point(query, 1)
