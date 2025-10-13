@@ -30,6 +30,9 @@ distance = 122.0
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3dryh"]
 
 [sub_resource type="Environment" id="Environment_1phco"]
+ambient_light_source = 2
+ambient_light_color = Color(0, 0.443663, 0.198357, 1)
+ambient_light_energy = 2.0
 glow_enabled = true
 glow_bloom = 0.28
 glow_blend_mode = 0
