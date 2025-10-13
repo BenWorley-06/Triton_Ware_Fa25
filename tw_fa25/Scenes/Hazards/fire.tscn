@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cuptthik5fbdt"]
+
+[ext_resource type="Script" uid="uid://uget1kn4puty" path="res://fire.gd" id="1_x0kke"]
+[ext_resource type="Texture2D" uid="uid://dekc88uf6g8iu" path="res://Art/Temporary/fire.webp" id="2_aux0q"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ufe0f"]
+
+[node name="fire" type="Area2D" groups=["fire"]]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_x0kke")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(5.47627, 1.8558)
+shape = SubResource("CircleShape2D_ufe0f")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -7)
+scale = Vector2(0.0441634, 0.0441634)
+texture = ExtResource("2_aux0q")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

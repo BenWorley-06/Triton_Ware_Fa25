@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c4lo5nuaxreh8"]
 
-[ext_resource type="Script" uid="uid://cd4ad2a7nsn8b" path="res://Scenes/end_day.gd" id="1_16otp"]
+[ext_resource type="Script" uid="uid://cd4ad2a7nsn8b" path="res://end_day.gd" id="1_16otp"]
 [ext_resource type="Texture2D" uid="uid://bjkswu5yngqad" path="res://Art/Temporary/jdChan.jpg" id="1_ca7k3"]
 
 [node name="end_day" type="CanvasLayer"]
