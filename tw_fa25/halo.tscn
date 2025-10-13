@@ -15,6 +15,7 @@ script = ExtResource("1_ro5j4")
 
 [node name="aura" type="Sprite2D" parent="."]
 modulate = Color(1, 0.843137, 0, 0.152941)
+z_as_relative = false
 position = Vector2(0, 52)
 scale = Vector2(0.570055, 0.27258)
 texture = ExtResource("1_6j11l")
