@@ -205,8 +205,10 @@ func _on_burn_area_area_exited(area: Area2D) -> void:
 func killed():
 	if sinner:
 		get_node("/root/Game/Managers/ResourceManager").add_faith(10)
+		get_node("/root/Game/Managers/AudioManager").play_death(true)
 	else:
 		get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
+		get_node("/root/Game/Managers/AudioManager").play_death(false)
 	var noise=death_noise_scene.instantiate()
 	get_tree().current_scene.add_child(noise)
 	noise.global_position=global_position
