@@ -32,6 +32,9 @@ func place_farm(position: Vector2) -> void:
 		print("Farm overlaps layer 2 object — deleting.")
 		farm.queue_free()
 		return
+	if houses.size()<farms.size()+1:
+		farm.queue_free()
+		return
 	register_farm(farm)
 	
 func place_scaffold(position: Vector2) -> void:
