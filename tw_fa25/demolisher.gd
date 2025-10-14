@@ -37,6 +37,8 @@ func _destroy_buildings():
 	for area in overlapping_areas:
 		if area.is_in_group("fire"):
 			area.queue_free()
+		if area.is_in_group("corpse"):
+			area.smash()
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("character"):

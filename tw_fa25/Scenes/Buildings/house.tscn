@@ -13,8 +13,8 @@ collision_mask = 2
 script = ExtResource("1_metfq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.16331, 29.0828)
-scale = Vector2(3.1932, -0.458127)
+position = Vector2(-1.16331, 20.9396)
+scale = Vector2(4.52361, -1.92693)
 shape = SubResource("CapsuleShape2D_i6h3i")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

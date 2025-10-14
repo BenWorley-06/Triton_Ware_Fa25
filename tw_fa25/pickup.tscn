@@ -8,6 +8,8 @@
 
 [node name="Pickup" type="Area2D"]
 script = ExtResource("1_iqk3k")
+speed = 3.0
+pickup_distance = 140.0
 
 [node name="bread" type="Sprite2D" parent="."]
 texture_filter = 1

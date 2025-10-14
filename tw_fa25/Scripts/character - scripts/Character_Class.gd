@@ -9,6 +9,7 @@ class_name Character
 @export var lava_particle_scene: PackedScene
 @export var blood_particle_scene: PackedScene
 @export var death_noise_scene: PackedScene
+@export var corpse_scene: PackedScene
 
 enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING,SCARED}
 var sins=["kill","sleep"]
@@ -111,8 +112,10 @@ func do_talk(delta):
 		action_state=Action_State.IDLE
 
 #	--- Scared ---
-func initiate_scared(pos: Vector2):
+func initiate_scared(pos: Vector2, corpse: bool = false):
 	if action_state!=Action_State.SCARED:
+		if corpse and sinner:
+			return
 		velocity = (global_position - pos).normalized() * stats.run_speed
 		action_state=Action_State.SCARED
 		voicebox.request_play("scream")
@@ -209,7 +212,7 @@ func enter_volcano():
 	var lava = lava_particle_scene.instantiate()
 	get_tree().current_scene.add_child(lava)
 	lava.global_position = global_position
-	killed()
+	killed(false)
 	
 func _on_burn_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("volcano"):
@@ -219,13 +222,14 @@ func _on_burn_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("volcano"):
 		over_volcano=false
 
-func killed():
-	if sinner:
-		get_node("/root/Game/Managers/ResourceManager").add_faith(10)
-		get_node("/root/Game/Managers/AudioManager").play_death(true)
-	else:
-		get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
-		get_node("/root/Game/Managers/AudioManager").play_death(false)
+func killed(good: bool):
+	if not good:
+		if sinner:
+			get_node("/root/Game/Managers/ResourceManager").add_faith(10)
+			get_node("/root/Game/Managers/AudioManager").play_death(true)
+		else:
+			get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
+			get_node("/root/Game/Managers/AudioManager").play_death(false)
 	var noise=death_noise_scene.instantiate()
 	get_tree().current_scene.add_child(noise)
 	noise.global_position=global_position
@@ -236,7 +240,16 @@ func smashed():
 	var blood=blood_particle_scene.instantiate()
 	get_tree().current_scene.add_child(blood)
 	blood.global_position = global_position
-	killed()
+	killed(false)
+
+func murdered():
+	var blood=blood_particle_scene.instantiate()
+	get_tree().current_scene.add_child(blood)
+	blood.global_position = global_position
+	var corpse=corpse_scene.instantiate()
+	get_tree().current_scene.add_child(corpse)
+	corpse.global_position = global_position
+	killed(true)
 
 #	--- Breeding ---
 func breed(target: Character, primary: bool):
@@ -289,7 +302,7 @@ func do_killing(delta):
 		velocity = Vector2.ZERO
 		killing_timer+=1
 		if killing_timer>=stats.murder_time:
-			murder_target.smashed()
+			murder_target.murdered()
 			killing_timer=0
 			murder_target=null
 			action_state=Action_State.IDLE
