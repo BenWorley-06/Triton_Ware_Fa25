@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://req66xpfkta"]
+
+[node name="MarginContainer" type="MarginContainer"]
+offset_right = 8.0
+offset_bottom = 45.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Controls: P - Pickup / B - House / F - Farm / D - Destroy"
+
+[node name="faith" type="ProgressBar" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/faith"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 82.0
+offset_bottom = 30.0
+text = "Faith"

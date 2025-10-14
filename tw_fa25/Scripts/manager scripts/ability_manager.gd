@@ -70,7 +70,7 @@ func try_pickup_character() -> void:
 
 	var query = PhysicsShapeQueryParameters2D.new()
 	var shape = CircleShape2D.new()
-	shape.radius = 50  # <-- increase to make it easier to grab
+	shape.radius = 15  # <-- increase to make it easier to grab
 	query.shape = shape
 	query.transform = Transform2D(0, mouse_pos)
 	query.collide_with_areas = true
@@ -79,8 +79,10 @@ func try_pickup_character() -> void:
 	var results = space_state.intersect_shape(query, 32)  # up to 32 results
 
 	for result in results:
+		print(result)
 		var collider = result["collider"]
 		if collider is Character:
+			print("grab")
 			grabbed_character = collider
 			collider.initiate_grab()
 			return

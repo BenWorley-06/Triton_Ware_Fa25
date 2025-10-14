@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4lo5nuaxreh8"]
+[gd_scene load_steps=4 format=3 uid="uid://c4lo5nuaxreh8"]
 
-[ext_resource type="Script" uid="uid://cd4ad2a7nsn8b" path="res://end_day.gd" id="1_16otp"]
-[ext_resource type="Texture2D" uid="uid://bjkswu5yngqad" path="res://Art/Temporary/jdChan.jpg" id="1_ca7k3"]
+[ext_resource type="Script" uid="uid://cd4ad2a7nsn8b" path="res://Scenes/end_day.gd" id="1_16otp"]
+
+[sub_resource type="Gradient" id="Gradient_ca7k3"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_16otp"]
+gradient = SubResource("Gradient_ca7k3")
 
 [node name="end_day" type="CanvasLayer"]
 script = ExtResource("1_16otp")
@@ -13,14 +19,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_ca7k3")
+texture = SubResource("GradientTexture1D_16otp")
 
 [node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
 layout_mode = 0
-offset_left = 556.0
-offset_top = 332.0
-offset_right = 596.0
-offset_bottom = 375.0
+offset_left = 538.0
+offset_top = 296.0
+offset_right = 634.0
+offset_bottom = 381.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer"]
 layout_mode = 2
@@ -29,7 +35,10 @@ layout_mode = 2
 layout_mode = 2
 text = "Start Game"
 
-[node name="Label" type="Label" parent="TextureRect/MarginContainer/VBoxContainer"]
+[node name="Day" type="Label" parent="TextureRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Faith" type="Label" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

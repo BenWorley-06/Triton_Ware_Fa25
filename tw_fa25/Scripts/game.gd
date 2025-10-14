@@ -2,11 +2,20 @@ extends Node2D
 
 @export var stats: GameStats
 @export var overlay: ColorRect
+
 @onready var building_manager: BuildingManager = $Managers/BuildingManager
 @onready var population_manager: PopulationManager = $Managers/PopulationManager
+@onready var resource_manager: ResourceManager = $Managers/ResourceManager
 var character_scene = preload("res://Scenes/character.tscn")
+
+# ---- End day variables ----
 @onready var end_day_layer: CanvasLayer = $end_day
-@onready var end_day_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Label
+@onready var end_day_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Day
+@onready var faith_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Faith
+
+# ---- UI ----
+@onready var ui: MarginContainer = $ui
+@onready var faith_progress_bar: ProgressBar = $ui/VBoxContainer/faith
 
 # ---- Day/Night Tint Colors ----
 var morning_color: Color = Color(0.2, 0.3, 0.5, 0.5)
@@ -24,7 +33,7 @@ var end_day_cooldown: bool = false
 func _process(delta: float) -> void:
 	if paused:
 		return  # Stop day progression during end screen
-
+	update_ui()
 	day_timer += delta
 	if day_timer >= stats.time_in_day:
 		end_day()
@@ -79,10 +88,16 @@ func end_day() -> void:
 			node.set_physics_process(false)
 			node.set_process(false)
 		end_day_layer.visible = true
-		end_day_label.text = "Day: %d" % day
+		update_labels()
 		paused = true
 
 	print("Day state toggled. Paused:", paused)
+
+
+# ---- Labels ----
+func update_labels():
+	end_day_label.text = "Day: %d" % day
+	faith_label.text = "Faith: %d" % stats.faith
 
 
 # ---- Input ----
@@ -91,3 +106,12 @@ func _input(event: InputEvent) -> void:
 		end_day()
 	elif event.is_action_pressed("escape"):
 		get_tree().change_scene_to_file("res://Scenes/main.tscn")
+
+
+# ---- UI Updates ----
+func update_ui():
+	update_faith()
+
+func update_faith():
+	if faith_progress_bar:
+		faith_progress_bar.value = resource_manager.faith
