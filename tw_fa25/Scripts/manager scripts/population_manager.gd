@@ -5,6 +5,7 @@ class_name PopulationManager
 @onready var building_manager: BuildingManager = $"../BuildingManager"
 @onready var resource_manager: ResourceManager = $"../ResourceManager"
 @export var stork_scene: PackedScene
+@export var names: NameList
 const Character = preload("res://Scripts/character - scripts/Character_Class.gd")
 
 var people: Array = []          # all active people
@@ -28,6 +29,8 @@ func register_character(character: Character):
 		people.append(character)
 		if not resource_manager:
 			resource_manager= $"../ResourceManager"
+		var char_name = names.name_list.pick_random()
+		character.change_name(char_name)
 		resource_manager.add_population(1)
 		
 func remove_character(character: Character):

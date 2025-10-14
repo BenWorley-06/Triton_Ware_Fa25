@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cah1gdlpwbn5i"]
+[gd_scene load_steps=16 format=3 uid="uid://cah1gdlpwbn5i"]
 
 [ext_resource type="Script" uid="uid://unpx8fm2f83l" path="res://Scripts/character - scripts/Character_Class.gd" id="1_owm7s"]
 [ext_resource type="Script" uid="uid://c3i3i32v4ta6k" path="res://Scripts/character - scripts/character_stats.gd" id="2_nytcm"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://b1ai862ae1s1y" path="res://Scripts/character - scripts/voicebox.gd" id="5_ejsiy"]
 [ext_resource type="PackedScene" uid="uid://dcdxwi6f5tpoo" path="res://corpse.tscn" id="6_kq7hj"]
 [ext_resource type="Script" uid="uid://cvoucn6vtfcil" path="res://Scenes/sfx.gd" id="9_wbia7"]
+[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="11_7iw6i"]
 
 [sub_resource type="Resource" id="Resource_px5sl"]
 script = ExtResource("2_nytcm")
@@ -32,6 +33,9 @@ metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2mse5"]
+
+[sub_resource type="Theme" id="Theme_l1rcp"]
+default_font = ExtResource("11_7iw6i")
 
 [node name="Character" type="CharacterBody2D" groups=["character", "pausable"]]
 scale = Vector2(0.443294, 0.366278)
@@ -72,6 +76,29 @@ shape = SubResource("CircleShape2D_2mse5")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("9_wbia7")
+
+[node name="nametag" type="Label" parent="."]
+z_index = 50
+z_as_relative = false
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -45.1168
+offset_top = -103.746
+offset_right = 1.88321
+offset_bottom = -57.7463
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.12576, 2.12576)
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme = SubResource("Theme_l1rcp")
+text = "Name"
+horizontal_alignment = 1
+uppercase = true
 
 [connection signal="area_entered" from="burn_area" to="." method="_on_burn_area_area_entered"]
 [connection signal="area_exited" from="burn_area" to="." method="_on_burn_area_area_exited"]

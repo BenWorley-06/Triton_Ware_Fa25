@@ -5,6 +5,7 @@ class_name Character
 @onready var sprite: Sprite2D = $Sprite
 @onready var voicebox: AudioStreamPlayer2D = $voicebox
 @onready var sfx: AudioStreamPlayer2D = $SFX
+@onready var nametag: Label = $nametag
 
 @export var lava_particle_scene: PackedScene
 @export var blood_particle_scene: PackedScene
@@ -48,13 +49,19 @@ var talking_timer: float = 0
 
 var scared_timer: float = 0
 
+var char_name: String
+
 #	--- Main ---
 func _ready():
 	# register self to population manager
 	base_scale = sprite.scale
 	get_node("/root/Game/Managers/PopulationManager").register_character(self)
 	z_index=1
-		
+	
+func change_name(input_name:String):
+	char_name=input_name
+	nametag.text=char_name
+	
 func _process(delta: float) -> void:
 	
 	match action_state:
