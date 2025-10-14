@@ -44,3 +44,8 @@ func _on_body_entered(body: Node2D) -> void:
 		body.enter_volcano()
 	if body.is_in_group("house"):
 		building_manager.destroy_building(body)
+
+
+func _on_scare_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("character"):
+			body.initiate_scared(global_position)

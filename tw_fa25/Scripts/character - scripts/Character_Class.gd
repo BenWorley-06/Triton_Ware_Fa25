@@ -10,7 +10,7 @@ class_name Character
 @export var blood_particle_scene: PackedScene
 @export var death_noise_scene: PackedScene
 
-enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING}
+enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING,SCARED}
 var sins=["kill","sleep"]
 var action_state = Action_State.IDLE
 var current_job=null
@@ -45,6 +45,8 @@ var sleeping_timer: float = 0
 
 var talking_timer: float = 0
 
+var scared_timer: float = 0
+
 #	--- Main ---
 func _ready():
 	# register self to population manager
@@ -67,6 +69,8 @@ func _process(delta: float) -> void:
 			do_breed(delta)
 		Action_State.TALKING:
 			do_talk(delta)
+		Action_State.SCARED:
+			do_scared(delta)
 	if not selected:
 		if over_volcano:
 			enter_volcano()
@@ -105,7 +109,20 @@ func do_talk(delta):
 	if talking_timer>stats.talk_timer:
 		talking_timer=0
 		action_state=Action_State.IDLE
+
+#	--- Scared ---
+func initiate_scared(pos: Vector2):
+	if action_state!=Action_State.SCARED:
+		velocity = (global_position - pos).normalized() * stats.run_speed
+		action_state=Action_State.SCARED
+		voicebox.request_play("scream")
 	
+func do_scared(delta:float):
+	scared_timer+=delta
+	if scared_timer>=stats.time_scared:
+		action_state=Action_State.IDLE
+		scared_timer=0
+
 #	--- Work ---
 func assign_job(job):
 	current_job = job

@@ -3,6 +3,7 @@ class_name VoiceBox
 
 @export var pickup_folder: String = "res://Sounds/Character/Pickup Edited/"
 @export var talk_folder: String = "res://Sounds/character/Talk Edited 2/"
+@export var scream_folder: String = "res://Sounds/character/Scared/"
 var pickup_lines: Array
 
 var voice_lines: Dictionary ={}
@@ -10,6 +11,7 @@ var voice_lines: Dictionary ={}
 func _ready() -> void:
 	voice_lines["pickup"] = load_audio_files(pickup_folder)
 	voice_lines["talk"] = load_audio_files(talk_folder)
+	voice_lines["scream"] = load_audio_files(scream_folder)
 
 func load_audio_files(path: String) -> Array:
 	var dir := DirAccess.open(path)

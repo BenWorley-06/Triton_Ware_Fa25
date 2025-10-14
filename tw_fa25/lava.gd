@@ -24,3 +24,8 @@ func spawn_fire_nearby() -> void:
 	var fire = fire_scene.instantiate()
 	fire.global_position = fire_pos
 	get_tree().current_scene.add_child(fire)
+
+
+func _on_scare_area_body_entered(body: Node2D) -> void:
+	if body.is_in_group("character"):
+			body.initiate_scared(global_position)

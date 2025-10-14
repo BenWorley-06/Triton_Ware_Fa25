@@ -104,10 +104,6 @@ autoplay = true
 
 [node name="death" type="AudioStreamPlayer" parent="Managers/AudioManager"]
 
-[node name="Volcano" parent="." groups=["pausable"] instance=ExtResource("6_i6g32")]
-position = Vector2(84, 343)
-scale = Vector2(4.41522, 4.38919)
-
 [node name="Day Tint" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0.501961)
 z_index = 100
@@ -125,3 +121,7 @@ script = ExtResource("14_1phco")
 environment = SubResource("Environment_1phco")
 
 [node name="ui" parent="." instance=ExtResource("15_nb51f")]
+
+[node name="lava" parent="." instance=ExtResource("6_i6g32")]
+position = Vector2(138, 272)
+scale = Vector2(6.26942, 3.77395)

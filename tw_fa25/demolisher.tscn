@@ -29,3 +29,5 @@ texture = ExtResource("3_pvi58")
 
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_dnaad")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

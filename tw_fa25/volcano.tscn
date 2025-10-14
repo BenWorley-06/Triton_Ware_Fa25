@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bni15epyyxgeu"]
+[gd_scene load_steps=6 format=3 uid="uid://bni15epyyxgeu"]
 
 [ext_resource type="Script" uid="uid://4wbbpjwkaarw" path="res://lava.gd" id="1_3dejo"]
 [ext_resource type="Texture2D" uid="uid://clatjin4tut0v" path="res://Art/Temporary/lava temporary.png" id="1_gu245"]
@@ -6,7 +6,10 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3dejo"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_yrdue"]
+
 [node name="lava" type="Area2D" groups=["volcano"]]
+scale = Vector2(0.964695, 0.580709)
 script = ExtResource("1_3dejo")
 fire_scene = ExtResource("2_yrdue")
 
@@ -18,3 +21,13 @@ shape = SubResource("CircleShape2D_3dejo")
 position = Vector2(-2.98023e-08, -1.19209e-07)
 scale = Vector2(0.0204497, 0.0204497)
 texture = ExtResource("1_gu245")
+
+[node name="scare_area" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="scare_area"]
+scale = Vector2(2.54686, 2.15664)
+shape = SubResource("CircleShape2D_yrdue")
+
+[connection signal="body_entered" from="scare_area" to="." method="_on_scare_area_body_entered"]
