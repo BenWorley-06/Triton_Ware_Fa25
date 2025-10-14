@@ -96,8 +96,10 @@ script = ExtResource("9_o5yvi")
 
 [node name="Music" type="AudioStreamPlayer" parent="Managers/AudioManager"]
 stream = ExtResource("10_rku1e")
-volume_db = -7.495
+volume_db = -7.22
 autoplay = true
+
+[node name="death" type="AudioStreamPlayer" parent="Managers/AudioManager"]
 
 [node name="Volcano" parent="." groups=["pausable"] instance=ExtResource("6_i6g32")]
 position = Vector2(84, 343)

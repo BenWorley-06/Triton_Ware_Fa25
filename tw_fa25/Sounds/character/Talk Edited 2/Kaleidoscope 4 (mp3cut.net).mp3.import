@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bu8o5p2vewk0f"
+path="res://.godot/imported/Kaleidoscope 4 (mp3cut.net).mp3-762bd31b2a0643a6a7dd4aae874cd8a6.mp3str"
+
+[deps]
+
+source_file="res://Sounds/character/Talk Edited 2/Kaleidoscope 4 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/Kaleidoscope 4 (mp3cut.net).mp3-762bd31b2a0643a6a7dd4aae874cd8a6.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

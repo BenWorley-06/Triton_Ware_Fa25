@@ -27,9 +27,13 @@ func smite_buildings():
 
 func _destroy_buildings():
 	var overlapping_bodies = get_overlapping_bodies()
+	var overlapping_areas = get_overlapping_areas()
 	audio.play()
 	for body in overlapping_bodies:
 		if body.is_in_group("building"):
 			get_node("/root/Game/Managers/BuildingManager").destroy_building(body)
 		elif body.is_in_group("character"):
 			body.smashed()
+	for area in overlapping_areas:
+		if area.is_in_group("fire"):
+			area.queue_free()

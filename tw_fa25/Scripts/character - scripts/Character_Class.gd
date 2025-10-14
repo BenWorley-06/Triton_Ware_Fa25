@@ -10,7 +10,7 @@ class_name Character
 @export var blood_particle_scene: PackedScene
 @export var death_noise_scene: PackedScene
 
-enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING}
+enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING}
 var sins=["kill","sleep"]
 var action_state = Action_State.IDLE
 var current_job=null
@@ -43,6 +43,8 @@ var killing_timer: float = 0
 
 var sleeping_timer: float = 0
 
+var talking_timer: float = 0
+
 #	--- Main ---
 func _ready():
 	# register self to population manager
@@ -63,6 +65,8 @@ func _process(delta: float) -> void:
 			do_sleep(delta)
 		Action_State.BREEDING:
 			do_breed(delta)
+		Action_State.TALKING:
+			do_talk(delta)
 	if not selected:
 		if over_volcano:
 			enter_volcano()
@@ -86,9 +90,21 @@ func idle(delta: float):
 	var job = get_node("/root/Game/Managers/PopulationManager").request_job(self)
 	if job:
 		assign_job(job)
+	else:
+		if randf()<0.001:
+			action_state=Action_State.TALKING
+			voicebox.request_play("talk")
+			velocity=Vector2.ZERO
+			
 
 func is_idle() -> bool:
 	return action_state==Action_State.IDLE
+	
+func do_talk(delta):
+	talking_timer+=delta
+	if talking_timer>stats.talk_timer:
+		talking_timer=0
+		action_state=Action_State.IDLE
 	
 #	--- Work ---
 func assign_job(job):
@@ -189,8 +205,10 @@ func _on_burn_area_area_exited(area: Area2D) -> void:
 func killed():
 	if sinner:
 		get_node("/root/Game/Managers/ResourceManager").add_faith(10)
+		get_node("/root/Game/Managers/AudioManager").play_death(true)
 	else:
 		get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
+		get_node("/root/Game/Managers/AudioManager").play_death(false)
 	var noise=death_noise_scene.instantiate()
 	get_tree().current_scene.add_child(noise)
 	noise.global_position=global_position
