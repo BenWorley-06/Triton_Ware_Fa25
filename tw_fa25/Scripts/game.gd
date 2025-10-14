@@ -12,11 +12,12 @@ var character_scene = preload("res://Scenes/character.tscn")
 @onready var end_day_layer: CanvasLayer = $end_day
 @onready var end_day_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Day
 @onready var faith_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Faith
-
+# ---- loss
+@onready var loss_layer: CanvasLayer = $loss_layer
 # ---- UI ----
 @onready var ui: MarginContainer = $ui
 @onready var faith_progress_bar: ProgressBar = $ui/VBoxContainer/faith
-
+@onready var timer: Label = $ui/VBoxContainer/time
 # ---- Day/Night Tint Colors ----
 var morning_color: Color = Color(0.2, 0.3, 0.5, 0.5)
 var afternoon_color: Color = Color(1.0, 0.6, 0.2, 0.3)
@@ -37,8 +38,26 @@ func _process(delta: float) -> void:
 	day_timer += delta
 	if day_timer >= stats.time_in_day:
 		end_day()
+	manage_day_tint()
+	faith_conditions()
+	
 
-	# Smooth color transition
+func faith_conditions():
+	if resource_manager.faith == 0.0:
+		faith_loss()
+	return
+
+func faith_loss():
+	# End day
+	for node in get_tree().get_nodes_in_group("pausable"):
+		node.set_physics_process(false)
+		node.set_process(false)
+	loss_layer.visible = true
+	update_labels()
+	paused = true
+	return
+
+func manage_day_tint():
 	var t = fmod(day_timer / stats.time_in_day, 1.0)
 	var c1: Color
 	var c2: Color
@@ -62,7 +81,6 @@ func _process(delta: float) -> void:
 		local_t = (t - 0.75) / 0.25
 
 	overlay.color = c1.lerp(c2, local_t)
-
 
 # ---- End Day ----
 func end_day() -> void:
@@ -111,7 +129,12 @@ func _input(event: InputEvent) -> void:
 # ---- UI Updates ----
 func update_ui():
 	update_faith()
+	update_time()
 
+func update_time():
+	if timer:
+		timer.text = "time : %d" % day_timer
+	return
 func update_faith():
 	if faith_progress_bar:
 		faith_progress_bar.value = resource_manager.faith

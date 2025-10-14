@@ -5,4 +5,3 @@ class_name GameStats
 
 
 @export var faith: float = 50.0
-
