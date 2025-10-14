@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=23 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cajn8hw5ro47n" path="res://stork.tscn" id="13_rfjv2"]
 [ext_resource type="Script" uid="uid://xqjja68kex4r" path="res://Scenes/debugger.gd" id="14_1phco"]
 [ext_resource type="PackedScene" uid="uid://req66xpfkta" path="res://Scenes/ui.tscn" id="15_nb51f"]
+[ext_resource type="PackedScene" uid="uid://5dkarjg88tms" path="res://loss_layer.tscn" id="16_nnt18"]
 
 [sub_resource type="Resource" id="Resource_ldgsr"]
 script = ExtResource("2_h4fw4")
@@ -120,3 +121,16 @@ script = ExtResource("14_1phco")
 environment = SubResource("Environment_1phco")
 
 [node name="ui" parent="." instance=ExtResource("15_nb51f")]
+<<<<<<< Updated upstream
+=======
+
+[node name="lava" parent="." instance=ExtResource("6_i6g32")]
+position = Vector2(130, 130)
+scale = Vector2(6.26942, 3.77395)
+
+[node name="lava2" parent="." instance=ExtResource("6_i6g32")]
+position = Vector2(1045, 587)
+scale = Vector2(6.14801, 3.45078)
+
+[node name="loss_layer" parent="." instance=ExtResource("16_nnt18")]
+>>>>>>> Stashed changes
