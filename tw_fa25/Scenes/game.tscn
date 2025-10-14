@@ -13,7 +13,7 @@
 [ext_resource type="Script" uid="uid://dfn2nllek1slu" path="res://audio_manager.gd" id="9_o5yvi"]
 [ext_resource type="AudioStream" uid="uid://cualnhn7f1xo0" path="res://Sounds/Choir Edited.mp3" id="10_rku1e"]
 [ext_resource type="PackedScene" uid="uid://cajn8hw5ro47n" path="res://stork.tscn" id="13_rfjv2"]
-[ext_resource type="Script" uid="uid://xqjja68kex4r" path="res://Scenes/debugger.gd" id="14_1phco"]
+[ext_resource type="Script" uid="uid://xqjja68kex4r" path="res://debugger.gd" id="14_1phco"]
 [ext_resource type="PackedScene" uid="uid://req66xpfkta" path="res://Scenes/ui.tscn" id="15_nb51f"]
 
 [sub_resource type="Resource" id="Resource_ldgsr"]
@@ -23,9 +23,12 @@ faith = 50.0
 metadata/_custom_type_script = "uid://b6i7vriwvog26"
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ebmjs"]
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qxrlw"]
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wrm1d"]
 distance = 122.0
+
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3dryh"]
 
 [sub_resource type="Environment" id="Environment_1phco"]

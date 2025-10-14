@@ -62,7 +62,6 @@ script = ExtResource("5_ejsiy")
 [node name="burn_area" type="Area2D" parent="."]
 scale = Vector2(0.819537, 0.819537)
 
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="burn_area"]
 scale = Vector2(5.08784, 6.98879)
 shape = SubResource("CircleShape2D_2mse5")

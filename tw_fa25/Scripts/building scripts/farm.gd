@@ -1,9 +1,13 @@
 extends StaticBody2D
 class_name Farm
+
 @onready var sprite: AnimatedSprite2D = $sprite
+@export var pickup_scene: PackedScene
+
 var max_state: int = 4
 var growth_state: int = 0
 @export var state_change_time: float = 5
+
 var change_timer: float = 0
 
 var harvest_amount: int = 2
@@ -38,4 +42,9 @@ func harvest():
 	growth_state=0
 	growing=true
 	get_node("/root/Game/Managers/ResourceManager").add_bread(harvest_amount)
+	var item = pickup_scene.instantiate()
+	get_tree().current_scene.add_child(item)
+	item.pickup_type="bread"
+	item.global_position = global_position
+	
 	

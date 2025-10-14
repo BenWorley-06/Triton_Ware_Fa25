@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwsrp2gfx5dtn"]
+[gd_scene load_steps=8 format=3 uid="uid://bwsrp2gfx5dtn"]
 
 [ext_resource type="Texture2D" uid="uid://eg41w38eqey1" path="res://Art/Temporary/white_circle.png" id="1_6j11l"]
 [ext_resource type="Script" uid="uid://d3dj4wacnl482" path="res://halo.gd" id="1_ro5j4"]
+[ext_resource type="PackedScene" uid="uid://ddja7ywhyxnyp" path="res://pickup.tscn" id="2_dldgo"]
 [ext_resource type="Texture2D" uid="uid://cmkt63mpd8ytb" path="res://Art/Temporary/halo.webp" id="2_ro5j4"]
 [ext_resource type="Shader" uid="uid://c365dk125fr4r" path="res://halo.gdshader" id="3_lo6go"]
 
@@ -12,6 +13,7 @@ shader = ExtResource("3_lo6go")
 
 [node name="halo" type="Area2D"]
 script = ExtResource("1_ro5j4")
+pickup_scene = ExtResource("2_dldgo")
 
 [node name="aura" type="Sprite2D" parent="."]
 modulate = Color(1, 0.843137, 0, 0.152941)

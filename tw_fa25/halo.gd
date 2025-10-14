@@ -3,6 +3,7 @@ extends Area2D
 @onready var aura: Sprite2D = $aura
 @onready var halo: Sprite2D = $halo
 @onready var resource_manager: ResourceManager = get_node("/root/Game/Managers/ResourceManager")
+@export var pickup_scene: PackedScene
 
 var people_in_area: int = 0
 var praise_timer: float = 0
@@ -79,7 +80,10 @@ func _process(delta: float) -> void:
 	if people_in_area > 0 and not parent.selected:
 		praise_timer += delta
 		if praise_timer >= time_for_faith:
-			resource_manager.add_faith(1)
+			var item = pickup_scene.instantiate()
+			get_tree().current_scene.add_child(item)
+			item.pickup_type="faith"
+			item.global_position = global_position
 			praise_timer = 0
 
 

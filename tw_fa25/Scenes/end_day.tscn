@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://c4lo5nuaxreh8"]
 
-[ext_resource type="Script" uid="uid://cd4ad2a7nsn8b" path="res://Scenes/end_day.gd" id="1_16otp"]
+[ext_resource type="Script" uid="uid://cd4ad2a7nsn8b" path="res://end_day.gd" id="1_16otp"]
 
 [sub_resource type="Gradient" id="Gradient_ca7k3"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)

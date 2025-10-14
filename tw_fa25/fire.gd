@@ -3,6 +3,7 @@ class_name Fire
 
 @export var lifetime: float = 5.0
 @export var spread_time: float = 3
+@onready var building_manager = get_node("/root/Game/Managers/BuildingManager")
 
 var left_bound=0
 var right_bound=1200
@@ -41,3 +42,5 @@ func spread_fire() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group('character'):
 		body.enter_volcano()
+	if body.is_in_group("house"):
+		building_manager.destroy_building(body)
