@@ -23,6 +23,7 @@ var current_job=null
 
 @export var sinner: bool = false
 @export var fed: bool = false
+var has_sinned=false
 var prophet: bool = false
 
 var sin_timer:float = 20
@@ -259,12 +260,14 @@ func _on_burn_area_area_exited(area: Area2D) -> void:
 func killed(good: bool):
 	interupted()
 	if not good:
-		if sinner:
+		if has_sinned:
 			get_node("/root/Game/Managers/ResourceManager").add_faith(10)
 			get_node("/root/Game/Managers/AudioManager").play_death(true)
 		else:
 			get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
 			get_node("/root/Game/Managers/AudioManager").play_death(false)
+	if good and not has_sinned:
+		resource_manager.add_faith(-5)
 	var noise=death_noise_scene.instantiate()
 	get_tree().current_scene.add_child(noise)
 	noise.global_position=global_position
@@ -341,6 +344,7 @@ func do_killing(delta):
 			killing_timer=0
 			murder_target=null
 			action_state=Action_State.IDLE
+			has_sinned=true
 			
 func do_sleep(delta):
 	velocity=Vector2.ZERO
