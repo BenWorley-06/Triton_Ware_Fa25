@@ -56,6 +56,15 @@ overlay = NodePath("Day Tint")
 [node name="Character" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(674, 337)
 
+[node name="Character5" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(563, 217)
+
+[node name="Character6" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(465, 286)
+
+[node name="Character7" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(687, 233)
+
 [node name="world_bounds" type="StaticBody2D" parent="."]
 
 [node name="top" type="CollisionShape2D" parent="world_bounds"]
@@ -78,7 +87,6 @@ shape = SubResource("WorldBoundaryShape2D_3dryh")
 
 [node name="Character2" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(399, 376)
-sinner = true
 fed = true
 
 [node name="Character3" parent="." instance=ExtResource("1_ebmjs")]

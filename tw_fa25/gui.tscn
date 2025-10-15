@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://c8cksin46oc4k"]
+[gd_scene load_steps=9 format=3 uid="uid://c8cksin46oc4k"]
 
 [ext_resource type="Script" uid="uid://cku0shi3kyyih" path="res://gui.gd" id="1_q8o8l"]
-[ext_resource type="PackedScene" uid="uid://req66xpfkta" path="res://Scenes/ui.tscn" id="2_cor1f"]
+[ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="3_q8o8l"]
 [ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="3_u77ya"]
 
 [sub_resource type="Theme" id="Theme_jf511"]
@@ -10,49 +10,59 @@ default_font = ExtResource("3_u77ya")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q8o8l"]
 size = Vector2(20, 62.2835)
 
+[sub_resource type="Theme" id="Theme_cor1f"]
+default_font = ExtResource("3_u77ya")
+
+[sub_resource type="Theme" id="Theme_q8o8l"]
+default_font = ExtResource("3_u77ya")
+
+[sub_resource type="Theme" id="Theme_6lon5"]
+default_font = ExtResource("3_u77ya")
+
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_q8o8l")
 
-[node name="top_left_display" parent="." instance=ExtResource("2_cor1f")]
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="button_container" type="MarginContainer" parent="."]
+z_index = 120
+z_as_relative = false
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -64.0
-offset_top = -200.0
-offset_bottom = 200.0
+offset_left = -81.0
+offset_top = -201.0
+offset_right = -13.0
+offset_bottom = 199.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="button_container"]
 layout_mode = 2
 alignment = 1
 
-[node name="PickupButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="PickupButton" type="Button" parent="button_container/VBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme = SubResource("Theme_jf511")
 text = "Pickup"
 
-[node name="DestroyButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="DestroyButton" type="Button" parent="button_container/VBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme = SubResource("Theme_jf511")
 text = "Destroy"
 
-[node name="HouseButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="HouseButton" type="Button" parent="button_container/VBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 theme = SubResource("Theme_jf511")
 text = "House"
 
-[node name="FarmButton" type="Button" parent="MarginContainer/VBoxContainer"]
+[node name="FarmButton" type="Button" parent="button_container/VBoxContainer"]
 texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -68,7 +78,84 @@ position = Vector2(1114, 317.5)
 scale = Vector2(5.80267, 4.89697)
 shape = SubResource("RectangleShape2D_q8o8l")
 
-[connection signal="pressed" from="MarginContainer/VBoxContainer/PickupButton" to="." method="_on_pickup_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/DestroyButton" to="." method="_on_destroy_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/HouseButton" to="." method="_on_house_button_pressed"]
-[connection signal="pressed" from="MarginContainer/VBoxContainer/FarmButton" to="." method="_on_farm_button_pressed"]
+[node name="Indicators" type="MarginContainer" parent="."]
+z_index = 120
+z_as_relative = false
+offset_left = 924.0
+offset_top = 28.7384
+offset_right = 1172.0
+offset_bottom = 100.738
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Indicators"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Indicators/HBoxContainer"]
+layout_mode = 2
+
+[node name="faith_title" type="Label" parent="Indicators/HBoxContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_cor1f")
+text = "Faith:"
+uppercase = true
+
+[node name="faith_bar" type="ProgressBar" parent="Indicators/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(128, 32)
+layout_mode = 2
+size_flags_vertical = 1
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Indicators/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Bread" type="Label" parent="Indicators/HBoxContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+theme = SubResource("Theme_q8o8l")
+text = "Bread: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Population" type="Label" parent="Indicators/HBoxContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 16)
+layout_mode = 2
+theme = SubResource("Theme_q8o8l")
+text = "Population: "
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="time_label" type="Label" parent="Indicators/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = SubResource("Theme_6lon5")
+text = "Time:
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="GUI Background" type="Sprite2D" parent="."]
+modulate = Color(0.52376, 0.430767, 0.293325, 1)
+z_index = 100
+z_as_relative = false
+position = Vector2(1026.5, 68.8692)
+scale = Vector2(0.219727, 0.099354)
+texture = ExtResource("3_q8o8l")
+
+[node name="GUI Background2" type="Sprite2D" parent="."]
+modulate = Color(0.52376, 0.430767, 0.293325, 1)
+z_index = 100
+z_as_relative = false
+position = Vector2(1123.25, 320.565)
+scale = Vector2(0.14209, 0.291864)
+texture = ExtResource("3_q8o8l")
+
+[connection signal="pressed" from="button_container/VBoxContainer/PickupButton" to="." method="_on_pickup_button_pressed"]
+[connection signal="pressed" from="button_container/VBoxContainer/DestroyButton" to="." method="_on_destroy_button_pressed"]
+[connection signal="pressed" from="button_container/VBoxContainer/HouseButton" to="." method="_on_house_button_pressed"]
+[connection signal="pressed" from="button_container/VBoxContainer/FarmButton" to="." method="_on_farm_button_pressed"]

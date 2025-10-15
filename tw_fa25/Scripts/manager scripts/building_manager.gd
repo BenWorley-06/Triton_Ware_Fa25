@@ -20,8 +20,6 @@ func register_house_scafold(house_scafold: Node):
 		house_scafolds.append(house_scafold)
 		
 func get_total_housing_capacity() -> int:
-	print("capacity: %d"%((houses.size()+house_scafolds.size()) * people_per_house))
-	print("population %d"%resource_manager.population)
 	return ((houses.size()+house_scafolds.size()) * people_per_house)
 
 func get_available_housing_capacity(current_population: int) -> int:

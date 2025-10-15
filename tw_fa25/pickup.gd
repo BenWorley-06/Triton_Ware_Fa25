@@ -2,6 +2,7 @@ extends Node2D
 class_name Pickup
 
 @onready var resource_manager = get_node("/root/Game/Managers/ResourceManager")
+@export var audio_scene: PackedScene
 @onready var bread: Sprite2D = $bread
 @onready var faith: Sprite2D = $faith
 
@@ -66,4 +67,6 @@ func _collect() -> void:
 			resource_manager.add_bread(1)
 		"faith":
 			resource_manager.add_faith(1)
+	var sound = audio_scene.instantiate()
+	get_tree().current_scene.add_child(sound)
 	queue_free()

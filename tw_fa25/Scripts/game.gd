@@ -12,12 +12,10 @@ var character_scene = preload("res://Scenes/character.tscn")
 @onready var end_day_layer: CanvasLayer = $end_day
 @onready var end_day_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Day
 @onready var faith_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Faith
+
 # ---- loss
 @onready var loss_layer: CanvasLayer = $loss_layer
-# ---- UI ----
-@onready var ui: MarginContainer = $ui
-@onready var faith_progress_bar: ProgressBar = $ui/VBoxContainer/faith
-@onready var timer: Label = $ui/VBoxContainer/time
+
 # ---- Day/Night Tint Colors ----
 var morning_color: Color = Color(0.2, 0.3, 0.5, 0.5)
 var afternoon_color: Color = Color(1.0, 0.6, 0.2, 0.3)
@@ -34,7 +32,6 @@ var end_day_cooldown: bool = false
 func _process(delta: float) -> void:
 	if paused:
 		return  # Stop day progression during end screen
-	update_ui()
 	day_timer += delta
 	if day_timer >= stats.time_in_day:
 		end_day()
@@ -124,17 +121,3 @@ func _input(event: InputEvent) -> void:
 		end_day()
 	elif event.is_action_pressed("escape"):
 		get_tree().change_scene_to_file("res://Scenes/main.tscn")
-
-
-# ---- UI Updates ----
-func update_ui():
-	update_faith()
-	update_time()
-
-func update_time():
-	if timer:
-		timer.text = "time : %d" % day_timer
-	return
-func update_faith():
-	if faith_progress_bar:
-		faith_progress_bar.value = resource_manager.faith

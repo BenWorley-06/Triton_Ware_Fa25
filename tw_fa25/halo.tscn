@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bwsrp2gfx5dtn"]
+[gd_scene load_steps=9 format=3 uid="uid://bwsrp2gfx5dtn"]
 
 [ext_resource type="Texture2D" uid="uid://eg41w38eqey1" path="res://Art/Temporary/white_circle.png" id="1_6j11l"]
 [ext_resource type="Script" uid="uid://d3dj4wacnl482" path="res://halo.gd" id="1_ro5j4"]
 [ext_resource type="PackedScene" uid="uid://ddja7ywhyxnyp" path="res://pickup.tscn" id="2_dldgo"]
 [ext_resource type="Texture2D" uid="uid://cmkt63mpd8ytb" path="res://Art/Temporary/halo.webp" id="2_ro5j4"]
 [ext_resource type="Shader" uid="uid://c365dk125fr4r" path="res://halo.gdshader" id="3_lo6go"]
+[ext_resource type="Script" uid="uid://bot00u5me0pml" path="res://faithcircle.gd" id="6_tfnmw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6r47y"]
 
@@ -12,6 +13,8 @@
 shader = ExtResource("3_lo6go")
 
 [node name="halo" type="Area2D"]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_ro5j4")
 pickup_scene = ExtResource("2_dldgo")
 
@@ -33,6 +36,10 @@ position = Vector2(-4.3201e-12, -55)
 rotation = 3.14159
 scale = Vector2(-0.237172, -0.237172)
 texture = ExtResource("2_ro5j4")
+
+[node name="faithcircle" type="Node2D" parent="."]
+position = Vector2(0, -115)
+script = ExtResource("6_tfnmw")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

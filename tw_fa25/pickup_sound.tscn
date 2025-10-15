@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8m22towrpmvl"]
+
+[ext_resource type="AudioStream" uid="uid://43pwginnvmmh" path="res://Sounds/character/SFX/plop.mp3" id="1_276y0"]
+[ext_resource type="Script" uid="uid://ckeif2juy3l1h" path="res://pickup_sound.gd" id="2_lq1so"]
+
+[node name="pickup_sound" type="AudioStreamPlayer"]
+stream = ExtResource("1_276y0")
+script = ExtResource("2_lq1so")

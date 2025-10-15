@@ -42,9 +42,10 @@ func harvest():
 	growth_state=0
 	growing=true
 	get_node("/root/Game/Managers/ResourceManager").add_bread(harvest_amount)
-	var item = pickup_scene.instantiate()
-	get_tree().current_scene.add_child(item)
-	item.pickup_type="bread"
-	item.global_position = global_position
+	for i in range(harvest_amount):
+		var item = pickup_scene.instantiate()
+		get_tree().current_scene.add_child(item)
+		item.pickup_type="bread"
+		item.global_position = global_position
 	
 	

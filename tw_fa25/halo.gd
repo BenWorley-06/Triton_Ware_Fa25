@@ -4,6 +4,7 @@ extends Area2D
 @onready var halo: Sprite2D = $halo
 @onready var resource_manager: ResourceManager = get_node("/root/Game/Managers/ResourceManager")
 @export var pickup_scene: PackedScene
+@onready var faithcircle: Node2D = $faithcircle
 
 var people_in_area: int = 0
 var praise_timer: float = 0
@@ -78,20 +79,25 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if people_in_area > 0 and not parent.selected:
-		praise_timer += delta
+		praise_timer += delta*people_in_area
+		var ratio := praise_timer / time_for_faith
+		faithcircle.set_progress(ratio)
+		
 		if praise_timer >= time_for_faith:
 			var item = pickup_scene.instantiate()
 			get_tree().current_scene.add_child(item)
-			item.pickup_type="faith"
+			item.pickup_type = "faith"
 			item.global_position = global_position
 			praise_timer = 0
+			faithcircle.set_progress(0)
 
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("character"):
-		people_in_area += 1
+		if not body.prophet:
+			people_in_area += 1
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("character"):
-		people_in_area -= 1
+		people_in_area = max(0,people_in_area-1)

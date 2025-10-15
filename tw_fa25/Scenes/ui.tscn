@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://req66xpfkta"]
 
-[node name="MarginContainer" type="MarginContainer"]
+[node name="top_left_display" type="MarginContainer"]
 offset_right = 8.0
 offset_bottom = 45.0
 
