@@ -25,7 +25,6 @@ func _process(delta: float) -> void:
 			handle_destroy_input(delta)
 			
 func switch_abilities():
-	
 	if Input.is_action_just_pressed("p"):
 		abilitychosen=AbilityChosen.PICKUP
 		remove_demolisher_if_exists()
@@ -39,6 +38,22 @@ func switch_abilities():
 		abilitychosen=AbilityChosen.DESTROY
 		remove_demolisher_if_exists()
 		create_demolisher()
+
+func signal_change(ability_name: String):
+	match ability_name:
+		"pickup":
+			abilitychosen=AbilityChosen.PICKUP
+			remove_demolisher_if_exists()
+		"house":
+			abilitychosen=AbilityChosen.HOUSE
+			remove_demolisher_if_exists()
+		"farm":
+			abilitychosen=AbilityChosen.FARM
+			remove_demolisher_if_exists()
+		"destroy":
+			abilitychosen=AbilityChosen.DESTROY
+			remove_demolisher_if_exists()
+			create_demolisher()
 
 #	--- Pickup Functionality ---
 func handle_pickup_input(delta: float) -> void:

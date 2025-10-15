@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://c8cksin46oc4k"]
+
+[ext_resource type="Script" uid="uid://cku0shi3kyyih" path="res://gui.gd" id="1_q8o8l"]
+[ext_resource type="PackedScene" uid="uid://req66xpfkta" path="res://Scenes/ui.tscn" id="2_cor1f"]
+[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="3_u77ya"]
+
+[sub_resource type="Theme" id="Theme_jf511"]
+default_font = ExtResource("3_u77ya")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q8o8l"]
+size = Vector2(20, 62.2835)
+
+[node name="GUI" type="CanvasLayer"]
+script = ExtResource("1_q8o8l")
+
+[node name="top_left_display" parent="." instance=ExtResource("2_cor1f")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -200.0
+offset_bottom = 200.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="PickupButton" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = SubResource("Theme_jf511")
+text = "Pickup"
+
+[node name="DestroyButton" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = SubResource("Theme_jf511")
+text = "Destroy"
+
+[node name="HouseButton" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = SubResource("Theme_jf511")
+text = "House"
+
+[node name="FarmButton" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme = SubResource("Theme_jf511")
+text = "Farm"
+
+[node name="building_blocker" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="building_blocker"]
+position = Vector2(1114, 317.5)
+scale = Vector2(5.80267, 4.89697)
+shape = SubResource("RectangleShape2D_q8o8l")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/PickupButton" to="." method="_on_pickup_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/DestroyButton" to="." method="_on_destroy_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HouseButton" to="." method="_on_house_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/FarmButton" to="." method="_on_farm_button_pressed"]
