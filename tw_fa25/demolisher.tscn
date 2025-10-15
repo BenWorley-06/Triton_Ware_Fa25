@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://ip16vgl4u7s4"]
 
 [ext_resource type="Script" uid="uid://dr7wj5sucpq80" path="res://demolisher.gd" id="1_21eog"]
-[ext_resource type="Texture2D" uid="uid://bdwbtvmdmi7yu" path="res://Art/Temporary/black_circle.png" id="2_dnaad"]
+[ext_resource type="Texture2D" uid="uid://eg41w38eqey1" path="res://Art/Temporary/white_circle.png" id="2_dnaad"]
 [ext_resource type="Texture2D" uid="uid://vsj761gyofab" path="res://Art/Temporary/hand.png" id="3_pvi58"]
 [ext_resource type="AudioStream" uid="uid://du5usipmju7l8" path="res://Sounds/slam.mp3" id="4_dnaad"]
 
@@ -17,8 +17,8 @@ scale = Vector2(8.64466, 2.34908)
 shape = SubResource("CircleShape2D_5jp6u")
 
 [node name="shadow" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 0.584314)
-scale = Vector2(0.389295, 0.123615)
+modulate = Color(0.376471, 0, 0, 0.490196)
+scale = Vector2(0.140786, -0.03636)
 texture = ExtResource("2_dnaad")
 
 [node name="hand" type="Sprite2D" parent="."]

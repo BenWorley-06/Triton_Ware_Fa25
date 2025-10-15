@@ -3,6 +3,8 @@ class_name AbilityManager
 
 @onready var building_manager: BuildingManager = $"../BuildingManager"
 @export var demolisher_scene: PackedScene
+@export var house_marker_scene: PackedScene
+@export var farm_marker_scene: PackedScene
 
 enum AbilityChosen { PICKUP , HOUSE , FARM, DESTROY}
 
@@ -11,6 +13,7 @@ var grabbed_character: Character = null
 var click_in_progress := false
 
 var demolisher: Area2D
+var marker: Node2D
 
 func _process(delta: float) -> void:
 	switch_abilities()
@@ -26,36 +29,31 @@ func _process(delta: float) -> void:
 			
 func switch_abilities():
 	if Input.is_action_just_pressed("p"):
-		abilitychosen=AbilityChosen.PICKUP
-		remove_demolisher_if_exists()
+		init_pickup()
 	elif Input.is_action_just_pressed("b"):
-		abilitychosen=AbilityChosen.HOUSE
-		remove_demolisher_if_exists()
+		init_house()
 	elif Input.is_action_just_pressed("f"):
-		abilitychosen=AbilityChosen.FARM
-		remove_demolisher_if_exists()
+		init_farm()
 	elif Input.is_action_just_pressed("d"):
-		abilitychosen=AbilityChosen.DESTROY
-		remove_demolisher_if_exists()
-		create_demolisher()
+		init_demolisher()
 
 func signal_change(ability_name: String):
 	match ability_name:
 		"pickup":
-			abilitychosen=AbilityChosen.PICKUP
-			remove_demolisher_if_exists()
+			init_pickup()
 		"house":
-			abilitychosen=AbilityChosen.HOUSE
-			remove_demolisher_if_exists()
+			init_house()
 		"farm":
-			abilitychosen=AbilityChosen.FARM
-			remove_demolisher_if_exists()
+			init_farm()
 		"destroy":
-			abilitychosen=AbilityChosen.DESTROY
-			remove_demolisher_if_exists()
-			create_demolisher()
+			init_demolisher()
 
 #	--- Pickup Functionality ---
+func init_pickup():
+	abilitychosen=AbilityChosen.PICKUP
+	remove_demolisher_if_exists()
+	destroy_marker()
+
 func handle_pickup_input(delta: float) -> void:
 	# Released (always resets states cleanly)
 	if Input.is_action_just_released("left_click"):
@@ -76,8 +74,6 @@ func handle_pickup_input(delta: float) -> void:
 			get_global_mouse_position(),
 			20 * delta
 		)
-
-	
 
 func try_pickup_character() -> void:
 	var mouse_pos = get_global_mouse_position()
@@ -105,10 +101,34 @@ func try_pickup_character() -> void:
 	click_in_progress = false
 
 #	--- Building Functionality ---
+func destroy_marker():
+	if marker and is_instance_valid(marker):
+		marker.queue_free()
+		marker = null
+
+func init_house():
+	abilitychosen=AbilityChosen.HOUSE
+	remove_demolisher_if_exists()
+	destroy_marker()
+	var new_marker = house_marker_scene.instantiate()
+	marker=new_marker
+	get_tree().current_scene.add_child(new_marker)
+	new_marker.global_position=get_global_mouse_position()
+	
+
 func handle_house_input(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
 		var position=get_global_mouse_position()
 		building_manager.place_scaffold(position)
+		
+func init_farm():
+	abilitychosen=AbilityChosen.FARM
+	remove_demolisher_if_exists()
+	destroy_marker()
+	var new_marker = farm_marker_scene.instantiate()
+	marker=new_marker
+	get_tree().current_scene.add_child(new_marker)
+	new_marker.global_position=get_global_mouse_position()
 
 func handle_farm_input(delta: float) -> void:
 	if Input.is_action_just_pressed("left_click"):
@@ -116,6 +136,12 @@ func handle_farm_input(delta: float) -> void:
 		building_manager.place_farm(position)
 		
 # --- DESTROY FUNCTIONALITY ---
+func init_demolisher():
+	abilitychosen=AbilityChosen.DESTROY
+	remove_demolisher_if_exists()
+	destroy_marker()
+	create_demolisher()
+	
 func create_demolisher():
 	if demolisher:
 		return  # already exists

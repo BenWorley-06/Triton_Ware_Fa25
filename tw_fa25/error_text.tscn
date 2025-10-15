@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi06us2lh8s0"]
+
+[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="1_6ktrv"]
+[ext_resource type="Script" uid="uid://wdnrbnqjtxn5" path="res://error_text.gd" id="2_4ec3l"]
+
+[sub_resource type="Theme" id="Theme_4ec3l"]
+default_font = ExtResource("1_6ktrv")
+
+[node name="error_text" type="Label"]
+modulate = Color(0.877346, 3.87453e-06, 1.2514e-06, 1)
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 23.0
+theme = SubResource("Theme_4ec3l")
+text = "Error"
+horizontal_alignment = 1
+uppercase = true
+script = ExtResource("2_4ec3l")
