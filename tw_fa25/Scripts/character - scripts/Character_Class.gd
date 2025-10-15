@@ -12,6 +12,10 @@ class_name Character
 @export var death_noise_scene: PackedScene
 @export var corpse_scene: PackedScene
 
+@onready var population_manager: PopulationManager = get_node("/root/Game/Managers/PopulationManager")
+@onready var resource_manager: ResourceManager = get_node("/root/Game/Managers/ResourceManager")
+@onready var building_manager: BuildingManager = get_node("/root/Game/Managers/BuildingManager")
+
 enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING,SCARED}
 var sins=["kill","sleep"]
 var action_state = Action_State.IDLE
@@ -117,12 +121,35 @@ func do_talk(delta):
 	if talking_timer>stats.talk_timer:
 		talking_timer=0
 		action_state=Action_State.IDLE
+		
+func interupted(sent:bool=false):
+	if current_job:
+		if current_job.type=="farm":
+			var farm = current_job.farm
+			var job = Farm_Job.new()
+			job.farm = farm
+			population_manager.add_job(job)
+		elif current_job.type=="build":
+			var scafold = current_job.scafold
+			var job = Build_Job.new()
+			job.scafold = scafold
+			population_manager.add_job(job)
+		current_job=null
+	if breeding_target:
+		if not sent:
+			breeding_target.interupted(true)
+			breeding_target.action_state=Action_State.IDLE
+		breeding_timer=0
+		primary_breeder=false
+		breeding_target = null
+		
 
 #	--- Scared ---
 func initiate_scared(pos: Vector2, corpse: bool = false):
 	if action_state!=Action_State.SCARED:
 		if corpse and sinner:
 			return
+		interupted()
 		velocity = (global_position - pos).normalized() * stats.run_speed
 		action_state=Action_State.SCARED
 		voicebox.request_play("scream")
@@ -230,6 +257,7 @@ func _on_burn_area_area_exited(area: Area2D) -> void:
 		over_volcano=false
 
 func killed(good: bool):
+	interupted()
 	if not good:
 		if sinner:
 			get_node("/root/Game/Managers/ResourceManager").add_faith(10)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=28 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://v2qi7sy76e00" path="res://NameList.gd" id="6_ewbju"]
 [ext_resource type="PackedScene" uid="uid://bni15epyyxgeu" path="res://volcano.tscn" id="6_i6g32"]
 [ext_resource type="Script" uid="uid://ux8fr26o1ta2" path="res://Scripts/manager scripts/ability_manager.gd" id="6_v158k"]
+[ext_resource type="PackedScene" uid="uid://bi06us2lh8s0" path="res://error_text.tscn" id="8_7nbq1"]
 [ext_resource type="PackedScene" uid="uid://ip16vgl4u7s4" path="res://demolisher.tscn" id="8_ldgsr"]
 [ext_resource type="PackedScene" uid="uid://c4lo5nuaxreh8" path="res://Scenes/end_day.tscn" id="8_v158k"]
 [ext_resource type="Script" uid="uid://dfn2nllek1slu" path="res://audio_manager.gd" id="9_o5yvi"]
@@ -96,6 +97,7 @@ names = SubResource("Resource_85qyi")
 
 [node name="BuildingManager" type="Node2D" parent="Managers" groups=["pausable"]]
 script = ExtResource("3_wrm1d")
+error_text_scene = ExtResource("8_7nbq1")
 
 [node name="ResourceManager" type="Node" parent="Managers" groups=["pausable"]]
 script = ExtResource("4_3dryh")
