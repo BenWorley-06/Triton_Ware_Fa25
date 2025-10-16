@@ -17,5 +17,7 @@ var name_list = [
 	"Mary", "Martha", "Elizabeth", "Zacharias", "John the Baptist", "Joseph of Arimathea",
 	"Nicodemus", "Anna", "Simeon", "Caiaphas", "Pontius", "Herod", "Salome",
 	"Joanna", "Claudia", "Phoebe", "Lois", "Eunice", "Apollos", "Onesimus",
-	"Philemon", "Demetrius", "Alexander", "Jason", "Crispus", "Justus", "Gaius"
+	"Philemon", "Demetrius", "Alexander", "Jason", "Crispus", "Justus", "Gaius","Phoenix Guiza",
+	"Benjamin Eugene Worley","Milay Galbraith","Xavier Chua","Karim Barjas","Sebastian Hill",
+	"Finn Vermaas"
 ]

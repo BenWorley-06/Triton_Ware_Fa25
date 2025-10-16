@@ -3,6 +3,7 @@ extends CanvasLayer
 @onready var ability_manager = get_node("/root/Game/Managers/AbilityManager")
 @onready var resource_manager: ResourceManager = get_node("/root/Game/Managers/ResourceManager")
 
+@onready var button_container: MarginContainer = $button_container
 @onready var pickup_button: Button = $MarginContainer/VBoxContainer/PickupButton
 @onready var destroy_button: Button = $MarginContainer/VBoxContainer/DestroyButton
 @onready var house_button: Button = $MarginContainer/VBoxContainer/HouseButton
@@ -18,6 +19,10 @@ extends CanvasLayer
 @onready var t_ob: Label = $tutorial_container/VBoxContainer/t_ob
 @onready var t_dir: Label = $tutorial_container/VBoxContainer/t_dir
 @onready var t_prog: Label = $tutorial_container/VBoxContainer/t_prog
+
+@export var button_offset: float = 100.0
+@export var tween_time: float = 0.3
+var buttons_in_place := false
 
 @export var tutorial_active: bool = true
 @export var tutorial_state: String = "house"
@@ -39,6 +44,7 @@ var tutorial_text: Dictionary = {
 func _ready() -> void:
 	if tutorial_active:
 		set_tutorial_state(tutorial_state)
+	button_container.position.x += button_offset
 
 func _process(delta: float) -> void:
 	update_display()
@@ -91,3 +97,17 @@ func tutorial_process():
 			t_prog.text="%d/%d"%[t_data.fires,t_data.fires_needed]
 			if t_data.fires>=t_data.fires_needed:
 				set_tutorial_state("over")
+
+func _on_button_hover_mouse_entered() -> void:
+	if buttons_in_place:
+		return
+	buttons_in_place = true
+	var tween = create_tween()
+	tween.tween_property(button_container, "position:x", button_container.position.x - button_offset, tween_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+
+func _on_button_hover_mouse_exited() -> void:
+	if not buttons_in_place:
+		return
+	buttons_in_place = false
+	var tween = create_tween()
+	tween.tween_property(button_container, "position:x", button_container.position.x + button_offset, tween_time).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)

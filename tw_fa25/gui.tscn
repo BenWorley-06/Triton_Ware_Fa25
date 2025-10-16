@@ -1,16 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://c8cksin46oc4k"]
+[gd_scene load_steps=13 format=3 uid="uid://c8cksin46oc4k"]
 
 [ext_resource type="Script" uid="uid://cku0shi3kyyih" path="res://gui.gd" id="1_q8o8l"]
 [ext_resource type="Script" uid="uid://3fnufw16oej8" path="res://tutorial_data.gd" id="2_cor1f"]
 [ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="3_q8o8l"]
 [ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="3_u77ya"]
+[ext_resource type="Texture2D" uid="uid://y1wo1s8e7xcx" path="res://Art/Temporary/arrow.png" id="5_u77ya"]
 
 [sub_resource type="Resource" id="Resource_u77ya"]
 script = ExtResource("2_cor1f")
 metadata/_custom_type_script = "uid://3fnufw16oej8"
-
-[sub_resource type="Theme" id="Theme_jf511"]
-default_font = ExtResource("3_u77ya")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q8o8l"]
 size = Vector2(20, 62.2835)
@@ -27,56 +25,12 @@ default_font = ExtResource("3_u77ya")
 [sub_resource type="Theme" id="Theme_u77ya"]
 default_font = ExtResource("3_u77ya")
 
+[sub_resource type="Theme" id="Theme_jf511"]
+default_font = ExtResource("3_u77ya")
+
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_q8o8l")
 t_data = SubResource("Resource_u77ya")
-
-[node name="button_container" type="MarginContainer" parent="."]
-z_index = 120
-z_as_relative = false
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -81.0
-offset_top = -201.0
-offset_right = -13.0
-offset_bottom = 199.0
-grow_horizontal = 0
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="button_container"]
-layout_mode = 2
-alignment = 1
-
-[node name="PickupButton" type="Button" parent="button_container/VBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-theme = SubResource("Theme_jf511")
-text = "Pickup"
-
-[node name="DestroyButton" type="Button" parent="button_container/VBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-theme = SubResource("Theme_jf511")
-text = "Destroy"
-
-[node name="HouseButton" type="Button" parent="button_container/VBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-theme = SubResource("Theme_jf511")
-text = "House"
-
-[node name="FarmButton" type="Button" parent="button_container/VBoxContainer"]
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-theme = SubResource("Theme_jf511")
-text = "Farm"
 
 [node name="building_blocker" type="Area2D" parent="."]
 collision_layer = 2
@@ -156,14 +110,6 @@ position = Vector2(1026.5, 68.8692)
 scale = Vector2(0.219727, 0.099354)
 texture = ExtResource("3_q8o8l")
 
-[node name="GUI Background2" type="Sprite2D" parent="."]
-modulate = Color(0.52376, 0.430767, 0.293325, 1)
-z_index = 100
-z_as_relative = false
-position = Vector2(1123.25, 320.565)
-scale = Vector2(0.14209, 0.291864)
-texture = ExtResource("3_q8o8l")
-
 [node name="tutorial_container" type="MarginContainer" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
@@ -211,6 +157,88 @@ position = Vector2(44.3989, 55.3167)
 scale = Vector2(0.158412, 0.201918)
 texture = ExtResource("3_q8o8l")
 
+[node name="button_hover" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1019.0
+offset_top = 148.0
+offset_right = 1059.0
+offset_bottom = 188.0
+scale = Vector2(3.85765, 8.93054)
+
+[node name="button_container" type="MarginContainer" parent="."]
+z_index = 120
+z_as_relative = false
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -81.0
+offset_top = -201.0
+offset_right = -13.0
+offset_bottom = 199.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(1.0045, 1)
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="button_container"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="PickupButton" type="Button" parent="button_container/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_jf511")
+text = "Pickup"
+
+[node name="DestroyButton" type="Button" parent="button_container/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_jf511")
+text = "Destroy"
+
+[node name="HouseButton" type="Button" parent="button_container/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_jf511")
+text = "House"
+
+[node name="FarmButton" type="Button" parent="button_container/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_jf511")
+text = "Farm"
+
+[node name="GUI Background2" type="Sprite2D" parent="button_container"]
+modulate = Color(0.52376, 0.430767, 0.293325, 1)
+z_index = 100
+z_as_relative = false
+position = Vector2(52.25, 197.565)
+scale = Vector2(0.14209, 0.291864)
+texture = ExtResource("3_q8o8l")
+
+[node name="arrow" type="Sprite2D" parent="button_container"]
+modulate = Color(1, 1, 1, 0.545098)
+z_index = 60
+z_as_relative = false
+position = Vector2(7, 192)
+rotation = 3.14159
+scale = Vector2(0.282601, 0.401808)
+texture = ExtResource("5_u77ya")
+
+[connection signal="mouse_entered" from="button_hover" to="." method="_on_button_hover_mouse_entered"]
+[connection signal="mouse_exited" from="button_hover" to="." method="_on_button_hover_mouse_exited"]
 [connection signal="pressed" from="button_container/VBoxContainer/PickupButton" to="." method="_on_pickup_button_pressed"]
 [connection signal="pressed" from="button_container/VBoxContainer/DestroyButton" to="." method="_on_destroy_button_pressed"]
 [connection signal="pressed" from="button_container/VBoxContainer/HouseButton" to="." method="_on_house_button_pressed"]

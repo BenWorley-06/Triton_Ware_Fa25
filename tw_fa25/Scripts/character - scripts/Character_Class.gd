@@ -65,6 +65,8 @@ func _ready():
 	get_node("/root/Game/Managers/PopulationManager").register_character(self)
 	z_index=1
 	social=randf()<0.5
+	if prophet:
+		social = true
 	social_timer=randf_range(5,20)
 	
 func change_name(input_name:String):
@@ -72,10 +74,11 @@ func change_name(input_name:String):
 	nametag.text=char_name
 	
 func _process(delta: float) -> void:
-	social_timer+=delta
-	if social_timer<=0:
-		social = not social
-		social_timer=randf_range(5,20)
+	if not prophet:
+		social_timer+=delta
+		if social_timer<=0:
+			social = not social
+			social_timer=randf_range(5,20)
 
 	match action_state:
 		Action_State.IDLE:
@@ -197,8 +200,6 @@ func interupted(sent:bool=false):
 #	--- Scared ---
 func initiate_scared(pos: Vector2, corpse: bool = false):
 	if action_state!=Action_State.SCARED:
-		if corpse and sinner:
-			return
 		interupted()
 		velocity = (global_position - pos).normalized() * stats.run_speed
 		action_state=Action_State.SCARED
