@@ -70,6 +70,7 @@ func _ready():
 	get_node("/root/Game/Managers/PopulationManager").register_character(self)
 	z_index=1
 	social=randf()<0.5
+	wander_direction = Vector2.from_angle(randf_range(0, TAU))
 	if prophet:
 		social = true
 	social_timer=randf_range(5,20)
@@ -112,7 +113,7 @@ func _process(delta: float) -> void:
 #	--- Idle ---
 func get_wander_dir_social() -> Vector2:
 	var pop_manager = get_node("/root/Game/Managers/PopulationManager")
-	var nearby_people = []
+	var nearby_people: Array = []
 	for c in pop_manager.people:
 		if c == self or not is_instance_valid(c):
 			continue
@@ -120,16 +121,30 @@ func get_wander_dir_social() -> Vector2:
 		if dist < 150:
 			nearby_people.append(c)
 
-	if nearby_people.size() > 0:
-		var avg_pos = Vector2.ZERO
-		for p in nearby_people:
-			avg_pos += p.global_position
-		avg_pos /= nearby_people.size()
+	if nearby_people.is_empty():
+		return wander_direction
 
-		var to_group = (avg_pos - global_position).normalized()
-		wander_direction = wander_direction.lerp(to_group, 0.05).normalized()
+	# --- cohesion (move toward group center) ---
+	var avg_pos = Vector2.ZERO
+	for p in nearby_people:
+		avg_pos += p.global_position
+	avg_pos /= nearby_people.size()
+	var to_group = (avg_pos - global_position).normalized()
+
+	# --- separation (avoid being too close) ---
+	var separation = Vector2.ZERO
+	for p in nearby_people:
+		var diff = global_position - p.global_position
+		var dist = diff.length()
+		if dist < 50:  # “personal space” radius
+			separation += diff.normalized() * (1.0 - dist / 50.0)  # stronger if closer
+
+	# --- combine with weights ---
+	var combined = (to_group * 0.6 + separation * 1.4).normalized()
+
+	# --- smooth transition ---
+	wander_direction = wander_direction.lerp(combined, 0.05).normalized()
 	return wander_direction
-
 func idle(delta: float):
 	var pop_manager = get_node("/root/Game/Managers/PopulationManager")
 

@@ -35,6 +35,7 @@ func register_character(character: Character):
 		
 func remove_character(character: Character):
 	people.erase(character)
+	resource_manager.add_population(-1)
 		
 func get_murder_target(exclude: Character) -> Character:
 	var candidates: Array = []

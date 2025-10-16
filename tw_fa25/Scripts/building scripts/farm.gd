@@ -7,10 +7,11 @@ class_name Farm
 var max_state: int = 4
 var growth_state: int = 0
 @export var state_change_time: float = 5
+var original_state_change_time: float
 
 var change_timer: float = 0
 
-var harvest_amount: int = 2
+var harvest_amount: int = 1
 
 var growing: bool = true
 var harvestable:bool = false
@@ -19,12 +20,15 @@ var type="farm"
 
 func _ready() -> void:
 	z_index=-1
+	original_state_change_time=state_change_time
+	state_change_time*=randf_range(0.8,2)
 
 func _process(delta: float) -> void:
 	if growing:
 		change_timer += delta
 		if change_timer >= state_change_time:
 			change_timer = 0
+			state_change_time=original_state_change_time*randf_range(0.8,2)
 			growth_state = clamp(growth_state + 1, 0, max_state)
 			if growth_state == max_state:
 				request_harvest()
