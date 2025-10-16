@@ -11,13 +11,14 @@ class_name Character
 @export var blood_particle_scene: PackedScene
 @export var death_noise_scene: PackedScene
 @export var corpse_scene: PackedScene
+@export var streak_scene: PackedScene
 
 @onready var population_manager: PopulationManager = get_node("/root/Game/Managers/PopulationManager")
 @onready var resource_manager: ResourceManager = get_node("/root/Game/Managers/ResourceManager")
 @onready var building_manager: BuildingManager = get_node("/root/Game/Managers/BuildingManager")
 
-enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING,SCARED}
-var sins=["kill","sleep"]
+enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING,SCARED,STREAKING}
+var sins=["kill","sleep","streak"]
 var action_state = Action_State.IDLE
 var current_job=null
 
@@ -51,6 +52,10 @@ var murder_target: Character
 var killing_timer: float = 0
 
 var sleeping_timer: float = 0
+
+var streaking_timer: float = 0
+var streak_area: Area2D
+var streaking: bool = false
 
 var talking_timer: float = 0
 
@@ -97,12 +102,34 @@ func _process(delta: float) -> void:
 			do_talk(delta)
 		Action_State.SCARED:
 			do_scared(delta)
+		Action_State.STREAKING:
+			do_streaking(delta)
 	if not selected:
 		if over_volcano:
 			enter_volcano()
 		move_and_slide()
 
 #	--- Idle ---
+func get_wander_dir_social() -> Vector2:
+	var pop_manager = get_node("/root/Game/Managers/PopulationManager")
+	var nearby_people = []
+	for c in pop_manager.people:
+		if c == self or not is_instance_valid(c):
+			continue
+		var dist = global_position.distance_to(c.global_position)
+		if dist < 150:
+			nearby_people.append(c)
+
+	if nearby_people.size() > 0:
+		var avg_pos = Vector2.ZERO
+		for p in nearby_people:
+			avg_pos += p.global_position
+		avg_pos /= nearby_people.size()
+
+		var to_group = (avg_pos - global_position).normalized()
+		wander_direction = wander_direction.lerp(to_group, 0.05).normalized()
+	return wander_direction
+
 func idle(delta: float):
 	var pop_manager = get_node("/root/Game/Managers/PopulationManager")
 
@@ -120,31 +147,7 @@ func idle(delta: float):
 
 	# --- social or independent movement bias ---
 	if social:
-		var nearby_people = []
-		for c in pop_manager.people:
-			if c == self or not is_instance_valid(c):
-				continue
-			var dist = global_position.distance_to(c.global_position)
-			if dist < 150:
-				nearby_people.append(c)
-
-		if nearby_people.size() > 0:
-			var avg_pos = Vector2.ZERO
-			for p in nearby_people:
-				avg_pos += p.global_position
-			avg_pos /= nearby_people.size()
-
-			var to_group = (avg_pos - global_position).normalized()
-			wander_direction = wander_direction.lerp(to_group, 0.05).normalized()
-	else:
-		# while alone, drift slightly away from nearby people
-		for c in pop_manager.people:
-			if c == self or not is_instance_valid(c):
-				continue
-			var dist = global_position.distance_to(c.global_position)
-			if dist < 100:
-				var away = (global_position - c.global_position).normalized()
-				wander_direction = wander_direction.lerp(away, 0.02).normalized()
+		wander_direction=get_wander_dir_social()
 	
 	var target_velocity = wander_direction * stats.wander_speed
 	velocity = velocity.lerp(target_velocity, delta * 2.0)
@@ -202,7 +205,9 @@ func interupted(sent:bool=false):
 		
 
 #	--- Scared ---
-func initiate_scared(pos: Vector2, corpse: bool = false):
+func initiate_scared(pos: Vector2, corpse: bool = false, streaker: bool = false):
+	if streaker and streaking:
+		return
 	if action_state!=Action_State.SCARED:
 		interupted()
 		velocity = (global_position - pos).normalized() * stats.run_speed
@@ -378,6 +383,8 @@ func initiate_sins():
 		initiate_murder()
 	elif sin=="sleep":
 		action_state=Action_State.SlEEPING
+	elif sin=="streak":
+		start_streaking()
 
 func initiate_murder():
 	murder_target=get_node("/root/Game/Managers/PopulationManager").get_murder_target(self)
@@ -409,3 +416,23 @@ func do_sleep(delta):
 	if sleeping_timer>=stats.sleep_time:
 		action_state=Action_State.IDLE
 		sleeping_timer=0
+
+func start_streaking():
+	print("streaking")
+	streak_area=streak_scene.instantiate()
+	add_child(streak_area)
+	streak_area.global_position = global_position
+	streaking=true
+	action_state=Action_State.STREAKING
+
+func do_streaking(delta):
+	var streak_direction = get_wander_dir_social()
+	var target_velocity = streak_direction * stats.run_speed
+	velocity = velocity.lerp(target_velocity, delta * 2.0)
+	streaking_timer+=delta
+	if streaking_timer>=stats.steak_time:
+		streaking_timer=0
+		action_state=Action_State.IDLE
+		streaking=false
+		streak_area.queue_free()
+		streak_area=null

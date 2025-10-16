@@ -23,5 +23,6 @@ class_name Character_Stats
 @export var max_time_to_sin: float = 30
 
 @export var sleep_time: float = 10
+@export var steak_time: float = 6
 @export var talk_timer: float = 1
 @export var time_scared: float = 3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cah1gdlpwbn5i"]
+[gd_scene load_steps=17 format=3 uid="uid://cah1gdlpwbn5i"]
 
 [ext_resource type="Script" uid="uid://unpx8fm2f83l" path="res://Scripts/character - scripts/Character_Class.gd" id="1_owm7s"]
 [ext_resource type="Script" uid="uid://c3i3i32v4ta6k" path="res://Scripts/character - scripts/character_stats.gd" id="2_nytcm"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://vnuggmxedgch" path="res://death_noise.tscn" id="5_a5ess"]
 [ext_resource type="Script" uid="uid://b1ai862ae1s1y" path="res://Scripts/character - scripts/voicebox.gd" id="5_ejsiy"]
 [ext_resource type="PackedScene" uid="uid://dcdxwi6f5tpoo" path="res://corpse.tscn" id="6_kq7hj"]
+[ext_resource type="PackedScene" uid="uid://dmdfeb0e77u5p" path="res://streak_area.tscn" id="7_l1rcp"]
 [ext_resource type="Script" uid="uid://cvoucn6vtfcil" path="res://Scenes/sfx.gd" id="9_wbia7"]
 [ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="11_7iw6i"]
 
@@ -26,6 +27,7 @@ murder_time = 2.0
 murder_distance = 40.0
 max_time_to_sin = 30.0
 sleep_time = 4.0
+steak_time = 6.0
 talk_timer = 1.0
 time_scared = 3.0
 metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
@@ -46,6 +48,7 @@ lava_particle_scene = ExtResource("3_2mse5")
 blood_particle_scene = ExtResource("4_reotu")
 death_noise_scene = ExtResource("5_a5ess")
 corpse_scene = ExtResource("6_kq7hj")
+streak_scene = ExtResource("7_l1rcp")
 metadata/_custom_type_script = "uid://unpx8fm2f83l"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
