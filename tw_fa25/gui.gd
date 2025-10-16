@@ -23,6 +23,7 @@ extends CanvasLayer
 @export var button_offset: float = 100.0
 @export var tween_time: float = 0.3
 var buttons_in_place := false
+@export var hover_area_x: int = 900
 
 @export var tutorial_active: bool = true
 @export var tutorial_state: String = "house"
@@ -50,6 +51,7 @@ func _process(delta: float) -> void:
 	update_display()
 	if tutorial_active:
 		tutorial_process()
+	check_hover_area()
 
 func _on_pickup_button_pressed() -> void:
 	ability_manager.signal_change("pickup")
@@ -98,14 +100,22 @@ func tutorial_process():
 			if t_data.fires>=t_data.fires_needed:
 				set_tutorial_state("over")
 
-func _on_button_hover_mouse_entered() -> void:
+func check_hover_area():
+	var mouse_pos = game.get_global_mouse_position()
+	var mouse_in_area = mouse_pos.x > hover_area_x
+	if mouse_in_area and not buttons_in_place:
+		show_buttons()
+	elif not mouse_in_area and buttons_in_place:
+		hide_buttons()
+
+func show_buttons() -> void:
 	if buttons_in_place:
 		return
 	buttons_in_place = true
 	var tween = create_tween()
 	tween.tween_property(button_container, "position:x", button_container.position.x - button_offset, tween_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 
-func _on_button_hover_mouse_exited() -> void:
+func hide_buttons() -> void:
 	if not buttons_in_place:
 		return
 	buttons_in_place = false
