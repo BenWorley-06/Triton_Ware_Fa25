@@ -102,11 +102,11 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
-[node name="GUI Background" type="Sprite2D" parent="."]
+[node name="GUI Background" type="Sprite2D" parent="Indicators"]
 modulate = Color(0.52376, 0.430767, 0.293325, 1)
 z_index = 100
 z_as_relative = false
-position = Vector2(1026.5, 68.8692)
+position = Vector2(102.5, 40.1308)
 scale = Vector2(0.219727, 0.099354)
 texture = ExtResource("3_q8o8l")
 
@@ -157,14 +157,23 @@ position = Vector2(44.3989, 55.3167)
 scale = Vector2(0.158412, 0.201918)
 texture = ExtResource("3_q8o8l")
 
-[node name="button_hover" type="Control" parent="."]
+[node name="tutorial_hover" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 1019.0
-offset_top = 148.0
-offset_right = 1059.0
-offset_bottom = 188.0
-scale = Vector2(3.85765, 8.93054)
+offset_left = -12.0
+offset_top = 376.0
+offset_right = 28.0
+offset_bottom = 416.0
+scale = Vector2(5.92636, 7.46763)
+
+[node name="stats_hover" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 890.0
+offset_top = 1.0
+offset_right = 930.0
+offset_bottom = 41.0
+scale = Vector2(6.80091, 3.17424)
 
 [node name="button_container" type="MarginContainer" parent="."]
 z_index = 120
@@ -237,8 +246,10 @@ rotation = 3.14159
 scale = Vector2(0.282601, 0.401808)
 texture = ExtResource("5_u77ya")
 
-[connection signal="mouse_entered" from="button_hover" to="." method="_on_button_hover_mouse_entered"]
-[connection signal="mouse_exited" from="button_hover" to="." method="_on_button_hover_mouse_exited"]
+[connection signal="mouse_entered" from="tutorial_hover" to="." method="_on_tutorial_hover_mouse_entered"]
+[connection signal="mouse_exited" from="tutorial_hover" to="." method="_on_tutorial_hover_mouse_exited"]
+[connection signal="mouse_entered" from="stats_hover" to="." method="_on_stats_hover_mouse_entered"]
+[connection signal="mouse_exited" from="stats_hover" to="." method="_on_stats_hover_mouse_exited"]
 [connection signal="pressed" from="button_container/VBoxContainer/PickupButton" to="." method="_on_pickup_button_pressed"]
 [connection signal="pressed" from="button_container/VBoxContainer/DestroyButton" to="." method="_on_destroy_button_pressed"]
 [connection signal="pressed" from="button_container/VBoxContainer/HouseButton" to="." method="_on_house_button_pressed"]

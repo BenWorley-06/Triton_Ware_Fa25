@@ -9,6 +9,7 @@ extends CanvasLayer
 @onready var house_button: Button = $MarginContainer/VBoxContainer/HouseButton
 @onready var farm_button: Button = $MarginContainer/VBoxContainer/FarmButton
 
+@onready var indicators: MarginContainer = $Indicators
 @onready var faith_bar: ProgressBar = $Indicators/HBoxContainer/VBoxContainer/faith_bar
 @onready var bread: Label = $Indicators/HBoxContainer/VBoxContainer/HBoxContainer/Bread
 @onready var population: Label = $Indicators/HBoxContainer/VBoxContainer/HBoxContainer/Population
@@ -121,3 +122,26 @@ func hide_buttons() -> void:
 	buttons_in_place = false
 	var tween = create_tween()
 	tween.tween_property(button_container, "position:x", button_container.position.x + button_offset, tween_time).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+
+func _fade(out: bool, object: Node):
+	var target_alpha := 0.0 if out else 1.0
+	var color = object.modulate
+	color.a = target_alpha
+	var tween = create_tween()
+	tween.tween_property(object, "modulate", color, 0.3)
+
+func _on_tutorial_hover_mouse_entered() -> void:
+	if tutorial_active:
+		_fade(true,tutorial_container)
+
+func _on_tutorial_hover_mouse_exited() -> void:
+	if tutorial_active:
+		_fade(false,tutorial_container)
+
+
+func _on_stats_hover_mouse_entered() -> void:
+	_fade(true,indicators)
+
+
+func _on_stats_hover_mouse_exited() -> void:
+	_fade(false,indicators)

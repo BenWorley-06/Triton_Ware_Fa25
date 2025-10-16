@@ -81,7 +81,7 @@ rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_wrm1d")
 
 [node name="right" type="CollisionShape2D" parent="world_bounds"]
-position = Vector2(1153, 123)
+position = Vector2(1072, 123)
 rotation = 4.71239
 shape = SubResource("WorldBoundaryShape2D_3dryh")
 
