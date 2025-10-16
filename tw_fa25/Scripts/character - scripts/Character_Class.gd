@@ -31,6 +31,8 @@ var time_to_sin: float = 0
 
 var wander_timer: float = 0
 var wander_direction: Vector2 = Vector2.ZERO
+var social: bool = false
+var social_timer: float = 0
 
 var build_timer: float = 0
 
@@ -62,13 +64,19 @@ func _ready():
 	base_scale = sprite.scale
 	get_node("/root/Game/Managers/PopulationManager").register_character(self)
 	z_index=1
+	social=randf()<0.5
+	social_timer=randf_range(5,20)
 	
 func change_name(input_name:String):
 	char_name=input_name
 	nametag.text=char_name
 	
 func _process(delta: float) -> void:
-	
+	social_timer+=delta
+	if social_timer<=0:
+		social = not social
+		social_timer=randf_range(5,20)
+
 	match action_state:
 		Action_State.IDLE:
 			idle(delta)
@@ -91,28 +99,69 @@ func _process(delta: float) -> void:
 
 #	--- Idle ---
 func idle(delta: float):
-	if wander_timer<=0:
-		wander_timer=stats.wander_time
-		var angle = randf() * TAU  # TAU = 2 * PI
-		wander_direction = Vector2.from_angle(angle)
-	velocity=wander_direction*stats.wander_speed
-	wander_timer-=delta
+	var pop_manager = get_node("/root/Game/Managers/PopulationManager")
+
+	# --- handle wander timer ---
+	if wander_timer <= 0:
+		wander_timer = stats.wander_time + randf_range(-1.0, 1.0)
+
+		var turn_angle = randf_range(-PI / 6, PI / 6)
+		var new_angle = wander_direction.angle() + turn_angle
+		var new_dir = Vector2.from_angle(new_angle)
+
+		wander_direction = wander_direction.lerp(new_dir, 0.3).normalized()
+	else:
+		wander_timer -= delta
+
+	# --- social or independent movement bias ---
+	if social:
+		var nearby_people = []
+		for c in pop_manager.people:
+			if c == self or not is_instance_valid(c):
+				continue
+			var dist = global_position.distance_to(c.global_position)
+			if dist < 150:
+				nearby_people.append(c)
+
+		if nearby_people.size() > 0:
+			var avg_pos = Vector2.ZERO
+			for p in nearby_people:
+				avg_pos += p.global_position
+			avg_pos /= nearby_people.size()
+
+			var to_group = (avg_pos - global_position).normalized()
+			wander_direction = wander_direction.lerp(to_group, 0.05).normalized()
+	else:
+		# while alone, drift slightly away from nearby people
+		for c in pop_manager.people:
+			if c == self or not is_instance_valid(c):
+				continue
+			var dist = global_position.distance_to(c.global_position)
+			if dist < 100:
+				var away = (global_position - c.global_position).normalized()
+				wander_direction = wander_direction.lerp(away, 0.02).normalized()
+	
+	var target_velocity = wander_direction * stats.wander_speed
+	velocity = velocity.lerp(target_velocity, delta * 2.0)
+
+	# --- sinner logic ---
 	if sinner:
-		sin_timer+=delta
-		if sin_timer>= time_to_sin:
+		sin_timer += delta
+		if sin_timer >= time_to_sin:
 			initiate_sins()
-			sin_timer=0
-			time_to_sin=stats.max_time_to_sin*randf()
+			sin_timer = 0
+			time_to_sin = stats.max_time_to_sin * randf()
 			return
-	var job = get_node("/root/Game/Managers/PopulationManager").request_job(self)
+
+	# --- job or social talking ---
+	var job = pop_manager.request_job(self)
 	if job:
 		assign_job(job)
-	else:
-		if randf()<0.001:
-			action_state=Action_State.TALKING
+	elif social:
+		if randf() < 0.001:
+			action_state = Action_State.TALKING
 			voicebox.request_play("talk")
-			velocity=Vector2.ZERO
-			
+			velocity = Vector2.ZERO
 
 func is_idle() -> bool:
 	return action_state==Action_State.IDLE
@@ -323,7 +372,7 @@ func initiate_sins():
 		action_state=Action_State.SlEEPING
 
 func initiate_murder():
-	murder_target=get_node("/root/Game/Managers/PopulationManager").get_random_person(self)
+	murder_target=get_node("/root/Game/Managers/PopulationManager").get_murder_target(self)
 	if murder_target:
 		action_state=Action_State.KILLING
 		

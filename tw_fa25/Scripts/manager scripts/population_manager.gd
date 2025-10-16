@@ -36,15 +36,45 @@ func register_character(character: Character):
 func remove_character(character: Character):
 	people.erase(character)
 		
-func get_random_person(exclude: Character) -> Character:
-	var candidates = []
+func get_murder_target(exclude: Character) -> Character:
+	var candidates: Array = []
 	for c in people:
-		if c != exclude and is_instance_valid(c):
-			candidates.append(c)
-	if candidates.size() == 0:
+		if c == exclude or not is_instance_valid(c) or c.sinner:
+			continue
+		candidates.append(c)
+
+	if candidates.is_empty():
 		return null
 
-	return candidates[randi() % candidates.size()]
+	# Find “crowd center” — average position of all people (optional)
+	var center := Vector2.ZERO
+	for c in candidates:
+		center += c.global_position
+	center /= candidates.size()
+
+	# Compute weights based on distance from center and exclude proximity extremes
+	var weights: Array = []
+	for c in candidates:
+		var crowd_dist = c.global_position.distance_to(center)
+		var self_dist = exclude.global_position.distance_to(c.global_position)
+
+		# Prefer characters close to others but not too close to murderer
+		var weight = clamp(1.0 / (crowd_dist + 10.0), 0.0, 1.0)
+		weight *= clamp(self_dist / 200.0, 0.2, 1.0)
+		weights.append(weight)
+
+	# Pick a target weighted by likelihood
+	var total = weights.reduce(func(a, b): return a + b)
+	var choice = randf() * total
+	var accum = 0.0
+
+	for i in range(candidates.size()):
+		accum += weights[i]
+		if choice <= accum:
+			return candidates[i]
+
+	return candidates.pick_random()
+
 func add_job(job):
 	jobs.append(job)
 
