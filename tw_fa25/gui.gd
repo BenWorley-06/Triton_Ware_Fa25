@@ -25,6 +25,7 @@ extends CanvasLayer
 @export var tween_time: float = 0.3
 var buttons_in_place := false
 @export var hover_area_x: int = 900
+var base_button_x: int
 
 @export var tutorial_active: bool = true
 @export var tutorial_state: String = "house"
@@ -46,6 +47,7 @@ var tutorial_text: Dictionary = {
 func _ready() -> void:
 	if tutorial_active:
 		set_tutorial_state(tutorial_state)
+	base_button_x=button_container.position.x
 	button_container.position.x += button_offset
 
 func _process(delta: float) -> void:
@@ -114,14 +116,14 @@ func show_buttons() -> void:
 		return
 	buttons_in_place = true
 	var tween = create_tween()
-	tween.tween_property(button_container, "position:x", button_container.position.x - button_offset, tween_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(button_container, "position:x", base_button_x, tween_time).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BACK)
 
 func hide_buttons() -> void:
 	if not buttons_in_place:
 		return
 	buttons_in_place = false
 	var tween = create_tween()
-	tween.tween_property(button_container, "position:x", button_container.position.x + button_offset, tween_time).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
+	tween.tween_property(button_container, "position:x", base_button_x+button_offset, tween_time).set_ease(Tween.EASE_IN).set_trans(Tween.TRANS_BACK)
 
 func _fade(out: bool, object: Node):
 	var target_alpha := 0.0 if out else 1.0

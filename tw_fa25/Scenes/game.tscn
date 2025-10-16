@@ -55,15 +55,12 @@ overlay = NodePath("Day Tint")
 
 [node name="Character" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(674, 337)
-sinner = true
 
 [node name="Character5" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(563, 217)
-sinner = true
 
 [node name="Character6" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(465, 286)
-sinner = true
 
 [node name="Character7" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(687, 233)
