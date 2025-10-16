@@ -79,6 +79,8 @@ func _process(delta: float) -> void:
 		if social_timer<=0:
 			social = not social
 			social_timer=randf_range(5,20)
+	elif not social:
+		social=true
 
 	match action_state:
 		Action_State.IDLE:
@@ -157,10 +159,12 @@ func idle(delta: float):
 			return
 
 	# --- job or social talking ---
-	var job = pop_manager.request_job(self)
-	if job:
-		assign_job(job)
-	elif social:
+	if not sinner and not prophet:
+		var job = pop_manager.request_job(self)
+		if job:
+			assign_job(job)
+			return
+	if social:
 		if randf() < 0.001:
 			action_state = Action_State.TALKING
 			voicebox.request_play("talk")
@@ -217,6 +221,9 @@ func assign_job(job):
 	action_state=Action_State.WORKING
 
 func working(delta:float):
+	if current_job==null:
+		action_state=Action_State.IDLE
+		return
 	match current_job.type:
 		"build":
 			do_build_job(delta)
