@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://hs30w146rwj0"
+path="res://.godot/imported/UC San Diego 14 (mp3cut.net).mp3-5e98aa47112727cb2764b463a4db992a.mp3str"
+
+[deps]
+
+source_file="res://Sounds/character/Scared/UC San Diego 14 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/UC San Diego 14 (mp3cut.net).mp3-5e98aa47112727cb2764b463a4db992a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
