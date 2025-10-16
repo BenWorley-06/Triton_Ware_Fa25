@@ -13,6 +13,8 @@ var character_scene = preload("res://Scenes/character.tscn")
 @onready var end_day_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Day
 @onready var faith_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Faith
 
+@onready var win_layer: CanvasLayer = $win_layer
+
 # ---- loss
 @onready var loss_layer: CanvasLayer = $loss_layer
 
@@ -27,6 +29,9 @@ var day_timer: float = 0.0
 var day: int = 0
 var paused: bool = false
 var end_day_cooldown: bool = false
+@export var faith_win: int = 200
+var has_won=false
+
 
 # ---- Process ----
 func _process(delta: float) -> void:
@@ -52,6 +57,10 @@ func faith_loss():
 	loss_layer.visible = true
 	paused = true
 	return
+
+func win():
+	has_won=true
+	win_layer.activate()
 
 func manage_day_tint():
 	var t = fmod(day_timer / stats.time_in_day, 1.0)
@@ -105,6 +114,11 @@ func end_day() -> void:
 			node.set_process(false)
 		end_day_layer.end_day(bread_loss,faith_gain)
 		paused = true
+		if day>=7 and not has_won:
+			if stats.faith>=faith_win:
+				win()
+			else:
+				faith_loss()
 
 	print("Day state toggled. Paused:", paused)
 
@@ -114,3 +128,5 @@ func _input(event: InputEvent) -> void:
 		end_day()
 	elif event.is_action_pressed("escape"):
 		get_tree().change_scene_to_file("res://Scenes/main.tscn")
+	elif event.is_action_pressed("auto_win"):
+		win()

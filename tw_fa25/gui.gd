@@ -49,6 +49,7 @@ func _ready() -> void:
 		set_tutorial_state(tutorial_state)
 	base_button_x=button_container.position.x
 	button_container.position.x += button_offset
+	faith_bar.max_value=game.faith_win
 
 func _process(delta: float) -> void:
 	update_display()
