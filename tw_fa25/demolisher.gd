@@ -2,6 +2,7 @@ extends Area2D
 @onready var shadow: Sprite2D = $shadow
 @onready var hand: Sprite2D = $hand
 @onready var audio: AudioStreamPlayer2D = $audio
+@onready var gui = get_node("/root/Game/GUI")
 
 @export var hand_down_duration: float = 0.4
 @export var hand_up_duration: float = 0.4
@@ -37,6 +38,8 @@ func _destroy_buildings():
 	for area in overlapping_areas:
 		if area.is_in_group("fire"):
 			area.queue_free()
+			if gui.tutorial_active:
+				gui.t_data.fires+=1
 		if area.is_in_group("corpse"):
 			area.smash()
 

@@ -1,8 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8cksin46oc4k"]
+[gd_scene load_steps=12 format=3 uid="uid://c8cksin46oc4k"]
 
 [ext_resource type="Script" uid="uid://cku0shi3kyyih" path="res://gui.gd" id="1_q8o8l"]
+[ext_resource type="Script" uid="uid://3fnufw16oej8" path="res://tutorial_data.gd" id="2_cor1f"]
 [ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="3_q8o8l"]
 [ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="3_u77ya"]
+
+[sub_resource type="Resource" id="Resource_u77ya"]
+script = ExtResource("2_cor1f")
+metadata/_custom_type_script = "uid://3fnufw16oej8"
 
 [sub_resource type="Theme" id="Theme_jf511"]
 default_font = ExtResource("3_u77ya")
@@ -19,8 +24,12 @@ default_font = ExtResource("3_u77ya")
 [sub_resource type="Theme" id="Theme_6lon5"]
 default_font = ExtResource("3_u77ya")
 
+[sub_resource type="Theme" id="Theme_u77ya"]
+default_font = ExtResource("3_u77ya")
+
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_q8o8l")
+t_data = SubResource("Resource_u77ya")
 
 [node name="button_container" type="MarginContainer" parent="."]
 z_index = 120
@@ -153,6 +162,53 @@ z_index = 100
 z_as_relative = false
 position = Vector2(1123.25, 320.565)
 scale = Vector2(0.14209, 0.291864)
+texture = ExtResource("3_q8o8l")
+
+[node name="tutorial_container" type="MarginContainer" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 34.0
+offset_top = -195.0
+offset_right = 134.0
+offset_bottom = -75.0
+grow_vertical = 0
+scale = Vector2(1.37391, 1.37391)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="tutorial_container"]
+z_index = 100
+layout_mode = 2
+
+[node name="t_ob" type="Label" parent="tutorial_container/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 24)
+layout_mode = 2
+theme = SubResource("Theme_u77ya")
+text = "Objective"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="t_dir" type="Label" parent="tutorial_container/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 64)
+layout_mode = 2
+theme = SubResource("Theme_u77ya")
+text = "Directions"
+vertical_alignment = 1
+
+[node name="t_prog" type="Label" parent="tutorial_container/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(100, 24)
+layout_mode = 2
+theme = SubResource("Theme_u77ya")
+text = "Progress"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="tutorial_container"]
+modulate = Color(0.495685, 0.426227, 0.28949, 1)
+position = Vector2(44.3989, 55.3167)
+scale = Vector2(0.158412, 0.201918)
 texture = ExtResource("3_q8o8l")
 
 [connection signal="pressed" from="button_container/VBoxContainer/PickupButton" to="." method="_on_pickup_button_pressed"]

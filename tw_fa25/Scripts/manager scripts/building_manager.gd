@@ -4,6 +4,7 @@ class_name BuildingManager
 @export var people_per_house:int =2
 @export var scafold_scene: PackedScene = preload("res://Scenes/Buildings/house_scafold.tscn")
 @export var farm_scene: PackedScene = preload("res://Scenes/Buildings/farm.tscn")
+@onready var gui: CanvasLayer = $"../../GUI"
 @onready var resource_manager: ResourceManager = $"../ResourceManager"
 @export var error_text_scene: PackedScene
 var house_scafolds: Array = []
@@ -12,9 +13,13 @@ var farms: Array = []
 
 func register_farm(farm: Node):
 		farms.append(farm)
+		if gui.tutorial_active:
+			gui.t_data.farms+=1
 
 func register_house(house: Node):
 		houses.append(house)
+		if gui.tutorial_active:
+			gui.t_data.houses+=1
 		
 func register_house_scafold(house_scafold: Node):
 		house_scafolds.append(house_scafold)
