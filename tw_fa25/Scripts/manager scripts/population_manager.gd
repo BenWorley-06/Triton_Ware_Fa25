@@ -109,7 +109,7 @@ func request_stork():
 	stork.global_position.x = 1300
 	stork.global_position.y = randi_range(200,400)
 	
-func new_day():
+func new_day() -> Array:
 	# Feeding
 	for person in people:
 		person.fed=false
@@ -125,3 +125,4 @@ func new_day():
 	#	Update Resources
 	resource_manager.add_bread(availiable_food-total_food)
 	resource_manager.add_faith(pray_amount)
+	return [availiable_food-total_food,pray_amount]

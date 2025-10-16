@@ -50,7 +50,6 @@ func faith_loss():
 		node.set_physics_process(false)
 		node.set_process(false)
 	loss_layer.visible = true
-	update_labels()
 	paused = true
 	return
 
@@ -92,28 +91,22 @@ func end_day() -> void:
 		for node in get_tree().get_nodes_in_group("pausable"):
 			node.set_physics_process(true)
 			node.set_process(true)
-		end_day_layer.visible = false
 		paused = false
+		end_day_layer.start_day()
 	else:
 		# End day
 		day += 1
 		day_timer = 0  # reset timer
-		population_manager.new_day()
+		var data: Array=population_manager.new_day()
+		var bread_loss: int = data[0]
+		var faith_gain: int = data[1]
 		for node in get_tree().get_nodes_in_group("pausable"):
 			node.set_physics_process(false)
 			node.set_process(false)
-		end_day_layer.visible = true
-		update_labels()
+		end_day_layer.end_day(bread_loss,faith_gain)
 		paused = true
 
 	print("Day state toggled. Paused:", paused)
-
-
-# ---- Labels ----
-func update_labels():
-	end_day_label.text = "Day: %d" % day
-	faith_label.text = "Faith: %d" % stats.faith
-
 
 # ---- Input ----
 func _input(event: InputEvent) -> void:

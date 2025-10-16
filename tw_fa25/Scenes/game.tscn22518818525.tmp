@@ -1,0 +1,155 @@
+[gd_scene load_steps=28 format=3 uid="uid://cifelub41grjx"]
+
+[ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
+[ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
+[ext_resource type="Script" uid="uid://b6i7vriwvog26" path="res://game_stats.gd" id="2_h4fw4"]
+[ext_resource type="Script" uid="uid://cf7vh241xnglu" path="res://Scripts/manager scripts/population_manager.gd" id="2_qxrlw"]
+[ext_resource type="Script" uid="uid://d16agg3i2gglf" path="res://Scripts/manager scripts/building_manager.gd" id="3_wrm1d"]
+[ext_resource type="Script" uid="uid://clngkkwwtpr5e" path="res://Scripts/manager scripts/resource_manager.gd" id="4_3dryh"]
+[ext_resource type="Script" uid="uid://v2qi7sy76e00" path="res://NameList.gd" id="6_ewbju"]
+[ext_resource type="PackedScene" uid="uid://bni15epyyxgeu" path="res://volcano.tscn" id="6_i6g32"]
+[ext_resource type="Script" uid="uid://ux8fr26o1ta2" path="res://Scripts/manager scripts/ability_manager.gd" id="6_v158k"]
+[ext_resource type="PackedScene" uid="uid://bi06us2lh8s0" path="res://error_text.tscn" id="8_7nbq1"]
+[ext_resource type="PackedScene" uid="uid://ip16vgl4u7s4" path="res://demolisher.tscn" id="8_ldgsr"]
+[ext_resource type="PackedScene" uid="uid://c4lo5nuaxreh8" path="res://Scenes/end_day.tscn" id="8_v158k"]
+[ext_resource type="Script" uid="uid://dfn2nllek1slu" path="res://audio_manager.gd" id="9_o5yvi"]
+[ext_resource type="AudioStream" uid="uid://cualnhn7f1xo0" path="res://Sounds/Choir Edited.mp3" id="10_rku1e"]
+[ext_resource type="PackedScene" uid="uid://dsgdtqrdkrtud" path="res://house_marker.tscn" id="11_iivbl"]
+[ext_resource type="PackedScene" uid="uid://dbnskhsylg5tw" path="res://farm_marker.tscn" id="12_7nbq1"]
+[ext_resource type="PackedScene" uid="uid://cajn8hw5ro47n" path="res://stork.tscn" id="13_rfjv2"]
+[ext_resource type="Script" uid="uid://xqjja68kex4r" path="res://debugger.gd" id="14_1phco"]
+[ext_resource type="PackedScene" uid="uid://5dkarjg88tms" path="res://loss_layer.tscn" id="16_nnt18"]
+[ext_resource type="PackedScene" uid="uid://c8cksin46oc4k" path="res://gui.tscn" id="17_ewbju"]
+
+[sub_resource type="Resource" id="Resource_ldgsr"]
+script = ExtResource("2_h4fw4")
+time_in_day = 60.0
+faith = 50.0
+metadata/_custom_type_script = "uid://b6i7vriwvog26"
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ebmjs"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_qxrlw"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_wrm1d"]
+distance = 122.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_3dryh"]
+
+[sub_resource type="Resource" id="Resource_85qyi"]
+script = ExtResource("6_ewbju")
+metadata/_custom_type_script = "uid://v2qi7sy76e00"
+
+[sub_resource type="Environment" id="Environment_1phco"]
+ambient_light_source = 2
+ambient_light_color = Color(0, 0.443663, 0.198357, 1)
+ambient_light_energy = 2.0
+glow_enabled = true
+glow_bloom = 0.28
+glow_blend_mode = 0
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("overlay")]
+script = ExtResource("1_1l0tm")
+stats = SubResource("Resource_ldgsr")
+overlay = NodePath("Day Tint")
+
+[node name="Character" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(674, 337)
+
+[node name="Character5" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(563, 217)
+
+[node name="Character6" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(465, 286)
+
+[node name="Character7" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(687, 233)
+
+[node name="world_bounds" type="StaticBody2D" parent="."]
+
+[node name="top" type="CollisionShape2D" parent="world_bounds"]
+rotation = 3.14159
+shape = SubResource("WorldBoundaryShape2D_ebmjs")
+
+[node name="bottom" type="CollisionShape2D" parent="world_bounds"]
+position = Vector2(654, 649)
+shape = SubResource("WorldBoundaryShape2D_qxrlw")
+
+[node name="left" type="CollisionShape2D" parent="world_bounds"]
+position = Vector2(-123, 0)
+rotation = 1.5708
+shape = SubResource("WorldBoundaryShape2D_wrm1d")
+
+[node name="right" type="CollisionShape2D" parent="world_bounds"]
+position = Vector2(1076, 123)
+rotation = 4.71239
+shape = SubResource("WorldBoundaryShape2D_3dryh")
+
+[node name="Character2" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(399, 376)
+fed = true
+
+[node name="Character3" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(435, 179)
+fed = true
+
+[node name="Character4" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(598, 535)
+
+[node name="Managers" type="Node" parent="."]
+
+[node name="PopulationManager" type="Node" parent="Managers" groups=["pausable"]]
+script = ExtResource("2_qxrlw")
+stork_scene = ExtResource("13_rfjv2")
+names = SubResource("Resource_85qyi")
+
+[node name="BuildingManager" type="Node2D" parent="Managers" groups=["pausable"]]
+script = ExtResource("3_wrm1d")
+error_text_scene = ExtResource("8_7nbq1")
+
+[node name="ResourceManager" type="Node" parent="Managers" groups=["pausable"]]
+script = ExtResource("4_3dryh")
+
+[node name="AbilityManager" type="Node2D" parent="Managers" groups=["pausable"]]
+script = ExtResource("6_v158k")
+demolisher_scene = ExtResource("8_ldgsr")
+house_marker_scene = ExtResource("11_iivbl")
+farm_marker_scene = ExtResource("12_7nbq1")
+
+[node name="AudioManager" type="Node" parent="Managers"]
+script = ExtResource("9_o5yvi")
+
+[node name="Music" type="AudioStreamPlayer" parent="Managers/AudioManager"]
+stream = ExtResource("10_rku1e")
+volume_db = -7.22
+autoplay = true
+
+[node name="death" type="AudioStreamPlayer" parent="Managers/AudioManager"]
+
+[node name="Day Tint" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0.501961)
+z_index = 100
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(28.9005, 16.2679)
+
+[node name="debugger" type="Node" parent="."]
+script = ExtResource("14_1phco")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1phco")
+
+[node name="lava" parent="." instance=ExtResource("6_i6g32")]
+position = Vector2(130, 130)
+scale = Vector2(6.26942, 3.77395)
+
+[node name="lava2" parent="." instance=ExtResource("6_i6g32")]
+position = Vector2(1045, 587)
+scale = Vector2(6.14801, 3.45078)
+
+[node name="GUI" parent="." instance=ExtResource("17_ewbju")]
+
+[node name="end_day" parent="." instance=ExtResource("8_v158k")]
+visible = false
+
+[node name="loss_layer" parent="." instance=ExtResource("16_nnt18")]
