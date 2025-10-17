@@ -6,7 +6,7 @@ class_name AbilityManager
 @export var house_marker_scene: PackedScene
 @export var farm_marker_scene: PackedScene
 
-enum AbilityChosen { PICKUP , HOUSE , FARM, DESTROY}
+enum AbilityChosen { PICKUP , HOUSE , FARM, DESTROY, MARKER}
 
 var abilitychosen: AbilityChosen = AbilityChosen.PICKUP
 var grabbed_character: Character = null
@@ -26,7 +26,9 @@ func _process(delta: float) -> void:
 			handle_farm_input(delta)
 		AbilityChosen.DESTROY:
 			handle_destroy_input(delta)
-			
+		AbilityChosen.MARKER:
+			handle_sin_marker_input()
+	
 func switch_abilities():
 	if Input.is_action_just_pressed("p"):
 		init_pickup()
@@ -36,6 +38,8 @@ func switch_abilities():
 		init_farm()
 	elif Input.is_action_just_pressed("d"):
 		init_demolisher()
+	elif Input.is_action_just_pressed("m"):
+		init_sin_marker()
 
 func signal_change(ability_name: String):
 	match ability_name:
@@ -47,6 +51,26 @@ func signal_change(ability_name: String):
 			init_farm()
 		"destroy":
 			init_demolisher()
+
+func mouse_collision_player()->Character:
+	var mouse_pos = get_global_mouse_position()
+	var space_state = get_world_2d().direct_space_state
+
+	var query = PhysicsShapeQueryParameters2D.new()
+	var shape = CircleShape2D.new()
+	shape.radius = 15  # <-- increase to make it easier to grab
+	query.shape = shape
+	query.transform = Transform2D(0, mouse_pos)
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+
+	var results = space_state.intersect_shape(query, 32)  # up to 32 results
+
+	for result in results:
+		var collider = result["collider"]
+		if collider is Character:
+			return collider
+	return null
 
 #	--- Pickup Functionality ---
 func init_pickup():
@@ -76,29 +100,29 @@ func handle_pickup_input(delta: float) -> void:
 		)
 
 func try_pickup_character() -> void:
-	var mouse_pos = get_global_mouse_position()
-	var space_state = get_world_2d().direct_space_state
-
-	var query = PhysicsShapeQueryParameters2D.new()
-	var shape = CircleShape2D.new()
-	shape.radius = 15  # <-- increase to make it easier to grab
-	query.shape = shape
-	query.transform = Transform2D(0, mouse_pos)
-	query.collide_with_areas = true
-	query.collide_with_bodies = true
-
-	var results = space_state.intersect_shape(query, 32)  # up to 32 results
-
-	for result in results:
-		print(result)
-		var collider = result["collider"]
-		if collider is Character:
-			print("grab")
-			grabbed_character = collider
-			collider.initiate_grab()
-			return
+	var player = mouse_collision_player()
+	if player:
+		grabbed_character = player
+		player.initiate_grab()
+		return
 
 	click_in_progress = false
+
+# Sin Marker
+func init_sin_marker():
+	abilitychosen=AbilityChosen.MARKER
+	remove_demolisher_if_exists()
+	destroy_marker()
+
+func handle_sin_marker_input():
+	if Input.is_action_just_pressed("left_click"):
+		try_marker_character()
+
+func try_marker_character() -> void:
+	var player = mouse_collision_player()
+	if player:
+		player.toggle_sin_marker()
+		return
 
 #	--- Building Functionality ---
 func destroy_marker():

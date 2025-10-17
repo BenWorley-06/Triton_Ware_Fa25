@@ -1,22 +1,22 @@
 [gd_scene load_steps=7 format=3 uid="uid://bt7pirj3f0vj"]
 
-[ext_resource type="Script" uid="uid://b0f754cyfhony" path="res://Scripts/main.gd" id="1_jjgbg"]
-[ext_resource type="Script" uid="uid://dti8caylbdygq" path="res://splash_texts.gd" id="2_8gbba"]
-[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://b0f754cyfhony" path="res://Scripts/main.gd" id="1_wa68x"]
+[ext_resource type="Script" uid="uid://dti8caylbdygq" path="res://splash_texts.gd" id="2_1d001"]
+[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="3_x4sv3"]
 
 [sub_resource type="Resource" id="Resource_8gbba"]
-script = ExtResource("2_8gbba")
+script = ExtResource("2_1d001")
 metadata/_custom_type_script = "uid://dti8caylbdygq"
 
 [sub_resource type="Theme" id="Theme_8gbba"]
-default_font = ExtResource("2_bo1nx")
+default_font = ExtResource("3_x4sv3")
 
 [sub_resource type="Theme" id="Theme_jjvhh"]
-default_font = ExtResource("2_bo1nx")
+default_font = ExtResource("3_x4sv3")
 default_font_size = 40
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_jjgbg")
+script = ExtResource("1_wa68x")
 splash_data = SubResource("Resource_8gbba")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

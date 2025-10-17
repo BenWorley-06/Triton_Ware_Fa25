@@ -12,6 +12,7 @@ class_name Character
 @export var death_noise_scene: PackedScene
 @export var corpse_scene: PackedScene
 @export var streak_scene: PackedScene
+@export var sin_marker_scene: PackedScene
 
 @onready var bounds: Node = get_node("/root/Game/world_bounds")
 @onready var population_manager: PopulationManager = get_node("/root/Game/Managers/PopulationManager")
@@ -24,6 +25,7 @@ var action_state = Action_State.IDLE
 var current_job=null
 
 var map_bounds: Rect2
+var sin_marker: Node2D
 
 @export var sinner: bool = false
 @export var fed: bool = false
@@ -377,6 +379,7 @@ func enter_volcano():
 func _on_burn_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("volcano"):
 		over_volcano=true
+		voicebox.request_play("scream")
 
 func _on_burn_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("volcano"):
@@ -449,6 +452,14 @@ func do_breed(delta):
 			fed=false
 
 # ------- SINS -----
+func toggle_sin_marker():
+	if not sin_marker:
+		sin_marker=sin_marker_scene.instantiate()
+		add_child(sin_marker)
+		return
+	sin_marker.queue_free()
+	sin_marker=null
+
 func initiate_sins():
 	var sin: String =sins[randi() % sins.size()]
 	if sin=="kill":

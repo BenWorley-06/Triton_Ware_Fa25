@@ -6,7 +6,7 @@ extends Node2D
 @onready var building_manager: BuildingManager = $Managers/BuildingManager
 @onready var population_manager: PopulationManager = $Managers/PopulationManager
 @onready var resource_manager: ResourceManager = $Managers/ResourceManager
-var character_scene = preload("res://Scenes/character.tscn")
+var character_scene = preload("res://Scenes/character/character.tscn")
 
 # ---- End day variables ----
 @onready var end_day_layer: CanvasLayer = $end_day

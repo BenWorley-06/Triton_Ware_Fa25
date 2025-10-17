@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfccc0mhd2c4r"]
 
-[ext_resource type="Script" uid="uid://bvu4d3wc2gy2n" path="res://blood_particle.gd" id="1_dw02m"]
+[ext_resource type="Script" uid="uid://bvu4d3wc2gy2n" path="res://Scripts/blood_particle.gd" id="1_dw02m"]
 
 [sub_resource type="Curve" id="Curve_cb66r"]
 _limits = [0.393258, 2.0, 0.0, 1.0]
