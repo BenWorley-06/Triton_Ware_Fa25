@@ -54,7 +54,7 @@ glow_blend_mode = 0
 script = ExtResource("1_1l0tm")
 stats = SubResource("Resource_ldgsr")
 overlay = NodePath("Day Tint")
-faith_win = 150
+faith_win = 120
 
 [node name="Character" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(674, 337)
