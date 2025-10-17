@@ -2,7 +2,7 @@ extends Node
 class_name ResourceManager
 
 @export var faith: int = 50
-@export var bread: int = 0
+@export var bread: int = 4
 @export var population: int = 0
 
 func add_faith(amount: int):

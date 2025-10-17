@@ -85,7 +85,23 @@ func request_job(person):
 		print("job recieved")
 		return job
 	return {}
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("l"):
+		for p in people:
+			if p.sinner:
+				print(p.char_name)
+func new_sinner():
+	for p in people: 
+		var target = people[randi_range(0,people.size()-1)]
+		if target.sinner == false:
+			if target.prophet == false:
+				target.sinner = true
+				target.sin_timer = 0
+				break
 	
+		
+		
 func assign_breeders():
 	var person1: Character
 	var person2: Character

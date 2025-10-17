@@ -15,6 +15,7 @@ offset_bottom = 40.0
 texture = SubResource("PlaceholderTexture2D_hu6et")
 
 [node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+layout_mode = 0
 offset_left = 576.0
 offset_top = 282.0
 offset_right = 681.0

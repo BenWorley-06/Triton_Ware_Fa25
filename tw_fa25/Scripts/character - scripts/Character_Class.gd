@@ -30,8 +30,8 @@ var map_bounds: Rect2
 var has_sinned=false
 var prophet: bool = false
 
-var sin_timer:float = 20
-var time_to_sin: float = 0
+var sin_timer: float = 20
+var time_to_sin: float = 15
 
 var wander_timer: float = 0
 var wander_direction: Vector2 = Vector2.ZERO
@@ -184,6 +184,7 @@ func get_boundary_avoidance(map_rect: Rect2) -> Vector2:
 		avoidance.y -= 1.0 - ((map_rect.position.y + map_rect.size.y) - pos.y) / margin
 
 	return avoidance.normalized()
+	
 func idle(delta: float):
 	var pop_manager = get_node("/root/Game/Managers/PopulationManager")
 
@@ -396,6 +397,11 @@ func killed(good: bool):
 	get_tree().current_scene.add_child(noise)
 	noise.global_position=global_position
 	get_node("/root/Game/Managers/PopulationManager").remove_character(self)
+	var r = randi_range(0,10)
+	print(r)
+
+	if  r > 7:
+		get_node("/root/Game/Managers/PopulationManager").new_sinner()
 	queue_free()
 	
 func smashed():

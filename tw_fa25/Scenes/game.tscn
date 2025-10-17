@@ -97,6 +97,22 @@ fed = true
 position = Vector2(435, 179)
 fed = true
 
+[node name="Character8" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(435, 179)
+fed = true
+
+[node name="Character9" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(435, 179)
+fed = true
+
+[node name="Character10" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(435, 179)
+fed = true
+
+[node name="Character11" parent="." instance=ExtResource("1_ebmjs")]
+position = Vector2(435, 179)
+fed = true
+
 [node name="Character4" parent="." instance=ExtResource("1_ebmjs")]
 position = Vector2(598, 535)
 

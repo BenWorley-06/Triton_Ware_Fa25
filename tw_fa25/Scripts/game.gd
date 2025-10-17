@@ -32,6 +32,8 @@ var end_day_cooldown: bool = false
 @export var faith_win: int = 200
 var has_won=false
 
+func _ready():
+	print(resource_manager.bread)
 
 # ---- Process ----
 func _process(delta: float) -> void:
