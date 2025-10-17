@@ -1,26 +1,67 @@
-[gd_scene load_steps=2 format=3 uid="uid://bt7pirj3f0vj"]
+[gd_scene load_steps=7 format=3 uid="uid://bt7pirj3f0vj"]
 
 [ext_resource type="Script" uid="uid://b0f754cyfhony" path="res://Scripts/main.gd" id="1_jjgbg"]
+[ext_resource type="Script" uid="uid://dti8caylbdygq" path="res://splash_texts.gd" id="2_8gbba"]
+[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="2_bo1nx"]
+
+[sub_resource type="Resource" id="Resource_8gbba"]
+script = ExtResource("2_8gbba")
+metadata/_custom_type_script = "uid://dti8caylbdygq"
+
+[sub_resource type="Theme" id="Theme_8gbba"]
+default_font = ExtResource("2_bo1nx")
+
+[sub_resource type="Theme" id="Theme_jjvhh"]
+default_font = ExtResource("2_bo1nx")
+default_font_size = 40
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_jjgbg")
+splash_data = SubResource("Resource_8gbba")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 533.0
-offset_top = 253.0
-offset_right = 579.0
-offset_bottom = 319.0
+offset_left = 447.0
+offset_top = 304.0
+offset_right = 558.0
+offset_bottom = 376.0
+scale = Vector2(2.03639, 2.03639)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
 [node name="Start" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
+theme = SubResource("Theme_8gbba")
 text = "Start"
 
 [node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
 layout_mode = 2
+theme = SubResource("Theme_8gbba")
 text = "Quit"
+
+[node name="Title" type="Label" parent="."]
+texture_filter = 1
+offset_left = 365.0
+offset_top = 211.0
+offset_right = 476.0
+offset_bottom = 227.0
+scale = Vector2(4.05484, 4.17643)
+theme = SubResource("Theme_8gbba")
+text = "God of Lamb"
+uppercase = true
+
+[node name="splash" type="Label" parent="."]
+modulate = Color(0.843184, 0.843184, 0.843184, 1)
+texture_filter = 1
+offset_left = 611.0
+offset_top = 56.0
+offset_right = 651.0
+offset_bottom = 116.0
+rotation = 0.261242
+scale = Vector2(9.68407, 9.68407)
+theme = SubResource("Theme_jjvhh")
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
