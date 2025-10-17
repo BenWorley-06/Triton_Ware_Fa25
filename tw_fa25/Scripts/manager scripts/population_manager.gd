@@ -6,11 +6,15 @@ class_name PopulationManager
 @onready var resource_manager: ResourceManager = $"../ResourceManager"
 @export var stork_scene: PackedScene
 @export var names: NameList
+
+@export var sinner_ratio_range: Array = [0.05,0.2]
 const Character = preload("res://Scripts/character - scripts/Character_Class.gd")
 
 var people: Array = []          # all active people
 var jobs: Array = []            # all open jobs
 var prophet_spawned=false
+
+var sinner_count: int = 0
 
 var breed_timer: float = 0
 var breed_cooldown: float = 10
@@ -23,6 +27,17 @@ func _process(delta: float) -> void:
 	if breed_timer>=breed_cooldown:
 		assign_breeders()
 		breed_timer=0
+		
+func should_be_sinner() -> int:
+	var ratio = sinner_count/people.size()
+	if ratio<sinner_ratio_range[0]:
+		print("sinner needed")
+		return 1 #Need Sinner
+	elif ratio>sinner_ratio_range[1]:
+		print("less sinner")
+		return 2 #Less Sinners
+	return 0
+	
 
 func register_character(character: Character):
 	if character not in people:
@@ -32,10 +47,14 @@ func register_character(character: Character):
 		var char_name = names.name_list.pick_random()
 		character.change_name(char_name)
 		resource_manager.add_population(1)
+		if character.sinner:
+			sinner_count+=1
 		
 func remove_character(character: Character):
 	people.erase(character)
 	resource_manager.add_population(-1)
+	if character.sinner:
+			sinner_count-=1
 		
 func get_murder_target(exclude: Character) -> Character:
 	var candidates: Array = []

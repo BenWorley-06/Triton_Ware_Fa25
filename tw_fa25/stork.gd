@@ -27,13 +27,19 @@ func drop_baby():
 	get_tree().current_scene.add_child(baby)
 	
 	if not people_manager.prophet_spawned:
-		if randf()<1:
-			people_manager.prophet_spawned=true
-			baby.prophet=true
-			var halo = halo_scene.instantiate()
-			baby.add_child(halo)
+		people_manager.prophet_spawned=true
+		baby.prophet=true
+		var halo = halo_scene.instantiate()
+		baby.add_child(halo)
 	elif randf()<0.25:
 		baby.sinner=true
+	if not baby.prophet:
+		var sinner_needed = people_manager.should_be_sinner()
+		if sinner_needed==1:
+			baby.sinner=true
+		if sinner_needed==2:
+			baby.sinner=false
+			
 	baby.global_position=global_position
 	people_manager.register_character(baby)
 	
