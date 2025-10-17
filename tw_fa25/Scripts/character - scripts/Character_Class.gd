@@ -490,6 +490,7 @@ func start_streaking():
 	streak_area.global_position = global_position
 	streaking=true
 	action_state=Action_State.STREAKING
+	has_sinned=true
 
 func do_streaking(delta):
 	var streak_direction = get_wander_dir_social()
