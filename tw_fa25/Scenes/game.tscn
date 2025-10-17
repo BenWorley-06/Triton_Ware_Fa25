@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=30 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character.tscn" id="1_ebmjs"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://cf7vh241xnglu" path="res://Scripts/manager scripts/population_manager.gd" id="2_qxrlw"]
 [ext_resource type="Script" uid="uid://d16agg3i2gglf" path="res://Scripts/manager scripts/building_manager.gd" id="3_wrm1d"]
 [ext_resource type="Script" uid="uid://clngkkwwtpr5e" path="res://Scripts/manager scripts/resource_manager.gd" id="4_3dryh"]
+[ext_resource type="Script" uid="uid://cpj30ywk5hgr6" path="res://Scenes/world_bounds.gd" id="4_7t8sx"]
 [ext_resource type="Script" uid="uid://v2qi7sy76e00" path="res://NameList.gd" id="6_ewbju"]
 [ext_resource type="PackedScene" uid="uid://bni15epyyxgeu" path="res://volcano.tscn" id="6_i6g32"]
 [ext_resource type="Script" uid="uid://ux8fr26o1ta2" path="res://Scripts/manager scripts/ability_manager.gd" id="6_v158k"]
@@ -67,21 +68,22 @@ position = Vector2(465, 286)
 position = Vector2(687, 233)
 
 [node name="world_bounds" type="StaticBody2D" parent="."]
+script = ExtResource("4_7t8sx")
 
-[node name="top" type="CollisionShape2D" parent="world_bounds"]
+[node name="top" type="CollisionShape2D" parent="world_bounds" groups=["world_boundaries"]]
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
-[node name="bottom" type="CollisionShape2D" parent="world_bounds"]
+[node name="bottom" type="CollisionShape2D" parent="world_bounds" groups=["world_boundaries"]]
 position = Vector2(654, 649)
 shape = SubResource("WorldBoundaryShape2D_qxrlw")
 
-[node name="left" type="CollisionShape2D" parent="world_bounds"]
+[node name="left" type="CollisionShape2D" parent="world_bounds" groups=["world_boundaries"]]
 position = Vector2(-123, 0)
 rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_wrm1d")
 
-[node name="right" type="CollisionShape2D" parent="world_bounds"]
+[node name="right" type="CollisionShape2D" parent="world_bounds" groups=["world_boundaries"]]
 position = Vector2(1076, 123)
 rotation = 4.71239
 shape = SubResource("WorldBoundaryShape2D_3dryh")

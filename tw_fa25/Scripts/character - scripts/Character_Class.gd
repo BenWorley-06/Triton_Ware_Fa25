@@ -13,6 +13,7 @@ class_name Character
 @export var corpse_scene: PackedScene
 @export var streak_scene: PackedScene
 
+@onready var bounds: Node = get_node("/root/Game/world_bounds")
 @onready var population_manager: PopulationManager = get_node("/root/Game/Managers/PopulationManager")
 @onready var resource_manager: ResourceManager = get_node("/root/Game/Managers/ResourceManager")
 @onready var building_manager: BuildingManager = get_node("/root/Game/Managers/BuildingManager")
@@ -21,6 +22,8 @@ enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING,SCARED
 var sins=["kill","sleep","streak"]
 var action_state = Action_State.IDLE
 var current_job=null
+
+var map_bounds: Rect2
 
 @export var sinner: bool = false
 @export var fed: bool = false
@@ -62,6 +65,7 @@ var talking_timer: float = 0
 var scared_timer: float = 0
 
 var char_name: String
+var can_die_timer: float = 1
 
 #	--- Main ---
 func _ready():
@@ -74,12 +78,20 @@ func _ready():
 	if prophet:
 		social = true
 	social_timer=randf_range(5,20)
+	await get_tree().process_frame  # ensures world and children are ready
+	await get_tree().process_frame
+	if bounds:
+		map_bounds = bounds.bounds
+	else:
+		push_warning("Boundary node not found! Defaulting world bounds.")
+		map_bounds = Rect2(Vector2.ZERO, Vector2(1000, 1000)) # fallback
 	
 func change_name(input_name:String):
 	char_name=input_name
 	nametag.text=char_name
 	
 func _process(delta: float) -> void:
+	can_die_timer-=delta
 	if not prophet:
 		social_timer+=delta
 		if social_timer<=0:
@@ -129,22 +141,49 @@ func get_wander_dir_social() -> Vector2:
 	for p in nearby_people:
 		avg_pos += p.global_position
 	avg_pos /= nearby_people.size()
-	var to_group = (avg_pos - global_position).normalized()
+	var to_group = avg_pos - global_position
+	if to_group.length_squared() > 0.0001:
+		to_group = to_group.normalized()
+	else:
+		to_group = Vector2.ZERO
 
 	# --- separation (avoid being too close) ---
 	var separation = Vector2.ZERO
 	for p in nearby_people:
 		var diff = global_position - p.global_position
 		var dist = diff.length()
-		if dist < 50:  # “personal space” radius
-			separation += diff.normalized() * (1.0 - dist / 50.0)  # stronger if closer
+		if dist < 50 and dist > 0.001:
+			separation += diff.normalized() * (1.0 - dist / 50.0)
 
 	# --- combine with weights ---
-	var combined = (to_group * 0.6 + separation * 1.4).normalized()
+	var combined = (to_group * 0.6 + separation * 1.4)
+	if combined.length_squared() > 0.0001:
+		combined = combined.normalized()
+	else:
+		combined = wander_direction
 
-	# --- smooth transition ---
 	wander_direction = wander_direction.lerp(combined, 0.05).normalized()
 	return wander_direction
+
+
+func get_boundary_avoidance(map_rect: Rect2) -> Vector2:
+	var avoidance = Vector2.ZERO
+	var margin = 100.0
+	var pos = global_position
+
+	# Repel horizontally
+	if pos.x < map_rect.position.x + margin:
+		avoidance.x += 1.0 - (pos.x - map_rect.position.x) / margin
+	elif pos.x > map_rect.position.x + map_rect.size.x - margin:
+		avoidance.x -= 1.0 - ((map_rect.position.x + map_rect.size.x) - pos.x) / margin
+
+	# Repel vertically
+	if pos.y < map_rect.position.y + margin:
+		avoidance.y += 1.0 - (pos.y - map_rect.position.y) / margin
+	elif pos.y > map_rect.position.y + map_rect.size.y - margin:
+		avoidance.y -= 1.0 - ((map_rect.position.y + map_rect.size.y) - pos.y) / margin
+
+	return avoidance.normalized()
 func idle(delta: float):
 	var pop_manager = get_node("/root/Game/Managers/PopulationManager")
 
@@ -163,6 +202,12 @@ func idle(delta: float):
 	# --- social or independent movement bias ---
 	if social:
 		wander_direction=get_wander_dir_social()
+	var boundary_force = get_boundary_avoidance(map_bounds)
+
+	# Combine boundary force with wander
+	if boundary_force != Vector2.ZERO:
+		var combined = (wander_direction + boundary_force * 2.0).normalized()
+		wander_direction = wander_direction.lerp(combined, 0.1)
 	
 	var target_velocity = wander_direction * stats.wander_speed
 	velocity = velocity.lerp(target_velocity, delta * 2.0)
@@ -321,6 +366,8 @@ func end_grab():
 	
 #--- killing them ---
 func enter_volcano():
+	if can_die_timer>0:
+		return
 	var lava = lava_particle_scene.instantiate()
 	get_tree().current_scene.add_child(lava)
 	lava.global_position = global_position
@@ -352,12 +399,16 @@ func killed(good: bool):
 	queue_free()
 	
 func smashed():
+	if can_die_timer>0:
+		return
 	var blood=blood_particle_scene.instantiate()
 	get_tree().current_scene.add_child(blood)
 	blood.global_position = global_position
 	killed(false)
 
 func murdered():
+	if can_die_timer>0:
+		return
 	var blood=blood_particle_scene.instantiate()
 	get_tree().current_scene.add_child(blood)
 	blood.global_position = global_position
