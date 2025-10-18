@@ -27,6 +27,9 @@ var buttons_in_place := false
 @export var hover_area_x: int = 900
 var base_button_x: int
 
+var locked = false
+
+
 @export var tutorial_active: bool = true
 @export var tutorial_state: String = "house"
 
@@ -53,6 +56,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	update_display()
+	update_stats()
 	if tutorial_active:
 		tutorial_process()
 	check_hover_area()
@@ -143,8 +147,8 @@ func _on_tutorial_hover_mouse_exited() -> void:
 
 
 func _on_stats_hover_mouse_entered() -> void:
-	_fade(true,indicators)
+		_fade(true,indicators)
 
 
 func _on_stats_hover_mouse_exited() -> void:
-	_fade(false,indicators)
+		_fade(false,indicators)

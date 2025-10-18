@@ -189,7 +189,7 @@ offset_right = -13.0
 offset_bottom = 199.0
 grow_horizontal = 0
 grow_vertical = 2
-scale = Vector2(1.0045, 1)
+scale = Vector2(1.0045, 1.04)
 mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="button_container"]

@@ -35,6 +35,6 @@ text = "Play again"
 [node name="start" type="Button" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
 
-[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/play_again" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/play_again" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/play_again" to="." method="_on_play_again_pressed"]
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/start" to="." method="_on_start_pressed"]

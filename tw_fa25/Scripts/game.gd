@@ -22,7 +22,7 @@ var character_scene = preload("res://Scenes/character.tscn")
 var morning_color: Color = Color(0.2, 0.3, 0.5, 0.5)
 var afternoon_color: Color = Color(1.0, 0.6, 0.2, 0.3)
 var evening_color: Color = Color(0.1, 0.05, 0.2, 0.6)
-var night_color: Color = Color(0, 0, 0.1, 0.7)
+var night_color: Color = Color(0, 0, 0.1, 0.9)
 
 # ---- Time Management ----
 var day_timer: float = 0.0
@@ -32,11 +32,15 @@ var end_day_cooldown: bool = false
 @export var faith_win: int = 200
 var has_won=false
 
+var passive_faith_loss = 5
 func _ready():
 	print(resource_manager.bread)
 
 # ---- Process ----
 func _process(delta: float) -> void:
+	passive_faith_loss -= delta
+	
+		
 	if paused:
 		return  # Stop day progression during end screen
 	day_timer += delta
@@ -44,10 +48,13 @@ func _process(delta: float) -> void:
 		end_day()
 	manage_day_tint()
 	faith_conditions()
-	
+	if passive_faith_loss <= 0.0:
+		passive_faith_loss = 5
+		resource_manager.faith -= 1
+		return
 
 func faith_conditions():
-	if resource_manager.faith == 0.0:
+	if resource_manager.faith <= 0.0:
 		faith_loss()
 	return
 
@@ -70,22 +77,18 @@ func manage_day_tint():
 	var c2: Color
 	var local_t: float
 
-	if t < 0.25:
+	if t < 0.333:
 		c1 = morning_color
 		c2 = afternoon_color
-		local_t = t / 0.25
-	elif t < 0.5:
+		local_t = t / 0.333
+	elif t < 0.666:
 		c1 = afternoon_color
 		c2 = evening_color
-		local_t = (t - 0.25) / 0.25
-	elif t < 0.75:
+		local_t = (t - 0.333) / 0.333
+	else:
 		c1 = evening_color
 		c2 = night_color
-		local_t = (t - 0.5) / 0.25
-	else:
-		c1 = night_color
-		c2 = morning_color
-		local_t = (t - 0.75) / 0.25
+		local_t = (t - 0.666) / 0.333
 
 	overlay.color = c1.lerp(c2, local_t)
 

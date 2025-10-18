@@ -397,10 +397,12 @@ func killed(good: bool):
 	get_tree().current_scene.add_child(noise)
 	noise.global_position=global_position
 	get_node("/root/Game/Managers/PopulationManager").remove_character(self)
+	get_node("/root/Game/Managers/PopulationManager").check_for_miracle()
 	var r = randi_range(0,10)
 	print(r)
 
-	if  r > 7:
+	if  r > 5:
+		print("sinner created")
 		get_node("/root/Game/Managers/PopulationManager").new_sinner()
 	queue_free()
 	
