@@ -26,6 +26,7 @@ extends CanvasLayer
 @onready var t_ob: Label = $tutorial_container/VBoxContainer/t_ob
 @onready var t_dir: Label = $tutorial_container/VBoxContainer/t_dir
 @onready var t_prog: Label = $tutorial_container/VBoxContainer/t_prog
+@onready var skip_tutorial: Button = $skip_tutorial
 
 @export var button_offset: float = 100.0
 @export var tween_time: float = 0.3
@@ -99,6 +100,8 @@ func set_tutorial_state(state: String):
 		tutorial_active=false
 		tutorial_container.visible=false
 		spawn_prophet()
+		skip_tutorial.queue_free()
+		_fade(true,tutorial_container)
 		return
 	if state=="mark":
 		var person = character_scene.instantiate()
@@ -184,3 +187,8 @@ func _on_stats_hover_mouse_entered() -> void:
 
 func _on_stats_hover_mouse_exited() -> void:
 	_fade(false,indicators)
+
+
+func _on_skip_tutorial_pressed() -> void:
+	if tutorial_active:
+		set_tutorial_state("over")

@@ -6,6 +6,7 @@ extends CanvasLayer
 @onready var bread: Label = $TextureRect/MarginContainer/VBoxContainer/Bread
 @onready var sinner: Label = $TextureRect/MarginContainer/VBoxContainer/Sinner
 @onready var texture_rect: TextureRect = $TextureRect
+@onready var population_manager: PopulationManager = get_node("/root/Game/Managers/PopulationManager")
 
 func _on_button_pressed() -> void:
 	print('pressed')
@@ -34,3 +35,7 @@ func update_labels(bread_loss:int,faith_gain:int):
 	day.text = "Day: %d" % game.day
 	faith.text = "Faith: +%d" % faith_gain
 	bread.text = "Bread: %d" % bread_loss
+	if population_manager.sinner_count>0:
+		sinner.text="There is a sinner in your ranks..."
+	else:
+		sinner.text=""

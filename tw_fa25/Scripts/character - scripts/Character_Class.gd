@@ -395,7 +395,7 @@ func killed(good: bool):
 			get_node("/root/Game/Managers/AudioManager").play_death(true)
 			gui.has_killed=true
 		else:
-			get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
+			get_node("/root/Game/Managers/ResourceManager").add_faith(-10)
 			get_node("/root/Game/Managers/AudioManager").play_death(false)
 	if good and not has_sinned:
 		resource_manager.add_faith(-5)
