@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://ch01vo5dn6tuw"]
+
+[ext_resource type="Script" uid="uid://bw0hoxw73cb1g" path="res://prophet_spawner.gd" id="1_djfcy"]
+[ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character/character.tscn" id="2_h2bjf"]
+[ext_resource type="Texture2D" uid="uid://eg41w38eqey1" path="res://Art/Temporary/white_circle.png" id="2_jlu72"]
+[ext_resource type="PackedScene" uid="uid://bwsrp2gfx5dtn" path="res://halo.tscn" id="3_byxk1"]
+
+[node name="Prophet_Spawner" type="Node2D"]
+z_index = -1
+z_as_relative = false
+script = ExtResource("1_djfcy")
+character_scene = ExtResource("2_h2bjf")
+halo_scene = ExtResource("3_byxk1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.916165, 0.853379, 0.614932, 1)
+scale = Vector2(0.0991959, -0.0468085)
+texture = ExtResource("2_jlu72")

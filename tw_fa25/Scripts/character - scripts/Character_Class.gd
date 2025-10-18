@@ -19,6 +19,7 @@ class_name Character
 @onready var population_manager: PopulationManager = get_node("/root/Game/Managers/PopulationManager")
 @onready var resource_manager: ResourceManager = get_node("/root/Game/Managers/ResourceManager")
 @onready var building_manager: BuildingManager = get_node("/root/Game/Managers/BuildingManager")
+@onready var gui: CanvasLayer = get_node("/root/Game/GUI")
 
 enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING,SCARED,STREAKING}
 var sins=["kill","sleep","streak"]
@@ -33,8 +34,8 @@ var sin_marker: Node2D
 var has_sinned=false
 var prophet: bool = false
 
-var sin_timer: float = 20
-var time_to_sin: float = 15
+var sin_timer: float = 0
+var time_to_sin: float = 30
 
 var wander_timer: float = 0
 var wander_direction: Vector2 = Vector2.ZERO
@@ -67,7 +68,7 @@ var talking_timer: float = 0
 
 var scared_timer: float = 0
 
-var char_name: String
+var char_name
 var can_die_timer: float = 1
 
 #	--- Main ---
@@ -392,6 +393,7 @@ func killed(good: bool):
 		if has_sinned:
 			get_node("/root/Game/Managers/ResourceManager").add_faith(20)
 			get_node("/root/Game/Managers/AudioManager").play_death(true)
+			gui.has_killed=true
 		else:
 			get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
 			get_node("/root/Game/Managers/AudioManager").play_death(false)

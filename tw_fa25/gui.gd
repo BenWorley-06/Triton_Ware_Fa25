@@ -2,6 +2,11 @@ extends CanvasLayer
 @onready var game = get_node("/root/Game")
 @onready var ability_manager = get_node("/root/Game/Managers/AbilityManager")
 @onready var resource_manager: ResourceManager = get_node("/root/Game/Managers/ResourceManager")
+@onready var population_manager: PopulationManager = get_node("/root/Game/Managers/PopulationManager")
+@export var prophet_spawner_scene: PackedScene
+@export var character_scene: PackedScene
+@onready var prophet_spawn_location: Marker2D = $Prophet_Spawn_Location
+
 
 @onready var button_container: MarginContainer = $button_container
 @onready var pickup_button: Button = $MarginContainer/VBoxContainer/PickupButton
@@ -32,17 +37,22 @@ var base_button_x: int
 @export var tutorial_state: String = "house"
 
 var tutorial_states: Array = ["house","farm"]
+var has_killed: bool = false
 
 var tutorial_text: Dictionary = {
 	"objective":{
 		"house":"1. Housing",
 		"farm":"2. Farming",
-		"fire":"3. Fire Fighting"
+		"fire":"3. Fire Fighting",
+		"mark":"4. Finding Sinners",
+		"kill":"5. Killing Sinners"
 	},
 	"directions":{
 		"house":"Build 4 Houses",
 		"farm":"Build 4 Farms",
-		"fire":"Destroy 5 Fires\nwith Hand"
+		"fire":"Destroy 5 Fires\nwith Hand",
+		"mark":"Sinner was spawned.\nUse marker tool\nto track.",
+		"kill":"Once sinner has sinned,\nstreaking or murder\nkill them."
 	}
 }
 func _ready() -> void:
@@ -88,10 +98,25 @@ func set_tutorial_state(state: String):
 	if state=="over":
 		tutorial_active=false
 		tutorial_container.visible=false
+		spawn_prophet()
 		return
+	if state=="mark":
+		var person = character_scene.instantiate()
+		get_tree().current_scene.add_child(person)
+		person.sinner=true
+		person.sin_timer=25
+		person.global_position=prophet_spawn_location.global_position
+		population_manager.register_character(person)
+		person.change_name("Sinner")
+
 	tutorial_state=state
 	t_ob.text=tutorial_text["objective"][tutorial_state]
 	t_dir.text=tutorial_text["directions"][tutorial_state]
+	
+func spawn_prophet():
+	var prophet_spawner = prophet_spawner_scene.instantiate()
+	game.add_child(prophet_spawner)
+	prophet_spawner.global_position=prophet_spawn_location.global_position
 	
 func tutorial_process():
 	match tutorial_state:
@@ -106,6 +131,13 @@ func tutorial_process():
 		"fire":
 			t_prog.text="%d/%d"%[t_data.fires,t_data.fires_needed]
 			if t_data.fires>=t_data.fires_needed:
+				set_tutorial_state("mark")
+		"mark":
+			t_prog.text=""
+			if ability_manager.used_marker:
+				set_tutorial_state("kill")
+		"kill":
+			if has_killed:
 				set_tutorial_state("over")
 
 func check_hover_area():

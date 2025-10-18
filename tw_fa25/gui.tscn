@@ -1,7 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8cksin46oc4k"]
+[gd_scene load_steps=15 format=3 uid="uid://c8cksin46oc4k"]
 
 [ext_resource type="Script" uid="uid://cku0shi3kyyih" path="res://gui.gd" id="1_q8o8l"]
 [ext_resource type="Script" uid="uid://3fnufw16oej8" path="res://tutorial_data.gd" id="2_cor1f"]
+[ext_resource type="PackedScene" uid="uid://ch01vo5dn6tuw" path="res://prophet_spawner.tscn" id="2_jf511"]
+[ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character/character.tscn" id="3_0wv8u"]
 [ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="3_q8o8l"]
 [ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="3_u77ya"]
 [ext_resource type="Texture2D" uid="uid://y1wo1s8e7xcx" path="res://Art/Temporary/arrow.png" id="5_u77ya"]
@@ -30,6 +32,8 @@ default_font = ExtResource("3_u77ya")
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_q8o8l")
+prophet_spawner_scene = ExtResource("2_jf511")
+character_scene = ExtResource("3_0wv8u")
 t_data = SubResource("Resource_u77ya")
 
 [node name="building_blocker" type="Area2D" parent="."]
@@ -253,6 +257,9 @@ position = Vector2(7, 192)
 rotation = 3.14159
 scale = Vector2(0.282601, 0.401808)
 texture = ExtResource("5_u77ya")
+
+[node name="Prophet_Spawn_Location" type="Marker2D" parent="."]
+position = Vector2(585, 349)
 
 [connection signal="mouse_entered" from="tutorial_hover" to="." method="_on_tutorial_hover_mouse_entered"]
 [connection signal="mouse_exited" from="tutorial_hover" to="." method="_on_tutorial_hover_mouse_exited"]
