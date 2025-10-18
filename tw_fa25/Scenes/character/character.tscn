@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cah1gdlpwbn5i"]
+[gd_scene load_steps=19 format=3 uid="uid://cah1gdlpwbn5i"]
 
 [ext_resource type="Script" uid="uid://unpx8fm2f83l" path="res://Scripts/character - scripts/Character_Class.gd" id="1_3e1sl"]
 [ext_resource type="Script" uid="uid://c3i3i32v4ta6k" path="res://Scripts/character - scripts/character_stats.gd" id="2_i1l8f"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dcdxwi6f5tpoo" path="res://Scenes/character/corpse.tscn" id="6_wx8d1"]
 [ext_resource type="PackedScene" uid="uid://dmdfeb0e77u5p" path="res://streak_area.tscn" id="7_gjemp"]
 [ext_resource type="Texture2D" uid="uid://bdwbtvmdmi7yu" path="res://Art/Temporary/black_circle.png" id="8_kswrj"]
+[ext_resource type="PackedScene" uid="uid://gs61o36tu8px" path="res://blood_spawner.tscn" id="9_bp14d"]
 [ext_resource type="Texture2D" uid="uid://4ggls74chslx" path="res://Art/Temporary/minion_vance.webp" id="9_ojug4"]
 [ext_resource type="Script" uid="uid://b1ai862ae1s1y" path="res://Scripts/character - scripts/voicebox.gd" id="10_cjyvl"]
 [ext_resource type="Script" uid="uid://cvoucn6vtfcil" path="res://Scripts/sfx.gd" id="11_uo7r7"]
@@ -30,7 +31,7 @@ max_time_to_sin = 30.0
 sleep_time = 4.0
 steak_time = 6.0
 talk_timer = 1.0
-time_scared = 3.0
+time_scared = 1.0
 metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]
@@ -51,6 +52,7 @@ death_noise_scene = ExtResource("5_6uc6c")
 corpse_scene = ExtResource("6_wx8d1")
 streak_scene = ExtResource("7_gjemp")
 sin_marker_scene = ExtResource("13_i1l8f")
+blood_spawner_scene = ExtResource("9_bp14d")
 metadata/_custom_type_script = "uid://unpx8fm2f83l"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

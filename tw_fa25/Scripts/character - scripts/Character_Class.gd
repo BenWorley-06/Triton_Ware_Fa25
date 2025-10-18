@@ -13,6 +13,7 @@ class_name Character
 @export var corpse_scene: PackedScene
 @export var streak_scene: PackedScene
 @export var sin_marker_scene: PackedScene
+@export var blood_spawner_scene: PackedScene
 
 @onready var bounds: Node = get_node("/root/Game/world_bounds")
 @onready var population_manager: PopulationManager = get_node("/root/Game/Managers/PopulationManager")
@@ -389,7 +390,7 @@ func killed(good: bool):
 	interupted()
 	if not good:
 		if has_sinned:
-			get_node("/root/Game/Managers/ResourceManager").add_faith(10)
+			get_node("/root/Game/Managers/ResourceManager").add_faith(20)
 			get_node("/root/Game/Managers/AudioManager").play_death(true)
 		else:
 			get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
@@ -400,10 +401,9 @@ func killed(good: bool):
 	get_tree().current_scene.add_child(noise)
 	noise.global_position=global_position
 	get_node("/root/Game/Managers/PopulationManager").remove_character(self)
-	var r = randi_range(0,10)
-	print(r)
 
-	if  r > 7:
+	if  randf()<0.2:
+		print("new Sinner")
 		get_node("/root/Game/Managers/PopulationManager").new_sinner()
 	queue_free()
 	
@@ -492,6 +492,9 @@ func do_killing(delta):
 			murder_target=null
 			action_state=Action_State.IDLE
 			has_sinned=true
+			var blood_spawner = blood_spawner_scene.instantiate()
+			add_child(blood_spawner)
+			blood_spawner.global_position=global_position
 			
 func do_sleep(delta):
 	velocity=Vector2.ZERO

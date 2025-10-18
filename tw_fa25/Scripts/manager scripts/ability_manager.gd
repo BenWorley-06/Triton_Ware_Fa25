@@ -51,6 +51,8 @@ func signal_change(ability_name: String):
 			init_farm()
 		"destroy":
 			init_demolisher()
+		"marker":
+			init_sin_marker()
 
 func mouse_collision_player()->Character:
 	var mouse_pos = get_global_mouse_position()
