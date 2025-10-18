@@ -1,8 +1,8 @@
 extends Node2D
 @export var blood_spot_scene: PackedScene
 
-@export var lifetime:float = 0.5
-@export var spawn_time:float = 0.15
+@export var lifetime:float = 0.3
+@export var spawn_time:float = 0.1
 var spawn_timer: float = 0
 
 func _ready() -> void:

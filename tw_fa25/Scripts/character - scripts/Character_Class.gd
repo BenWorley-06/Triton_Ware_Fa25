@@ -401,10 +401,6 @@ func killed(good: bool):
 	get_tree().current_scene.add_child(noise)
 	noise.global_position=global_position
 	get_node("/root/Game/Managers/PopulationManager").remove_character(self)
-
-	if  randf()<0.2:
-		print("new Sinner")
-		get_node("/root/Game/Managers/PopulationManager").new_sinner()
 	queue_free()
 	
 func smashed():
