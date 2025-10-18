@@ -29,6 +29,15 @@ var day_timer: float = 0.0
 var day: int = 0
 var paused: bool = false
 var end_day_cooldown: bool = false
+<<<<<<< Updated upstream
+=======
+@export var faith_win: int = 200
+var has_won=false
+
+var passive_faith_loss = 1
+func _ready():
+	print(resource_manager.bread)
+>>>>>>> Stashed changes
 
 # ---- Process ----
 func _process(delta: float) -> void:
@@ -40,7 +49,14 @@ func _process(delta: float) -> void:
 		end_day()
 	manage_day_tint()
 	faith_conditions()
+<<<<<<< Updated upstream
 	
+=======
+	if passive_faith_loss <= 0.0:
+		passive_faith_loss = 1
+		resource_manager.faith -=(0.5 * day)
+		return
+>>>>>>> Stashed changes
 
 func faith_conditions():
 	if resource_manager.faith == 0.0:
