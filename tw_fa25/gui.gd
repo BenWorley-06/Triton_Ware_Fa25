@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var destroy_button: Button = $MarginContainer/VBoxContainer/DestroyButton
 @onready var house_button: Button = $MarginContainer/VBoxContainer/HouseButton
 @onready var farm_button: Button = $MarginContainer/VBoxContainer/FarmButton
+@onready var marker_button: Button = $button_container/VBoxContainer/MarkerButton
 
 @onready var indicators: MarginContainer = $Indicators
 @onready var faith_bar: ProgressBar = $Indicators/HBoxContainer/VBoxContainer/faith_bar
@@ -72,6 +73,9 @@ func _on_house_button_pressed() -> void:
 
 func _on_farm_button_pressed() -> void:
 	ability_manager.signal_change("farm")
+	
+func _on_marker_button_pressed() -> void:
+	ability_manager.signal_change("marker")
 	
 	
 func update_display():

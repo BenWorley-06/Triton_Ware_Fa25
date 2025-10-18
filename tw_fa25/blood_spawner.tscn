@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://gs61o36tu8px"]
+
+[ext_resource type="Script" uid="uid://cbh3ir4bpx7f7" path="res://blood_spawner.gd" id="1_fjb24"]
+[ext_resource type="PackedScene" uid="uid://chc841smkuv2e" path="res://blood_spot.tscn" id="2_nh6np"]
+
+[node name="blood_spawner" type="Node2D"]
+script = ExtResource("1_fjb24")
+blood_spot_scene = ExtResource("2_nh6np")

@@ -229,12 +229,20 @@ mouse_filter = 1
 theme = SubResource("Theme_jf511")
 text = "Farm"
 
+[node name="MarkerButton" type="Button" parent="button_container/VBoxContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 1
+theme = SubResource("Theme_jf511")
+text = "MARKER"
+
 [node name="GUI Background2" type="Sprite2D" parent="button_container"]
 modulate = Color(0.52376, 0.430767, 0.293325, 1)
 z_index = 100
 z_as_relative = false
 position = Vector2(52.25, 197.565)
-scale = Vector2(0.14209, 0.291864)
+scale = Vector2(0.137388, 0.361963)
 texture = ExtResource("3_q8o8l")
 
 [node name="arrow" type="Sprite2D" parent="button_container"]
@@ -254,3 +262,4 @@ texture = ExtResource("5_u77ya")
 [connection signal="pressed" from="button_container/VBoxContainer/DestroyButton" to="." method="_on_destroy_button_pressed"]
 [connection signal="pressed" from="button_container/VBoxContainer/HouseButton" to="." method="_on_house_button_pressed"]
 [connection signal="pressed" from="button_container/VBoxContainer/FarmButton" to="." method="_on_farm_button_pressed"]
+[connection signal="pressed" from="button_container/VBoxContainer/MarkerButton" to="." method="_on_marker_button_pressed"]

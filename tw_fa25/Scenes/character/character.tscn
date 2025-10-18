@@ -1,20 +1,22 @@
-[gd_scene load_steps=17 format=3 uid="uid://cah1gdlpwbn5i"]
+[gd_scene load_steps=19 format=3 uid="uid://cah1gdlpwbn5i"]
 
-[ext_resource type="Script" uid="uid://unpx8fm2f83l" path="res://Scripts/character - scripts/Character_Class.gd" id="1_owm7s"]
-[ext_resource type="Script" uid="uid://c3i3i32v4ta6k" path="res://Scripts/character - scripts/character_stats.gd" id="2_nytcm"]
-[ext_resource type="PackedScene" uid="uid://bya1y6ct6nphw" path="res://lava_particles.tscn" id="3_2mse5"]
-[ext_resource type="Texture2D" uid="uid://4ggls74chslx" path="res://Art/Temporary/minion_vance.webp" id="3_ejsiy"]
-[ext_resource type="Texture2D" uid="uid://bdwbtvmdmi7yu" path="res://Art/Temporary/black_circle.png" id="3_nytcm"]
-[ext_resource type="PackedScene" uid="uid://cfccc0mhd2c4r" path="res://blood_particle.tscn" id="4_reotu"]
-[ext_resource type="PackedScene" uid="uid://vnuggmxedgch" path="res://death_noise.tscn" id="5_a5ess"]
-[ext_resource type="Script" uid="uid://b1ai862ae1s1y" path="res://Scripts/character - scripts/voicebox.gd" id="5_ejsiy"]
-[ext_resource type="PackedScene" uid="uid://dcdxwi6f5tpoo" path="res://corpse.tscn" id="6_kq7hj"]
-[ext_resource type="PackedScene" uid="uid://dmdfeb0e77u5p" path="res://streak_area.tscn" id="7_l1rcp"]
-[ext_resource type="Script" uid="uid://cvoucn6vtfcil" path="res://Scenes/sfx.gd" id="9_wbia7"]
-[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="11_7iw6i"]
+[ext_resource type="Script" uid="uid://unpx8fm2f83l" path="res://Scripts/character - scripts/Character_Class.gd" id="1_3e1sl"]
+[ext_resource type="Script" uid="uid://c3i3i32v4ta6k" path="res://Scripts/character - scripts/character_stats.gd" id="2_i1l8f"]
+[ext_resource type="PackedScene" uid="uid://bya1y6ct6nphw" path="res://lava_particles.tscn" id="3_bp14d"]
+[ext_resource type="PackedScene" uid="uid://cfccc0mhd2c4r" path="res://Scenes/blood_particle.tscn" id="4_w5o2j"]
+[ext_resource type="PackedScene" uid="uid://vnuggmxedgch" path="res://Scenes/death_noise.tscn" id="5_6uc6c"]
+[ext_resource type="PackedScene" uid="uid://dcdxwi6f5tpoo" path="res://Scenes/character/corpse.tscn" id="6_wx8d1"]
+[ext_resource type="PackedScene" uid="uid://dmdfeb0e77u5p" path="res://streak_area.tscn" id="7_gjemp"]
+[ext_resource type="Texture2D" uid="uid://bdwbtvmdmi7yu" path="res://Art/Temporary/black_circle.png" id="8_kswrj"]
+[ext_resource type="PackedScene" uid="uid://gs61o36tu8px" path="res://blood_spawner.tscn" id="9_bp14d"]
+[ext_resource type="Texture2D" uid="uid://4ggls74chslx" path="res://Art/Temporary/minion_vance.webp" id="9_ojug4"]
+[ext_resource type="Script" uid="uid://b1ai862ae1s1y" path="res://Scripts/character - scripts/voicebox.gd" id="10_cjyvl"]
+[ext_resource type="Script" uid="uid://cvoucn6vtfcil" path="res://Scripts/sfx.gd" id="11_uo7r7"]
+[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="12_0ipyx"]
+[ext_resource type="PackedScene" uid="uid://dxc4mij87yw8w" path="res://sinner_marker.tscn" id="13_i1l8f"]
 
 [sub_resource type="Resource" id="Resource_px5sl"]
-script = ExtResource("2_nytcm")
+script = ExtResource("2_i1l8f")
 walk_speed = 50.0
 run_speed = 100.0
 wander_speed = 30.0
@@ -29,7 +31,7 @@ max_time_to_sin = 30.0
 sleep_time = 4.0
 steak_time = 6.0
 talk_timer = 1.0
-time_scared = 3.0
+time_scared = 1.0
 metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]
@@ -37,18 +39,20 @@ metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 [sub_resource type="CircleShape2D" id="CircleShape2D_2mse5"]
 
 [sub_resource type="Theme" id="Theme_l1rcp"]
-default_font = ExtResource("11_7iw6i")
+default_font = ExtResource("12_0ipyx")
 
 [node name="Character" type="CharacterBody2D" groups=["character", "pausable"]]
 scale = Vector2(0.443294, 0.366278)
 collision_layer = 4
-script = ExtResource("1_owm7s")
+script = ExtResource("1_3e1sl")
 stats = SubResource("Resource_px5sl")
-lava_particle_scene = ExtResource("3_2mse5")
-blood_particle_scene = ExtResource("4_reotu")
-death_noise_scene = ExtResource("5_a5ess")
-corpse_scene = ExtResource("6_kq7hj")
-streak_scene = ExtResource("7_l1rcp")
+lava_particle_scene = ExtResource("3_bp14d")
+blood_particle_scene = ExtResource("4_w5o2j")
+death_noise_scene = ExtResource("5_6uc6c")
+corpse_scene = ExtResource("6_wx8d1")
+streak_scene = ExtResource("7_gjemp")
+sin_marker_scene = ExtResource("13_i1l8f")
+blood_spawner_scene = ExtResource("9_bp14d")
 metadata/_custom_type_script = "uid://unpx8fm2f83l"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -60,15 +64,15 @@ shape = SubResource("CapsuleShape2D_wfnr8")
 modulate = Color(0.10748, 0.10748, 0.10748, 0.713726)
 position = Vector2(0, 45.2846)
 scale = Vector2(0.0980067, 0.0751355)
-texture = ExtResource("3_nytcm")
+texture = ExtResource("8_kswrj")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(1, 1)
 scale = Vector2(0.0986301, 0.179402)
-texture = ExtResource("3_ejsiy")
+texture = ExtResource("9_ojug4")
 
 [node name="voicebox" type="AudioStreamPlayer2D" parent="."]
-script = ExtResource("5_ejsiy")
+script = ExtResource("10_cjyvl")
 
 [node name="burn_area" type="Area2D" parent="."]
 scale = Vector2(0.819537, 0.819537)
@@ -78,7 +82,7 @@ scale = Vector2(5.08784, 6.98879)
 shape = SubResource("CircleShape2D_2mse5")
 
 [node name="SFX" type="AudioStreamPlayer2D" parent="."]
-script = ExtResource("9_wbia7")
+script = ExtResource("11_uo7r7")
 
 [node name="nametag" type="Label" parent="."]
 z_index = 50

@@ -12,6 +12,8 @@ class_name Character
 @export var death_noise_scene: PackedScene
 @export var corpse_scene: PackedScene
 @export var streak_scene: PackedScene
+@export var sin_marker_scene: PackedScene
+@export var blood_spawner_scene: PackedScene
 
 @onready var bounds: Node = get_node("/root/Game/world_bounds")
 @onready var population_manager: PopulationManager = get_node("/root/Game/Managers/PopulationManager")
@@ -24,6 +26,7 @@ var action_state = Action_State.IDLE
 var current_job=null
 
 var map_bounds: Rect2
+var sin_marker: Node2D
 
 @export var sinner: bool = false
 @export var fed: bool = false
@@ -377,6 +380,7 @@ func enter_volcano():
 func _on_burn_area_area_entered(area: Area2D) -> void:
 	if area.is_in_group("volcano"):
 		over_volcano=true
+		voicebox.request_play("scream")
 
 func _on_burn_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("volcano"):
@@ -386,7 +390,7 @@ func killed(good: bool):
 	interupted()
 	if not good:
 		if has_sinned:
-			get_node("/root/Game/Managers/ResourceManager").add_faith(10)
+			get_node("/root/Game/Managers/ResourceManager").add_faith(20)
 			get_node("/root/Game/Managers/AudioManager").play_death(true)
 		else:
 			get_node("/root/Game/Managers/ResourceManager").add_faith(-20)
@@ -397,13 +401,6 @@ func killed(good: bool):
 	get_tree().current_scene.add_child(noise)
 	noise.global_position=global_position
 	get_node("/root/Game/Managers/PopulationManager").remove_character(self)
-	get_node("/root/Game/Managers/PopulationManager").check_for_miracle()
-	var r = randi_range(0,10)
-	print(r)
-
-	if  r > 5:
-		print("sinner created")
-		get_node("/root/Game/Managers/PopulationManager").new_sinner()
 	queue_free()
 	
 func smashed():
@@ -451,6 +448,14 @@ func do_breed(delta):
 			fed=false
 
 # ------- SINS -----
+func toggle_sin_marker():
+	if not sin_marker:
+		sin_marker=sin_marker_scene.instantiate()
+		add_child(sin_marker)
+		return
+	sin_marker.queue_free()
+	sin_marker=null
+
 func initiate_sins():
 	var sin: String =sins[randi() % sins.size()]
 	if sin=="kill":
@@ -483,6 +488,9 @@ func do_killing(delta):
 			murder_target=null
 			action_state=Action_State.IDLE
 			has_sinned=true
+			var blood_spawner = blood_spawner_scene.instantiate()
+			add_child(blood_spawner)
+			blood_spawner.global_position=global_position
 			
 func do_sleep(delta):
 	velocity=Vector2.ZERO

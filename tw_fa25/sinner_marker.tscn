@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxc4mij87yw8w"]
+
+[ext_resource type="Script" uid="uid://bcjdxsk34jijt" path="res://sinner_marker.gd" id="1_rbtqq"]
+
+[node name="sinner_marker" type="Node2D"]
+script = ExtResource("1_rbtqq")
+
+[node name="icon" type="Polygon2D" parent="."]
+z_index = 150
+z_as_relative = false
+position = Vector2(0, -108)
+scale = Vector2(15.3615, 15.3615)
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(-1, -2, 1, -2, 0, 0)
