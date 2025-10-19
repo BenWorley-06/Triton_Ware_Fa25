@@ -40,6 +40,9 @@ var base_button_x: int
 var tutorial_states: Array = ["house","farm"]
 var has_killed: bool = false
 
+var seconds
+var old_day
+
 var tutorial_text: Dictionary = {
 	"objective":{
 		"house":"1. Housing",
@@ -56,18 +59,35 @@ var tutorial_text: Dictionary = {
 		"kill":"Once sinner has sinned,\nstreaking or murder\nkill them."
 	}
 }
+
 func _ready() -> void:
+	$Days/Day1.visible = false
+	$Days/Day2.visible = false 
+	$Days/Day3.visible = false
+	$Days/Day4.visible = false
+	$Days/Day5.visible = false
+	$Days/Day6.visible = false
+	$Days/Day7.visible = false
 	if tutorial_active:
 		set_tutorial_state(tutorial_state)
 	base_button_x=button_container.position.x
 	button_container.position.x += button_offset
 	faith_bar.max_value=game.faith_win
+	seconds = game.day_timer;
+	old_day = 0;
 
 func _process(delta: float) -> void:
 	update_display()
 	if tutorial_active:
 		tutorial_process()
 	check_hover_area()
+	for i in 7:
+		if(i == game.day):
+			$Days.get_child(i).visible = true
+		else:
+			$Days.get_child(i).visible = false
+	seconds = seconds + delta
+	$Hand.rotation = -(fmod(seconds, 120.0) * TAU / 120.0) + deg_to_rad(-90)
 
 func _on_pickup_button_pressed() -> void:
 	ability_manager.signal_change("pickup")
@@ -182,11 +202,17 @@ func _on_tutorial_hover_mouse_exited() -> void:
 
 
 func _on_stats_hover_mouse_entered() -> void:
+	_fade(true, $Timer)
 	_fade(true,indicators)
+	_fade(true, $Days)
+	_fade(true, $Hand)
 
 
 func _on_stats_hover_mouse_exited() -> void:
+	_fade(false, $Timer)
 	_fade(false,indicators)
+	_fade(false, $Days)
+	_fade(false, $Hand)
 
 
 func _on_skip_tutorial_pressed() -> void:
