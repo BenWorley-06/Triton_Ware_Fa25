@@ -32,6 +32,7 @@ sleep_time = 4.0
 steak_time = 6.0
 talk_timer = 1.0
 time_scared = 1.0
+steal_distance = 20.0
 metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]

@@ -25,7 +25,6 @@ func _process(delta: float) -> void:
 		
 func drop_baby():
 	var baby = character_scene.instantiate()
-	get_tree().current_scene.add_child(baby)
 	
 	if randf()<0.25:
 		baby.sinner=true
@@ -37,6 +36,6 @@ func drop_baby():
 			baby.sinner=false
 	if gui.tutorial_active:
 		baby.sinner=false
+	get_tree().current_scene.add_child(baby)
 	baby.global_position=global_position
-	people_manager.register_character(baby)
 	

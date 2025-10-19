@@ -21,7 +21,7 @@ class_name Character
 @onready var building_manager: BuildingManager = get_node("/root/Game/Managers/BuildingManager")
 @onready var gui: CanvasLayer = get_node("/root/Game/GUI")
 
-enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING,SCARED,STREAKING}
+enum Action_State {IDLE,WORKING,CARRIED,KILLING,SlEEPING,BREEDING,TALKING,SCARED,STREAKING,STEALING}
 var sins=["kill","sleep","streak"]
 var action_state = Action_State.IDLE
 var current_job=null
@@ -70,6 +70,8 @@ var scared_timer: float = 0
 
 var char_name
 var can_die_timer: float = 1
+
+var steal_target: Pickup
 
 #	--- Main ---
 func _ready():
@@ -121,6 +123,8 @@ func _process(delta: float) -> void:
 			do_scared(delta)
 		Action_State.STREAKING:
 			do_streaking(delta)
+		Action_State.STEALING:
+			do_stealing(delta)
 	if not selected:
 		if over_volcano:
 			enter_volcano()
@@ -459,13 +463,20 @@ func toggle_sin_marker():
 	sin_marker=null
 
 func initiate_sins():
-	var sin: String =sins[randi() % sins.size()]
+	var temp_sins=sins.duplicate()
+	if resource_manager.bread_pickups.size()>0:
+		temp_sins.append("steal")
+		
+	var sin: String =temp_sins[randi() % temp_sins.size()]
+	print("Available sins:", temp_sins, " → Chosen:", sin)
 	if sin=="kill":
 		initiate_murder()
 	elif sin=="sleep":
 		action_state=Action_State.SlEEPING
 	elif sin=="streak":
 		start_streaking()
+	elif sin=="steal":
+		start_stealing()
 
 func initiate_murder():
 	murder_target=get_node("/root/Game/Managers/PopulationManager").get_murder_target(self)
@@ -521,3 +532,24 @@ func do_streaking(delta):
 		streaking=false
 		streak_area.queue_free()
 		streak_area=null
+		
+func start_stealing():
+	action_state=Action_State.STEALING
+	has_sinned=true
+	steal_target=resource_manager.bread_pickups.pick_random()
+	print("stealing")
+	
+func do_stealing(delta):
+	if steal_target==null:
+		action_state=Action_State.IDLE
+		return
+		
+	var distance = global_position.distance_to(steal_target.global_position)
+	if distance > stats.steal_distance:
+		var direction = (steal_target.global_position - global_position).normalized()
+		velocity = direction * stats.walk_speed
+	else:
+		velocity = Vector2.ZERO
+		steal_target.queue_free()
+		if resource_manager.bread_pickups.size()>0:
+			start_stealing()

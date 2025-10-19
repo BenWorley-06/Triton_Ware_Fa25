@@ -20,14 +20,16 @@ var pickup_type: String:
 	set(value):
 		_pickup_type = value
 		_update_visuals()
+		if _pickup_type == "bread":
+			resource_manager.bread_pickups.append(self)
 	get:
 		return _pickup_type
-
 
 func _ready() -> void:
 	var angle = randf() * TAU
 	velocity = Vector2.from_angle(angle) * initial_speed
 	_update_visuals()
+	
 
 
 func _update_visuals():
@@ -70,3 +72,7 @@ func _collect() -> void:
 	var sound = audio_scene.instantiate()
 	get_tree().current_scene.add_child(sound)
 	queue_free()
+	
+func _exit_tree() -> void:
+	if _pickup_type == "bread" and resource_manager.bread_pickups.has(self):
+		resource_manager.bread_pickups.erase(self)

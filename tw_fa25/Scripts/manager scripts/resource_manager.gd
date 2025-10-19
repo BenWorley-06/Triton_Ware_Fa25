@@ -5,6 +5,8 @@ class_name ResourceManager
 @export var bread: int = 4
 @export var population: int = 0
 
+var bread_pickups: Array = []
+
 func add_faith(amount: int):
 	faith += amount
 
