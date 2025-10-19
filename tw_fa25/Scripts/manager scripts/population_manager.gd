@@ -20,11 +20,21 @@ var sinner_count: int = 0
 
 var breed_timer: float = 0
 var breed_cooldown: float = 10
+var miracle_timer: float = 10.0
+var miracle
 
 func _ready():
 	call_deferred("register_character")
 
 func _process(delta: float) -> void:
+	if miracle:
+		miracle_timer-=delta
+		if miracle_timer < 0.0:
+			
+			request_stork()
+			
+			miracle = false
+			miracle_timer == 10
 	breed_timer+=delta
 	if breed_timer>=breed_cooldown:
 		assign_breeders()
@@ -170,3 +180,10 @@ func new_day() -> Array:
 	resource_manager.add_bread(availiable_food-total_food)
 	resource_manager.add_faith(pray_amount)
 	return [availiable_food-total_food,pray_amount]
+	
+func check_for_miracle():
+	print("check miracle")
+	if people.size() == 1:
+		print("miracle")
+		miracle = true
+	return

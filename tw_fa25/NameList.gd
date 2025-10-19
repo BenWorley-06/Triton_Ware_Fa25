@@ -19,5 +19,5 @@ var name_list = [
 	"Joanna", "Claudia", "Phoebe", "Lois", "Eunice", "Apollos", "Onesimus",
 	"Philemon", "Demetrius", "Alexander", "Jason", "Crispus", "Justus", "Gaius","Phoenix Guiza",
 	"Benjamin Eugene Worley","Milay Galbraith","Xavier Chua","Karim Barjas","Sebastian Hill",
-	"Finn Vermaas"
+	"Finn Vermaas", "Hannibel Lecter", "Michael Jordan"
 ]
