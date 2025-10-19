@@ -14,6 +14,7 @@ var click_in_progress := false
 
 var demolisher: Area2D
 var marker: Node2D
+var used_marker: bool = false
 
 func _process(delta: float) -> void:
 	switch_abilities()
@@ -124,6 +125,7 @@ func try_marker_character() -> void:
 	var player = mouse_collision_player()
 	if player:
 		player.toggle_sin_marker()
+		used_marker=true
 		return
 
 #	--- Building Functionality ---

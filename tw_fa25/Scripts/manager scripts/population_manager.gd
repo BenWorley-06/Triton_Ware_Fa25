@@ -2,6 +2,7 @@ extends Node
 
 class_name PopulationManager
 
+@onready var gui: CanvasLayer = $"../../GUI"
 @onready var building_manager: BuildingManager = $"../BuildingManager"
 @onready var resource_manager: ResourceManager = $"../ResourceManager"
 @export var stork_scene: PackedScene
@@ -15,6 +16,7 @@ var jobs: Array = []            # all open jobs
 var prophet_spawned=false
 
 var sinner_count: int = 0
+@export var people_before_sinner_correction: int = 15
 
 var breed_timer: float = 0
 var breed_cooldown: float = 10
@@ -39,11 +41,15 @@ func _process(delta: float) -> void:
 		breed_timer=0
 		
 func should_be_sinner() -> int:
-	var ratio = sinner_count/people.size()
-	if ratio<sinner_ratio_range[0]:
+	if people.size()<people_before_sinner_correction:
+		return 0
+	var ratio = sinner_count / float(people.size())
+	var dynamic_min = max(0.1, 1.0 / people.size())
+	var dynamic_max = sinner_ratio_range[1]
+	if ratio<dynamic_min:
 		print("sinner needed")
 		return 1 #Need Sinner
-	elif ratio>sinner_ratio_range[1]:
+	elif ratio>dynamic_max:
 		print("less sinner")
 		return 2 #Less Sinners
 	return 0
@@ -55,7 +61,8 @@ func register_character(character: Character):
 		if not resource_manager:
 			resource_manager= $"../ResourceManager"
 		var char_name = names.name_list.pick_random()
-		character.change_name(char_name)
+		if character.char_name==null:
+			character.change_name(char_name)
 		resource_manager.add_population(1)
 		if character.sinner:
 			sinner_count+=1
@@ -65,6 +72,8 @@ func remove_character(character: Character):
 	resource_manager.add_population(-1)
 	if character.sinner:
 			sinner_count-=1
+	elif character.prophet:
+		gui.spawn_prophet()
 		
 func get_murder_target(exclude: Character) -> Character:
 	var candidates: Array = []

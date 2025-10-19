@@ -2,6 +2,11 @@ extends CanvasLayer
 @onready var game = get_node("/root/Game")
 @onready var ability_manager = get_node("/root/Game/Managers/AbilityManager")
 @onready var resource_manager: ResourceManager = get_node("/root/Game/Managers/ResourceManager")
+@onready var population_manager: PopulationManager = get_node("/root/Game/Managers/PopulationManager")
+@export var prophet_spawner_scene: PackedScene
+@export var character_scene: PackedScene
+@onready var prophet_spawn_location: Marker2D = $Prophet_Spawn_Location
+
 
 @onready var button_container: MarginContainer = $button_container
 @onready var pickup_button: Button = $MarginContainer/VBoxContainer/PickupButton
@@ -21,6 +26,7 @@ extends CanvasLayer
 @onready var t_ob: Label = $tutorial_container/VBoxContainer/t_ob
 @onready var t_dir: Label = $tutorial_container/VBoxContainer/t_dir
 @onready var t_prog: Label = $tutorial_container/VBoxContainer/t_prog
+@onready var skip_tutorial: Button = $skip_tutorial
 
 @export var button_offset: float = 100.0
 @export var tween_time: float = 0.3
@@ -35,25 +41,43 @@ var locked = false
 @export var tutorial_state: String = "house"
 
 var tutorial_states: Array = ["house","farm"]
+var has_killed: bool = false
+
+var seconds
+var old_day
 
 var tutorial_text: Dictionary = {
 	"objective":{
 		"house":"1. Housing",
 		"farm":"2. Farming",
-		"fire":"3. Fire Fighting"
+		"fire":"3. Fire Fighting",
+		"mark":"4. Finding Sinners",
+		"kill":"5. Killing Sinners"
 	},
 	"directions":{
 		"house":"Build 4 Houses",
 		"farm":"Build 4 Farms",
-		"fire":"Destroy 5 Fires\nwith Hand"
+		"fire":"Destroy 5 Fires\nwith Hand",
+		"mark":"Sinner was spawned.\nUse marker tool\nto track.",
+		"kill":"Once sinner has sinned,\nstreaking or murder\nkill them."
 	}
 }
+
 func _ready() -> void:
+	$Days/Day1.visible = false
+	$Days/Day2.visible = false 
+	$Days/Day3.visible = false
+	$Days/Day4.visible = false
+	$Days/Day5.visible = false
+	$Days/Day6.visible = false
+	$Days/Day7.visible = false
 	if tutorial_active:
 		set_tutorial_state(tutorial_state)
 	base_button_x=button_container.position.x
 	button_container.position.x += button_offset
 	faith_bar.max_value=game.faith_win
+	seconds = game.day_timer;
+	old_day = 0;
 
 func _process(delta: float) -> void:
 	update_display()
@@ -61,6 +85,13 @@ func _process(delta: float) -> void:
 	if tutorial_active:
 		tutorial_process()
 	check_hover_area()
+	for i in 7:
+		if(i == game.day):
+			$Days.get_child(i).visible = true
+		else:
+			$Days.get_child(i).visible = false
+	seconds = seconds + delta
+	$Hand.rotation = -(fmod(seconds, 120.0) * TAU / 120.0) + deg_to_rad(-90)
 
 func _on_pickup_button_pressed() -> void:
 	ability_manager.signal_change("pickup")
@@ -92,10 +123,27 @@ func set_tutorial_state(state: String):
 	if state=="over":
 		tutorial_active=false
 		tutorial_container.visible=false
+		spawn_prophet()
+		skip_tutorial.queue_free()
+		_fade(true,tutorial_container)
 		return
+	if state=="mark":
+		var person = character_scene.instantiate()
+		get_tree().current_scene.add_child(person)
+		person.sinner=true
+		person.sin_timer=25
+		person.global_position=prophet_spawn_location.global_position
+		population_manager.register_character(person)
+		person.change_name("Sinner")
+
 	tutorial_state=state
 	t_ob.text=tutorial_text["objective"][tutorial_state]
 	t_dir.text=tutorial_text["directions"][tutorial_state]
+	
+func spawn_prophet():
+	var prophet_spawner = prophet_spawner_scene.instantiate()
+	game.add_child(prophet_spawner)
+	prophet_spawner.global_position=prophet_spawn_location.global_position
 	
 func tutorial_process():
 	match tutorial_state:
@@ -110,6 +158,13 @@ func tutorial_process():
 		"fire":
 			t_prog.text="%d/%d"%[t_data.fires,t_data.fires_needed]
 			if t_data.fires>=t_data.fires_needed:
+				set_tutorial_state("mark")
+		"mark":
+			t_prog.text=""
+			if ability_manager.used_marker:
+				set_tutorial_state("kill")
+		"kill":
+			if has_killed:
 				set_tutorial_state("over")
 
 func check_hover_area():
@@ -151,8 +206,19 @@ func _on_tutorial_hover_mouse_exited() -> void:
 
 
 func _on_stats_hover_mouse_entered() -> void:
-		_fade(true,indicators)
+	_fade(true, $Timer)
+	_fade(true,indicators)
+	_fade(true, $Days)
+	_fade(true, $Hand)
 
 
 func _on_stats_hover_mouse_exited() -> void:
-		_fade(false,indicators)
+	_fade(false, $Timer)
+	_fade(false,indicators)
+	_fade(false, $Days)
+	_fade(false, $Hand)
+
+
+func _on_skip_tutorial_pressed() -> void:
+	if tutorial_active:
+		set_tutorial_state("over")

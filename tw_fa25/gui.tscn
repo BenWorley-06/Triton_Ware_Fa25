@@ -1,10 +1,21 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8cksin46oc4k"]
+[gd_scene load_steps=25 format=3 uid="uid://c8cksin46oc4k"]
 
 [ext_resource type="Script" uid="uid://cku0shi3kyyih" path="res://gui.gd" id="1_q8o8l"]
 [ext_resource type="Script" uid="uid://3fnufw16oej8" path="res://tutorial_data.gd" id="2_cor1f"]
+[ext_resource type="PackedScene" uid="uid://ch01vo5dn6tuw" path="res://prophet_spawner.tscn" id="2_jf511"]
+[ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character/character.tscn" id="3_0wv8u"]
 [ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="3_q8o8l"]
 [ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="3_u77ya"]
+[ext_resource type="Texture2D" uid="uid://cbpleqhinr1uh" path="res://Art/icons/Day1.PNG" id="5_78ls4"]
 [ext_resource type="Texture2D" uid="uid://y1wo1s8e7xcx" path="res://Art/Temporary/arrow.png" id="5_u77ya"]
+[ext_resource type="Texture2D" uid="uid://cv44e4ntw8cev" path="res://Art/icons/Day2.PNG" id="6_ia15a"]
+[ext_resource type="Texture2D" uid="uid://bd2mxv4wyboo" path="res://Art/icons/Day3.PNG" id="7_nf4fc"]
+[ext_resource type="Texture2D" uid="uid://b2xsge6n85bbi" path="res://Art/icons/Day4.PNG" id="8_vwnqe"]
+[ext_resource type="Texture2D" uid="uid://c7ceptv0vn3ho" path="res://Art/icons/Day5.PNG" id="9_fxds3"]
+[ext_resource type="Texture2D" uid="uid://15v8oiww5503" path="res://Art/icons/Day6.PNG" id="10_s1fa6"]
+[ext_resource type="Texture2D" uid="uid://brkupvlxw51ar" path="res://Art/icons/Day7.PNG" id="11_xt5h2"]
+[ext_resource type="Texture2D" uid="uid://bllvhk6figdok" path="res://Art/icons/Border2.PNG" id="15_78ls4"]
+[ext_resource type="Texture2D" uid="uid://b14ac0vfd588t" path="res://Art/icons/Timer.PNG" id="15_k81xp"]
 
 [sub_resource type="Resource" id="Resource_u77ya"]
 script = ExtResource("2_cor1f")
@@ -28,8 +39,13 @@ default_font = ExtResource("3_u77ya")
 [sub_resource type="Theme" id="Theme_jf511"]
 default_font = ExtResource("3_u77ya")
 
+[sub_resource type="Theme" id="Theme_0wv8u"]
+default_font = ExtResource("3_u77ya")
+
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_q8o8l")
+prophet_spawner_scene = ExtResource("2_jf511")
+character_scene = ExtResource("3_0wv8u")
 t_data = SubResource("Resource_u77ya")
 
 [node name="building_blocker" type="Area2D" parent="."]
@@ -37,17 +53,74 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="building_blocker"]
-position = Vector2(1114, 317.5)
+position = Vector2(1109, 336.5)
 scale = Vector2(5.80267, 4.89697)
 shape = SubResource("RectangleShape2D_q8o8l")
+
+[node name="Timer" type="Sprite2D" parent="."]
+position = Vector2(943.987, 73.9875)
+scale = Vector2(0.0443828, 0.0443828)
+texture = ExtResource("15_k81xp")
+
+[node name="Days" type="Node2D" parent="."]
+position = Vector2(943, 73)
+scale = Vector2(0.0437656, 0.0437656)
+
+[node name="Day1" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.097, 1.097)
+texture = ExtResource("5_78ls4")
+
+[node name="Day2" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("6_ia15a")
+
+[node name="Day3" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("7_nf4fc")
+
+[node name="Day4" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("8_vwnqe")
+
+[node name="Day5" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("9_fxds3")
+
+[node name="Day6" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("10_s1fa6")
+
+[node name="Day7" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("11_xt5h2")
+
+[node name="Hand" type="Node2D" parent="."]
+position = Vector2(956, 69)
+rotation = -1.5708
+scale = Vector2(0.109508, 0.080804)
+
+[node name="arrow" type="Sprite2D" parent="Hand"]
+modulate = Color(1, 1, 1, 0.545098)
+z_index = 60
+z_as_relative = false
+position = Vector2(272.342, -0.000976563)
+scale = Vector2(1, 1)
+texture = ExtResource("5_u77ya")
 
 [node name="Indicators" type="MarginContainer" parent="."]
 z_index = 120
 z_as_relative = false
-offset_left = 924.0
-offset_top = 28.7384
-offset_right = 1172.0
-offset_bottom = 100.738
+offset_left = 970.0
+offset_top = 54.0
+offset_right = 1218.0
+offset_bottom = 126.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Indicators"]
 layout_mode = 2
@@ -77,7 +150,7 @@ texture_filter = 1
 custom_minimum_size = Vector2(64, 16)
 layout_mode = 2
 theme = SubResource("Theme_q8o8l")
-text = "Bread: "
+text = " Bread:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -86,11 +159,12 @@ texture_filter = 1
 custom_minimum_size = Vector2(64, 16)
 layout_mode = 2
 theme = SubResource("Theme_q8o8l")
-text = "Population: "
+text = "Population:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="time_label" type="Label" parent="Indicators/HBoxContainer"]
+visible = false
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
@@ -103,12 +177,12 @@ vertical_alignment = 1
 uppercase = true
 
 [node name="GUI Background" type="Sprite2D" parent="Indicators"]
-modulate = Color(0.52376, 0.430767, 0.293325, 1)
+modulate = Color(0.756863, 0.564706, 0.419608, 1)
 z_index = 100
 z_as_relative = false
-position = Vector2(102.5, 40.1308)
-scale = Vector2(0.219727, 0.099354)
-texture = ExtResource("3_q8o8l")
+position = Vector2(88.5, 40.1308)
+scale = Vector2(0.182617, 0.099354)
+texture = ExtResource("15_78ls4")
 
 [node name="tutorial_container" type="MarginContainer" parent="."]
 anchors_preset = 2
@@ -152,7 +226,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="tutorial_container"]
-modulate = Color(0.495685, 0.426227, 0.28949, 1)
+modulate = Color(0.756863, 0.564706, 0.419608, 1)
 position = Vector2(44.3989, 55.3167)
 scale = Vector2(0.158412, 0.201918)
 texture = ExtResource("3_q8o8l")
@@ -165,15 +239,17 @@ offset_top = 376.0
 offset_right = 28.0
 offset_bottom = 416.0
 scale = Vector2(5.92636, 7.46763)
+metadata/_edit_lock_ = true
 
 [node name="stats_hover" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 890.0
-offset_top = 1.0
-offset_right = 930.0
-offset_bottom = 41.0
+offset_left = 873.0
+offset_top = 5.0
+offset_right = 913.0
+offset_bottom = 45.0
 scale = Vector2(6.80091, 3.17424)
+metadata/_edit_lock_ = true
 
 [node name="button_container" type="MarginContainer" parent="."]
 z_index = 120
@@ -183,10 +259,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -81.0
-offset_top = -201.0
-offset_right = -13.0
-offset_bottom = 199.0
+offset_left = -94.0
+offset_top = -182.0
+offset_right = -18.0
+offset_bottom = 218.0
 grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(1.0045, 1.04)
@@ -238,14 +314,14 @@ theme = SubResource("Theme_jf511")
 text = "MARKER"
 
 [node name="GUI Background2" type="Sprite2D" parent="button_container"]
-modulate = Color(0.52376, 0.430767, 0.293325, 1)
+modulate = Color(0.756863, 0.564706, 0.419608, 1)
 z_index = 100
 z_as_relative = false
 position = Vector2(52.25, 197.565)
 scale = Vector2(0.137388, 0.361963)
-texture = ExtResource("3_q8o8l")
+texture = ExtResource("15_78ls4")
 
-[node name="arrow" type="Sprite2D" parent="button_container"]
+[node name="arrow2" type="Sprite2D" parent="button_container"]
 modulate = Color(1, 1, 1, 0.545098)
 z_index = 60
 z_as_relative = false
@@ -253,6 +329,18 @@ position = Vector2(7, 192)
 rotation = 3.14159
 scale = Vector2(0.282601, 0.401808)
 texture = ExtResource("5_u77ya")
+
+[node name="Prophet_Spawn_Location" type="Marker2D" parent="."]
+position = Vector2(585, 349)
+
+[node name="skip_tutorial" type="Button" parent="."]
+texture_filter = 1
+offset_left = 42.0
+offset_top = 623.0
+offset_right = 142.0
+offset_bottom = 647.0
+theme = SubResource("Theme_0wv8u")
+text = "Skip"
 
 [connection signal="mouse_entered" from="tutorial_hover" to="." method="_on_tutorial_hover_mouse_entered"]
 [connection signal="mouse_exited" from="tutorial_hover" to="." method="_on_tutorial_hover_mouse_exited"]
@@ -263,3 +351,4 @@ texture = ExtResource("5_u77ya")
 [connection signal="pressed" from="button_container/VBoxContainer/HouseButton" to="." method="_on_house_button_pressed"]
 [connection signal="pressed" from="button_container/VBoxContainer/FarmButton" to="." method="_on_farm_button_pressed"]
 [connection signal="pressed" from="button_container/VBoxContainer/MarkerButton" to="." method="_on_marker_button_pressed"]
+[connection signal="pressed" from="skip_tutorial" to="." method="_on_skip_tutorial_pressed"]
