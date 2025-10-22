@@ -2,6 +2,7 @@ extends Node2D
 
 @export var stats: GameStats
 @export var overlay: ColorRect
+@onready var gui: CanvasLayer = $GUI
 
 @onready var building_manager: BuildingManager = $Managers/BuildingManager
 @onready var population_manager: PopulationManager = $Managers/PopulationManager
@@ -44,7 +45,8 @@ func _process(delta: float) -> void:
 		end_day()
 	manage_day_tint()
 	faith_conditions()
-	
+
+
 
 func faith_conditions():
 	if resource_manager.faith == 0.0:

@@ -161,11 +161,9 @@ environment = SubResource("Environment_1phco")
 
 [node name="lava" parent="." instance=ExtResource("6_i6g32")]
 position = Vector2(130, 130)
-scale = Vector2(6.26942, 3.77395)
 
 [node name="lava2" parent="." instance=ExtResource("6_i6g32")]
 position = Vector2(1045, 587)
-scale = Vector2(6.14801, 3.45078)
 
 [node name="GUI" parent="." instance=ExtResource("17_ewbju")]
 
@@ -178,7 +176,7 @@ visible = false
 visible = false
 
 [node name="background" type="TextureRect" parent="."]
-z_index = -20
+z_index = -100
 z_as_relative = false
 anchors_preset = 15
 anchor_right = 1.0

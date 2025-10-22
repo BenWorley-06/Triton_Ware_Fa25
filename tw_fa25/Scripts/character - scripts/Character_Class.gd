@@ -2,7 +2,7 @@ extends Entity
 class_name Character
 
 @export var stats: Character_Stats
-@onready var sprite: Sprite2D = $Sprite
+@onready var sprite: AnimatedSprite2D = $Sprite
 @onready var voicebox: AudioStreamPlayer2D = $voicebox
 @onready var sfx: AudioStreamPlayer2D = $SFX
 @onready var nametag: Label = $nametag
@@ -72,6 +72,15 @@ var char_name
 var can_die_timer: float = 1
 
 var steal_target: Pickup
+# --- visuals ---
+var color: String
+var colors: Array = ["white","grey","black"]
+var walking_animation: String
+var building_animation: String
+var harvest_animation: String
+var killing_animation: String
+var streaking_animation: String
+var floating_animation: String
 
 #	--- Main ---
 func _ready():
@@ -88,13 +97,39 @@ func _ready():
 	await get_tree().process_frame
 	if bounds:
 		map_bounds = bounds.bounds
-	else:
-		push_warning("Boundary node not found! Defaulting world bounds.")
-		map_bounds = Rect2(Vector2.ZERO, Vector2(1000, 1000)) # fallback
+	set_animations()
 	
 func change_name(input_name:String):
 	char_name=input_name
 	nametag.text=char_name
+	if char_name=="Sinner":
+		var tween = create_tween()
+		tween = create_tween()
+		tween.set_loops()  # infinite looping pulse
+		tween.tween_property(nametag, "scale", Vector2(5, 5), 0.25).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween.tween_property(nametag, "scale", Vector2(3, 3), 0.25).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+func set_animations():
+	color = colors.pick_random()
+	walking_animation=color+"-walking"
+	building_animation=color+"-building"
+	harvest_animation=color+"-harvest"
+	killing_animation=color+"-killing"
+	streaking_animation=color+"-streaking"
+	sprite.play(walking_animation)
+	
+func update_animation():
+	sprite.play()
+	match action_state:
+		Action_State.IDLE:
+			sprite.play(walking_animation)
+		Action_State.WORKING:
+			sprite.play(walking_animation)
+		Action_State.KILLING:
+			sprite.play(walking_animation)
+		Action_State.SlEEPING:
+			sprite.play(walking_animation)
+			sprite.stop()
 	
 func _process(delta: float) -> void:
 	can_die_timer-=delta
@@ -250,6 +285,7 @@ func do_talk(delta):
 	if talking_timer>stats.talk_timer:
 		talking_timer=0
 		action_state=Action_State.IDLE
+		update_animation()
 		
 func interupted(sent:bool=false):
 	if current_job:
@@ -268,6 +304,7 @@ func interupted(sent:bool=false):
 		if not sent:
 			breeding_target.interupted(true)
 			breeding_target.action_state=Action_State.IDLE
+			update_animation()
 		breeding_timer=0
 		primary_breeder=false
 		breeding_target = null
@@ -287,6 +324,7 @@ func do_scared(delta:float):
 	scared_timer+=delta
 	if scared_timer>=stats.time_scared:
 		action_state=Action_State.IDLE
+		update_animation()
 		scared_timer=0
 
 #	--- Work ---
@@ -297,6 +335,7 @@ func assign_job(job):
 func working(delta:float):
 	if current_job==null:
 		action_state=Action_State.IDLE
+		update_animation()
 		return
 	match current_job.type:
 		"build":
@@ -306,6 +345,7 @@ func working(delta:float):
 		_:
 			print("Unknown job type:", current_job.type)
 			action_state = Action_State.IDLE
+			update_animation()
 			current_job = null
 
 func do_build_job(delta: float) -> void:
@@ -314,6 +354,7 @@ func do_build_job(delta: float) -> void:
 		# scaffold was removed for some reason
 		current_job = null
 		action_state = Action_State.IDLE
+		update_animation()
 		return
 
 	var distance = global_position.distance_to(scaffold.global_position)
@@ -322,12 +363,15 @@ func do_build_job(delta: float) -> void:
 		velocity = direction * stats.walk_speed
 	else:
 		velocity = Vector2.ZERO
+		if sprite.animation != building_animation:
+			sprite.play(building_animation)
 		build_timer += delta
 		if build_timer >= scaffold.build_time:
 			print("job done")
 			scaffold.complete_building()
 			current_job = null
 			action_state = Action_State.SlEEPING
+			update_animation()
 			build_timer=0
 			sfx.request_play("build")
 			
@@ -337,6 +381,7 @@ func go_harvest(delta):
 		# farm was removed for some reason
 		current_job = null
 		action_state = Action_State.IDLE
+		update_animation()
 		return
 	var distance = global_position.distance_to(farm.global_position)
 	if distance > stats.distance_to_harvest:
@@ -345,10 +390,13 @@ func go_harvest(delta):
 	else:
 		velocity = Vector2.ZERO
 		farm_timer+=delta
+		if sprite.animation != harvest_animation:
+			sprite.play(harvest_animation)
 		if farm_timer>= stats.time_to_harvest:
 			farm.harvest()
 			current_job = null
 			action_state = Action_State.SlEEPING
+			update_animation()
 			farm_timer=0
 			sfx.request_play("harvest")
 	
@@ -437,6 +485,7 @@ func breed(target: Character, primary: bool):
 func do_breed(delta):
 	if breeding_target==null:
 		action_state=Action_State.IDLE
+		update_animation()
 		return
 	var distance = global_position.distance_to(breeding_target.global_position)
 	if distance > stats.breeding_distance:
@@ -450,6 +499,7 @@ func do_breed(delta):
 			breeding_target.action_state=Action_State.IDLE
 			breeding_target.fed=false
 			action_state=Action_State.IDLE
+			update_animation()
 			breeding_timer=0
 			fed=false
 
@@ -486,6 +536,7 @@ func initiate_murder():
 func do_killing(delta):
 	if murder_target==null:
 		action_state=Action_State.IDLE
+		update_animation()
 		return
 		
 	var distance = global_position.distance_to(murder_target.global_position)
@@ -494,12 +545,15 @@ func do_killing(delta):
 		velocity = direction * stats.walk_speed
 	else:
 		velocity = Vector2.ZERO
-		killing_timer+=1
+		if sprite.animation != killing_animation:
+			sprite.play(killing_animation)
+		killing_timer+=delta
 		if killing_timer>=stats.murder_time:
 			murder_target.murdered()
 			killing_timer=0
 			murder_target=null
 			action_state=Action_State.IDLE
+			update_animation()
 			has_sinned=true
 			var blood_spawner = blood_spawner_scene.instantiate()
 			add_child(blood_spawner)
@@ -510,6 +564,7 @@ func do_sleep(delta):
 	sleeping_timer+=delta
 	if sleeping_timer>=stats.sleep_time:
 		action_state=Action_State.IDLE
+		update_animation()
 		sleeping_timer=0
 
 func start_streaking():
@@ -522,6 +577,8 @@ func start_streaking():
 	has_sinned=true
 
 func do_streaking(delta):
+	if sprite.animation!=streaking_animation:
+		sprite.play(streaking_animation)
 	var streak_direction = get_wander_dir_social()
 	var target_velocity = streak_direction * stats.run_speed
 	velocity = velocity.lerp(target_velocity, delta * 2.0)
@@ -529,6 +586,7 @@ func do_streaking(delta):
 	if streaking_timer>=stats.steak_time:
 		streaking_timer=0
 		action_state=Action_State.IDLE
+		update_animation()
 		streaking=false
 		streak_area.queue_free()
 		streak_area=null
@@ -542,6 +600,7 @@ func start_stealing():
 func do_stealing(delta):
 	if steal_target==null:
 		action_state=Action_State.IDLE
+		update_animation()
 		return
 		
 	var distance = global_position.distance_to(steal_target.global_position)

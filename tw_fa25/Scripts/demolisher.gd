@@ -16,7 +16,7 @@ func _ready():
 
 func smite_buildings():
 	var tween = create_tween()
-	var down_pos = shadow.position +Vector2(0,-15)
+	var down_pos = shadow.position +Vector2(0,0)
 
 	tween.tween_property(hand, "position", down_pos, hand_down_duration).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 

@@ -1,9 +1,45 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuptthik5fbdt"]
+[gd_scene load_steps=10 format=3 uid="uid://cuptthik5fbdt"]
 
 [ext_resource type="Script" uid="uid://uget1kn4puty" path="res://fire.gd" id="1_x0kke"]
-[ext_resource type="Texture2D" uid="uid://dekc88uf6g8iu" path="res://Art/Temporary/fire.webp" id="2_aux0q"]
+[ext_resource type="Texture2D" uid="uid://5m7rtjgwa6v5" path="res://Art/Temporary/fire pixel animated.png" id="2_x0kke"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ufe0f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aux0q"]
+atlas = ExtResource("2_x0kke")
+region = Rect2(0, 0, 29, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_foybl"]
+atlas = ExtResource("2_x0kke")
+region = Rect2(0, 16, 29, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu00e"]
+atlas = ExtResource("2_x0kke")
+region = Rect2(0, 32, 29, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_411w6"]
+atlas = ExtResource("2_x0kke")
+region = Rect2(0, 48, 29, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rejwc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aux0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_foybl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu00e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_411w6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x0kke"]
 
@@ -16,18 +52,21 @@ script = ExtResource("1_x0kke")
 scale = Vector2(5.47627, 1.8558)
 shape = SubResource("CircleShape2D_ufe0f")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -7)
-scale = Vector2(0.0441634, 0.0441634)
-texture = ExtResource("2_aux0q")
+position = Vector2(-1, -16)
+scale = Vector2(4.39635, 4.39635)
+sprite_frames = SubResource("SpriteFrames_rejwc")
+autoplay = "default"
+frame_progress = 0.472082
 
 [node name="scare_area" type="Area2D" parent="."]
 collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="scare_area"]
-scale = Vector2(9.65442, 3.71257)
+texture_filter = 1
+scale = Vector2(11.384, 3.27902)
 shape = SubResource("CircleShape2D_x0kke")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

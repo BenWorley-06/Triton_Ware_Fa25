@@ -1,9 +1,39 @@
-[gd_scene load_steps=4 format=3 uid="uid://c1inf813m25xt"]
+[gd_scene load_steps=8 format=3 uid="uid://c1inf813m25xt"]
 
-[ext_resource type="Texture2D" uid="uid://dl7i44f5kwsc6" path="res://Art/Temporary/house.png" id="1_hfkix"]
 [ext_resource type="Script" uid="uid://2fvg8jsg4r0s" path="res://Scripts/building scripts/house.gd" id="1_metfq"]
+[ext_resource type="Texture2D" uid="uid://cxgpuvfiq4c0l" path="res://Art/custom assets/house/blue_house.png" id="2_0vbyw"]
+[ext_resource type="Texture2D" uid="uid://dm0nsvvpkghls" path="res://Art/custom assets/house/green_house.png" id="3_6isqf"]
+[ext_resource type="Texture2D" uid="uid://c8qpcehuytrve" path="res://Art/custom assets/house/red_house.png" id="4_mts68"]
+[ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="5_6isqf"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i6h3i"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_siy1q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0vbyw")
+}],
+"loop": true,
+"name": &"blue-static",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_6isqf")
+}],
+"loop": true,
+"name": &"green-static",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_mts68")
+}],
+"loop": true,
+"name": &"red-static",
+"speed": 5.0
+}]
 
 [node name="house" type="StaticBody2D" groups=["building", "house"]]
 z_as_relative = false
@@ -13,11 +43,29 @@ collision_mask = 2
 script = ExtResource("1_metfq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1.16331, 20.9396)
-scale = Vector2(4.52361, -1.92693)
+position = Vector2(-1.16331, -2.32662)
+scale = Vector2(4.76656, -3.44833)
 shape = SubResource("CapsuleShape2D_i6h3i")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(0.473889, 0.473889)
-texture = ExtResource("1_hfkix")
+position = Vector2(0, -9.30649)
+scale = Vector2(1.11364, 1.11364)
+sprite_frames = SubResource("SpriteFrames_siy1q")
+animation = &"blue-static"
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.458824)
+z_index = -10
+z_as_relative = false
+position = Vector2(0, 24.4295)
+scale = Vector2(0.0968561, 0.0406)
+texture = ExtResource("5_6isqf")
+
+[node name="path" type="Sprite2D" parent="."]
+modulate = Color(0.65098, 0.54902, 0.298039, 1)
+z_index = -50
+z_as_relative = false
+position = Vector2(0, 16.2864)
+scale = Vector2(0.119837, 0.0842294)
+texture = ExtResource("5_6isqf")

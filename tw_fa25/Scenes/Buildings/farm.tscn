@@ -1,8 +1,14 @@
-[gd_scene load_steps=11 format=3 uid="uid://bj0kuytpqv41y"]
+[gd_scene load_steps=18 format=3 uid="uid://bj0kuytpqv41y"]
 
 [ext_resource type="Script" uid="uid://bl7e7r1pdvlky" path="res://Scripts/building scripts/farm.gd" id="1_bw225"]
 [ext_resource type="Texture2D" uid="uid://ccu5xpyd8ty6h" path="res://Art/Temporary/farm_temp.png" id="1_ju177"]
 [ext_resource type="PackedScene" uid="uid://ddja7ywhyxnyp" path="res://pickup.tscn" id="2_kdfae"]
+[ext_resource type="Texture2D" uid="uid://bdjxplhlrgudi" path="res://Art/custom assets/farm/wheat_1.png" id="4_swgry"]
+[ext_resource type="Texture2D" uid="uid://dgx53fsns2fwe" path="res://Art/custom assets/farm/wheat_2.png" id="5_imdyn"]
+[ext_resource type="Texture2D" uid="uid://b8sdrmobex60o" path="res://Art/custom assets/farm/wheat_3.png" id="6_ixioq"]
+[ext_resource type="Texture2D" uid="uid://bek4o83l0a7qa" path="res://Art/custom assets/farm/wheat_4.png" id="7_spi0u"]
+[ext_resource type="Texture2D" uid="uid://bch1hxfucjr1c" path="res://Art/custom assets/farm/wheat_5.png" id="8_7yhpl"]
+[ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="9_imdyn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tww1o"]
 
@@ -49,6 +55,37 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_gtt4x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_swgry")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_imdyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ixioq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_spi0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_7yhpl")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_7yhpl")
+}],
+"loop": true,
+"name": &"full",
+"speed": 5.0
+}]
+
 [node name="Farm" type="StaticBody2D" groups=["building"]]
 scale = Vector2(0.549819, 0.549819)
 collision_layer = 2
@@ -60,7 +97,92 @@ pickup_scene = ExtResource("2_kdfae")
 scale = Vector2(7.873, 7.873)
 shape = SubResource("RectangleShape2D_tww1o")
 
-[node name="sprite" type="AnimatedSprite2D" parent="."]
-scale = Vector2(4.3918, 4.3918)
+[node name="bed" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 29.1005)
+scale = Vector2(4.36699, 2.68078)
 sprite_frames = SubResource("SpriteFrames_dmuu5")
 frame_progress = 0.69571
+
+[node name="crops" type="Node2D" parent="."]
+position = Vector2(0, -3.63756)
+scale = Vector2(1.66062, 1.66062)
+
+[node name="crop7" type="AnimatedSprite2D" parent="crops"]
+z_index = 10
+texture_filter = 1
+position = Vector2(-33, -34.8426)
+scale = Vector2(0.858396, 0.858396)
+sprite_frames = SubResource("SpriteFrames_gtt4x")
+frame_progress = 0.710248
+
+[node name="crop8" type="AnimatedSprite2D" parent="crops"]
+z_index = 10
+texture_filter = 1
+position = Vector2(-7, -34.8426)
+scale = Vector2(0.858396, 0.858396)
+sprite_frames = SubResource("SpriteFrames_gtt4x")
+
+[node name="crop9" type="AnimatedSprite2D" parent="crops"]
+z_index = 10
+texture_filter = 1
+position = Vector2(19, -34.8426)
+scale = Vector2(0.858396, 0.858396)
+sprite_frames = SubResource("SpriteFrames_gtt4x")
+frame_progress = 0.324006
+
+[node name="crop4" type="AnimatedSprite2D" parent="crops"]
+z_index = 10
+texture_filter = 1
+position = Vector2(-19, -17.8426)
+scale = Vector2(0.858396, 0.858396)
+sprite_frames = SubResource("SpriteFrames_gtt4x")
+frame_progress = 0.710248
+
+[node name="crop5" type="AnimatedSprite2D" parent="crops"]
+z_index = 10
+texture_filter = 1
+position = Vector2(7, -17.8426)
+scale = Vector2(0.858396, 0.858396)
+sprite_frames = SubResource("SpriteFrames_gtt4x")
+frame_progress = 0.324006
+
+[node name="crop6" type="AnimatedSprite2D" parent="crops"]
+z_index = 10
+texture_filter = 1
+position = Vector2(33, -17.8426)
+scale = Vector2(0.858396, 0.858396)
+sprite_frames = SubResource("SpriteFrames_gtt4x")
+frame_progress = 0.324006
+
+[node name="crop" type="AnimatedSprite2D" parent="crops"]
+z_index = 10
+texture_filter = 1
+position = Vector2(-26, 1.15741)
+scale = Vector2(0.858396, 0.858396)
+sprite_frames = SubResource("SpriteFrames_gtt4x")
+frame = 3
+frame_progress = 0.596277
+
+[node name="crop2" type="AnimatedSprite2D" parent="crops"]
+z_index = 10
+texture_filter = 1
+position = Vector2(0, 1.15741)
+scale = Vector2(0.858396, 0.858396)
+sprite_frames = SubResource("SpriteFrames_gtt4x")
+frame_progress = 0.324006
+
+[node name="crop3" type="AnimatedSprite2D" parent="crops"]
+z_index = 10
+texture_filter = 1
+position = Vector2(26, 1.15741)
+scale = Vector2(0.858396, 0.858396)
+sprite_frames = SubResource("SpriteFrames_gtt4x")
+frame_progress = 0.324006
+
+[node name="path" type="Sprite2D" parent="."]
+modulate = Color(0.65098, 0.54902, 0.298039, 1)
+z_index = -50
+z_as_relative = false
+position = Vector2(-1.81878, 32.738)
+scale = Vector2(0.153971, 0.116859)
+texture = ExtResource("9_imdyn")
