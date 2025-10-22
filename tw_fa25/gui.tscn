@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://c8cksin46oc4k"]
+[gd_scene load_steps=33 format=3 uid="uid://c8cksin46oc4k"]
 
 [ext_resource type="Script" uid="uid://cku0shi3kyyih" path="res://gui.gd" id="1_q8o8l"]
 [ext_resource type="Script" uid="uid://3fnufw16oej8" path="res://tutorial_data.gd" id="2_cor1f"]
@@ -6,16 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character/character.tscn" id="3_0wv8u"]
 [ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="3_q8o8l"]
 [ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="3_u77ya"]
-[ext_resource type="Texture2D" uid="uid://cbpleqhinr1uh" path="res://Art/icons/Day1.PNG" id="5_78ls4"]
 [ext_resource type="Texture2D" uid="uid://y1wo1s8e7xcx" path="res://Art/Temporary/arrow.png" id="5_u77ya"]
-[ext_resource type="Texture2D" uid="uid://cv44e4ntw8cev" path="res://Art/icons/Day2.PNG" id="6_ia15a"]
-[ext_resource type="Texture2D" uid="uid://bd2mxv4wyboo" path="res://Art/icons/Day3.PNG" id="7_nf4fc"]
-[ext_resource type="Texture2D" uid="uid://b2xsge6n85bbi" path="res://Art/icons/Day4.PNG" id="8_vwnqe"]
-[ext_resource type="Texture2D" uid="uid://c7ceptv0vn3ho" path="res://Art/icons/Day5.PNG" id="9_fxds3"]
-[ext_resource type="Texture2D" uid="uid://15v8oiww5503" path="res://Art/icons/Day6.PNG" id="10_s1fa6"]
-[ext_resource type="Texture2D" uid="uid://brkupvlxw51ar" path="res://Art/icons/Day7.PNG" id="11_xt5h2"]
-[ext_resource type="Texture2D" uid="uid://bllvhk6figdok" path="res://Art/icons/Border2.PNG" id="15_78ls4"]
-[ext_resource type="Texture2D" uid="uid://b14ac0vfd588t" path="res://Art/icons/Timer.PNG" id="15_k81xp"]
 [ext_resource type="Texture2D" uid="uid://g8u3wk7qh6sw" path="res://Art/Temporary/progress_bar_under.png" id="6_fxds3"]
 [ext_resource type="Texture2D" uid="uid://x4i601tpopf0" path="res://Art/Temporary/progress_bar_over.png" id="7_s1fa6"]
 [ext_resource type="Texture2D" uid="uid://djb17aty2e0is" path="res://Art/Temporary/cloud pixel.png" id="8_67jta"]
@@ -26,6 +17,8 @@
 [ext_resource type="Texture2D" uid="uid://x6weyd28q1xe" path="res://Art/custom assets/icons/Day2.PNG" id="12_nf4fc"]
 [ext_resource type="Texture2D" uid="uid://dfygsav27wul5" path="res://Art/custom assets/icons/Day3.PNG" id="13_vwnqe"]
 [ext_resource type="Texture2D" uid="uid://cyj0gbnpggc87" path="res://Art/custom assets/icons/Day4.PNG" id="14_fxds3"]
+[ext_resource type="Texture2D" uid="uid://bllvhk6figdok" path="res://Art/icons/Border2.PNG" id="15_78ls4"]
+[ext_resource type="Texture2D" uid="uid://b14ac0vfd588t" path="res://Art/icons/Timer.PNG" id="15_k81xp"]
 [ext_resource type="Texture2D" uid="uid://cvrdkabf0gh6c" path="res://Art/custom assets/icons/Day5.PNG" id="15_s1fa6"]
 [ext_resource type="Texture2D" uid="uid://dk2gxibga1ys6" path="res://Art/custom assets/icons/Day6.PNG" id="16_xt5h2"]
 [ext_resource type="Texture2D" uid="uid://dt67x6i06qg5x" path="res://Art/custom assets/icons/Day7.PNG" id="17_737bf"]
@@ -43,8 +36,8 @@ size = Vector2(20, 62.2835)
 default_font = ExtResource("3_u77ya")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ni0mf"]
-animations = [ {
-"frames": [ {
+animations = [{
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("11_ia15a")
 }, {
@@ -65,11 +58,11 @@ animations = [ {
 }, {
 "duration": 1.0,
 "texture": ExtResource("17_737bf")
-} ],
+}],
 "loop": true,
 "name": &"default",
 "speed": 5.0
-} ]
+}]
 
 [sub_resource type="Theme" id="Theme_nf4fc"]
 
@@ -88,7 +81,7 @@ prophet_spawner_scene = ExtResource("2_jf511")
 character_scene = ExtResource("3_0wv8u")
 t_data = SubResource("Resource_u77ya")
 
-[node name="building_blocker" type="Area2D" parent="."] 
+[node name="building_blocker" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
 
@@ -97,75 +90,37 @@ position = Vector2(1109, 336.5)
 scale = Vector2(5.80267, 4.89697)
 shape = SubResource("RectangleShape2D_q8o8l")
 
-[node name="Timer" type="Sprite2D" parent="."] 
-position = Vector2(943.987, 73.9875)
-scale = Vector2(0.0443828, 0.0443828)
+[node name="Timer" type="Sprite2D" parent="."]
+z_index = 110
+z_as_relative = false
+position = Vector2(821.221, 71.2208)
+scale = Vector2(0.027638, 0.027638)
 texture = ExtResource("15_k81xp")
 
-[node name="Days" type="Node2D" parent="."] 
-position = Vector2(943, 73)
-scale = Vector2(0.0437656, 0.0437656)
-
-[node name="Day1" type="Sprite2D" parent="Days"]
-position = Vector2(2641.34, -1105.89)
-scale = Vector2(1.097, 1.097)
-texture = ExtResource("5_78ls4")
-
-[node name="Day2" type="Sprite2D" parent="Days"]
-position = Vector2(2641.34, -1105.89)
-scale = Vector2(1.09675, 1.09675)
-texture = ExtResource("6_ia15a")
-
-[node name="Day3" type="Sprite2D" parent="Days"]
-position = Vector2(2641.34, -1105.89)
-scale = Vector2(1.09675, 1.09675)
-texture = ExtResource("7_nf4fc")
-
-[node name="Day4" type="Sprite2D" parent="Days"]
-position = Vector2(2641.34, -1105.89)
-scale = Vector2(1.09675, 1.09675)
-texture = ExtResource("8_vwnqe")
-
-[node name="Day5" type="Sprite2D" parent="Days"]
-position = Vector2(2641.34, -1105.89)
-scale = Vector2(1.09675, 1.09675)
-texture = ExtResource("9_fxds3")
-
-[node name="Day6" type="Sprite2D" parent="Days"]
-position = Vector2(2641.34, -1105.89)
-scale = Vector2(1.09675, 1.09675)
-texture = ExtResource("10_s1fa6")
-
-[node name="Day7" type="Sprite2D" parent="Days"]
-position = Vector2(2641.34, -1105.89)
-scale = Vector2(1.09675, 1.09675)
-texture = ExtResource("11_xt5h2")
-
-[node name="Hand" type="Node2D" parent="."] 
-position = Vector2(956, 69)
+[node name="Hand" type="Node2D" parent="."]
+z_index = 110
+z_as_relative = false
+position = Vector2(833.234, 66.2333)
 rotation = -1.5708
-scale = Vector2(0.109508, 0.080804)
+scale = Vector2(0.0681926, 0.0503181)
 
 [node name="arrow" type="Sprite2D" parent="Hand"]
 modulate = Color(1, 1, 1, 0.545098)
-z_index = 60
+z_index = 110
 z_as_relative = false
 position = Vector2(272.342, -0.000976563)
-scale = Vector2(1, 1)
 texture = ExtResource("5_u77ya")
 
-[node name="Indicators" type="MarginContainer" parent="."] 
+[node name="Indicators" type="Node2D" parent="."]
 z_index = 120
 z_as_relative = false
-offset_left = 970.0
-offset_top = 54.0
-offset_right = 1218.0
-offset_bottom = 126.0
+position = Vector2(863, 34)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Indicators"] 
-offset_top = 78.0
-offset_right = 248.0
-offset_bottom = 150.0
+[node name="HBoxContainer" type="HBoxContainer" parent="Indicators"]
+offset_left = -61.0
+offset_top = 106.0
+offset_right = 187.0
+offset_bottom = 178.0
 
 [node name="Bread" type="Label" parent="Indicators/HBoxContainer"]
 modulate = Color(0.319089, 0.163881, 0, 1)
@@ -187,54 +142,41 @@ text = "Population:"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="time_label" type="Label" parent="Indicators/HBoxContainer"]
-visible = false
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 1
-theme = SubResource("Theme_q8o8l")
-text = "Time:
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-uppercase = true
-
 [node name="GUI Background" type="Sprite2D" parent="Indicators"]
 modulate = Color(0.756863, 0.564706, 0.419608, 1)
 z_index = 100
 z_as_relative = false
-position = Vector2(88.5, 40.1308)
-scale = Vector2(0.182617, 0.099354)
+position = Vector2(125.636, 52.8799)
+scale = Vector2(0.265227, 0.117461)
 texture = ExtResource("15_78ls4")
 
 [node name="GUI Background_alt" type="Sprite2D" parent="Indicators"]
 z_index = 100
 z_as_relative = false
-position = Vector2(126, 20)
-scale = Vector2(0.349212, 0.211622)
+position = Vector2(163.136, 32.7491)
+scale = Vector2(0.507185, 0.25019)
 texture = ExtResource("10_axmix")
 
 [node name="GUI Background2" type="Sprite2D" parent="Indicators"]
 modulate = Color(1, 0.914126, 0.829768, 1)
 z_index = 99
 z_as_relative = false
-position = Vector2(126, 20)
-scale = Vector2(0.36462, 0.220959)
+position = Vector2(163.136, 32.7491)
+scale = Vector2(0.529563, 0.261229)
 texture = ExtResource("10_axmix")
 
 [node name="day_counter" type="AnimatedSprite2D" parent="Indicators"]
-position = Vector2(73.7203, 75.0238)
+position = Vector2(70, 106)
 scale = Vector2(0.0431619, 0.0431619)
 sprite_frames = SubResource("SpriteFrames_ni0mf")
 
 [node name="faith_bar" type="TextureProgressBar" parent="Indicators"]
 texture_filter = 1
-offset_left = -4.90955
-offset_top = 28.9118
-offset_right = 152.09
-offset_bottom = 60.9118
-scale = Vector2(2.4938, 2.61843)
+offset_left = -5.0
+offset_top = 25.0
+offset_right = 243.0
+offset_bottom = 97.0
+scale = Vector2(3.43846, 3.43846)
 theme = SubResource("Theme_nf4fc")
 value = 50.0
 texture_under = ExtResource("6_fxds3")
@@ -251,11 +193,11 @@ texture = ExtResource("17_s1fa6")
 [node name="day_text" type="Sprite2D" parent="Indicators"]
 modulate = Color(0.827525, 0.510639, 0, 1)
 texture_filter = 1
-position = Vector2(-28.9095, 69.9118)
+position = Vector2(-31, 98)
 scale = Vector2(0.641809, 0.641809)
 texture = ExtResource("18_xt5h2")
 
-[node name="tutorial_container" type="MarginContainer" parent="."] 
+[node name="tutorial_container" type="MarginContainer" parent="."]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -301,7 +243,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="tutorial_container"]
-modulate = Color(0.756863, 0.564706, 0.419608, 1)
 z_index = 100
 z_as_relative = false
 position = Vector2(44.3989, 55.3167)
@@ -316,7 +257,7 @@ position = Vector2(44.3989, 55.3167)
 scale = Vector2(0.180884, 0.212205)
 texture = ExtResource("10_axmix")
 
-[node name="tutorial_hover" type="Control" parent="."] 
+[node name="tutorial_hover" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -12.0
@@ -326,17 +267,17 @@ offset_bottom = 416.0
 scale = Vector2(5.92636, 7.46763)
 metadata/_edit_lock_ = true
 
-[node name="stats_hover" type="Control" parent="."] 
+[node name="stats_hover" type="Control" parent="."]
+custom_minimum_size = Vector2(100, 64)
+layout_direction = 1
 layout_mode = 3
 anchors_preset = 0
-offset_left = 873.0
-offset_top = 5.0
-offset_right = 913.0
-offset_bottom = 45.0
+offset_left = 755.0
+offset_right = 855.0
+offset_bottom = 64.0
 scale = Vector2(6.80091, 3.17424)
-metadata/_edit_lock_ = true
 
-[node name="button_container" type="MarginContainer" parent="."] 
+[node name="button_container" type="MarginContainer" parent="."]
 z_index = 120
 z_as_relative = false
 anchors_preset = 6
@@ -404,7 +345,6 @@ theme = SubResource("Theme_jf511")
 text = "MARKER"
 
 [node name="GUI Background2" type="Sprite2D" parent="button_container"]
-modulate = Color(0.756863, 0.564706, 0.419608, 1)
 z_index = 100
 z_as_relative = false
 position = Vector2(52.25, 197.565)
@@ -428,10 +368,10 @@ rotation = 3.14159
 scale = Vector2(0.282601, 0.401808)
 texture = ExtResource("5_u77ya")
 
-[node name="Prophet_Spawn_Location" type="Marker2D" parent="."] 
+[node name="Prophet_Spawn_Location" type="Marker2D" parent="."]
 position = Vector2(585, 349)
 
-[node name="skip_tutorial" type="Button" parent="."] 
+[node name="skip_tutorial" type="Button" parent="."]
 modulate = Color(0.884657, 0.769903, 0.527239, 1)
 z_index = 110
 z_as_relative = false
@@ -443,7 +383,7 @@ offset_bottom = 647.0
 theme = SubResource("Theme_0wv8u")
 text = "Skip"
 
-[node name="white flash" type="TextureRect" parent="."] 
+[node name="white flash" type="TextureRect" parent="."]
 z_index = 1000
 offset_left = -162.0
 offset_top = -224.0
@@ -452,9 +392,9 @@ offset_bottom = 800.0
 scale = Vector2(1.51209, 1.08904)
 texture = ExtResource("3_q8o8l")
 
-[node name="Clouds" type="Node2D" parent="."] 
+[node name="Clouds" type="Node2D" parent="."]
 
-[node name="left" type="Node2D" parent="Clouds"] 
+[node name="left" type="Node2D" parent="Clouds"]
 
 [node name="cloud" type="Sprite2D" parent="Clouds/left"]
 z_index = 900
@@ -546,7 +486,7 @@ texture = ExtResource("8_67jta")
 script = ExtResource("9_p8208")
 direction = -1
 
-[node name="right" type="Node2D" parent="Clouds"] 
+[node name="right" type="Node2D" parent="Clouds"]
 
 [node name="cloud3" type="Sprite2D" parent="Clouds/right"]
 z_index = 900
@@ -637,8 +577,6 @@ position = Vector2(1277.51, 454.027)
 scale = Vector2(7.37667, 7.37667)
 texture = ExtResource("8_67jta")
 script = ExtResource("9_p8208")
-
-[node name="indicators_new" type="Node2D" parent="."] 
 
 [connection signal="mouse_entered" from="tutorial_hover" to="." method="_on_tutorial_hover_mouse_entered"]
 [connection signal="mouse_exited" from="tutorial_hover" to="." method="_on_tutorial_hover_mouse_exited"]

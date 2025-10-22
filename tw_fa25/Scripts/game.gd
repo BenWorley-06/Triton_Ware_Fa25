@@ -7,7 +7,6 @@ extends Node2D
 @onready var building_manager: BuildingManager = $Managers/BuildingManager
 @onready var population_manager: PopulationManager = $Managers/PopulationManager
 @onready var resource_manager: ResourceManager = $Managers/ResourceManager
-@onready var gui = get_node("/root/Game/GUI")
 var character_scene = preload("res://Scenes/character/character.tscn")
 
 # ---- End day variables ----
