@@ -53,7 +53,8 @@ func drop_baby():
 	if not baby.prophet and false:
 		var sinner_needed = people_manager.should_be_sinner()
 		if sinner_needed==1:
-			baby.sinner=true
+			if randf()<0.25:
+				baby.sinner=true
 		if sinner_needed==2:
 			baby.sinner=false
 	if gui.tutorial_active:

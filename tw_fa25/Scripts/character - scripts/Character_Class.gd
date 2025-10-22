@@ -272,7 +272,7 @@ func idle(delta: float):
 			assign_job(job)
 			return
 	if social:
-		if randf() < 0.001:
+		if randf() < 0.0001:
 			action_state = Action_State.TALKING
 			voicebox.request_play("talk")
 			velocity = Vector2.ZERO

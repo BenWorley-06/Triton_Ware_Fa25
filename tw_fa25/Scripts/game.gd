@@ -4,6 +4,7 @@ extends Node2D
 @export var overlay: ColorRect
 @onready var gui: CanvasLayer = $GUI
 
+@onready var audio_manager: Node = $Managers/AudioManager
 @onready var building_manager: BuildingManager = $Managers/BuildingManager
 @onready var population_manager: PopulationManager = $Managers/PopulationManager
 @onready var resource_manager: ResourceManager = $Managers/ResourceManager
@@ -24,6 +25,7 @@ var morning_color: Color = Color(0.2, 0.3, 0.5, 0.5)
 var afternoon_color: Color = Color(1.0, 0.6, 0.2, 0.3)
 var evening_color: Color = Color(0.1, 0.05, 0.2, 0.6)
 var night_color: Color = Color(0, 0, 0.1, 0.9)
+var day_7_color: Color =  Color(0.1, 0.0, 0.0, 0.9)
 
 # ---- Time Management ----
 var day_timer: float = 0.0
@@ -32,10 +34,22 @@ var paused: bool = false
 var end_day_cooldown: bool = false
 @export var faith_win: int = 200
 var has_won=false
+var boost_fires: bool = false
+var fires: int = 0
+var max_fires: int = 50
 
 var passive_faith_loss = 5
 func _ready():
 	print(resource_manager.bread)
+	for node in get_tree().get_nodes_in_group("pausable"):
+			node.set_physics_process(false)
+			node.set_process(false)
+	paused = true
+	await get_tree().create_timer(3.0).timeout
+	for node in get_tree().get_nodes_in_group("pausable"):
+		node.set_physics_process(true)
+		node.set_process(true)
+	paused = false
 
 # ---- Process ----
 func _process(delta: float) -> void:
@@ -66,18 +80,22 @@ func faith_loss():
 		node.set_process(false)
 	loss_layer.visible = true
 	paused = true
+	audio_manager.play_win(false)
 	return
 
 func win():
 	has_won=true
 	win_layer.activate()
+	audio_manager.play_win(true)
 
 func manage_day_tint():
 	var t = fmod(day_timer / stats.time_in_day, 1.0)
 	var c1: Color
 	var c2: Color
 	var local_t: float
-
+	if day==6:
+		overlay.color=day_7_color
+		return
 	if t < 0.333:
 		c1 = morning_color
 		c2 = afternoon_color
@@ -122,7 +140,7 @@ func end_day() -> void:
 		end_day_layer.end_day(bread_loss,faith_gain)
 		paused = true
 		if day>=7 and not has_won:
-			if stats.faith>=faith_win:
+			if resource_manager.faith>=faith_win:
 				win()
 			else:
 				faith_loss()

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c654iy2hh5it7"
+path="res://.godot/imported/low-ambient-01-61547 (mp3cut.net).mp3-bf122b2d7893af5bccb050057de50c21.mp3str"
+
+[deps]
+
+source_file="res://Sounds/low-ambient-01-61547 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/low-ambient-01-61547 (mp3cut.net).mp3-bf122b2d7893af5bccb050057de50c21.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

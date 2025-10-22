@@ -4,7 +4,7 @@ extends Sprite2D
 @export var speed: float = 200
 @export var max_speed: float = 1600
 @export var acceleration: float = 500 
-@export var wait: float = 0
+@export var wait: float = 3
 
 var timer: float = 0
 

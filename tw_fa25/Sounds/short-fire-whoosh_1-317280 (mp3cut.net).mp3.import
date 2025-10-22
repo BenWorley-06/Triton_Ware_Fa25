@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dwd2ai8pey57e"
+path="res://.godot/imported/short-fire-whoosh_1-317280 (mp3cut.net).mp3-120f3a3e745b15ffb3a7765f4a6aefbf.mp3str"
+
+[deps]
+
+source_file="res://Sounds/short-fire-whoosh_1-317280 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/short-fire-whoosh_1-317280 (mp3cut.net).mp3-120f3a3e745b15ffb3a7765f4a6aefbf.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

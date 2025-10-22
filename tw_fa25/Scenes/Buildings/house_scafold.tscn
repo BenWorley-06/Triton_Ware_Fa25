@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2bacbsv6vksv"]
+[gd_scene load_steps=6 format=3 uid="uid://b2bacbsv6vksv"]
 
 [ext_resource type="Script" uid="uid://batttehfy8jdj" path="res://Scripts/building scripts/house_scafold.gd" id="1_ti147"]
 [ext_resource type="Texture2D" uid="uid://c1edmgyw11m3c" path="res://Art/custom assets/house/building_house.png" id="2_sljcn"]
 [ext_resource type="Texture2D" uid="uid://eg41w38eqey1" path="res://Art/Temporary/white_circle.png" id="3_wygym"]
+[ext_resource type="AudioStream" uid="uid://bmyw0p2uphipr" path="res://Sounds/put_item-83043 (mp3cut.net).mp3" id="4_hh3n2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_op5p7"]
 
@@ -28,3 +29,7 @@ z_as_relative = false
 position = Vector2(1.53117, 21.4364)
 scale = Vector2(0.126643, 0.0976164)
 texture = ExtResource("3_wygym")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_hh3n2")
+autoplay = true

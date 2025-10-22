@@ -1,6 +1,7 @@
 extends Area2D
 class_name LavaSource
 
+@onready var game = get_node("/root/Game")
 @export var spread_time_og: float = 8
 @export var fire_scene: PackedScene
 @onready var space = get_world_2d().direct_space_state
@@ -14,6 +15,8 @@ func _process(delta: float) -> void:
 	timer+=delta
 	if timer>=spread_time:
 		spread_time=spread_time_og*randf_range(0.8,5)
+		if game.boost_fires or game.day==6:
+			spread_time=spread_time/5
 		timer=0
 		spawn_fire_nearby()
 

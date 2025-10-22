@@ -13,7 +13,6 @@
 [ext_resource type="Texture2D" uid="uid://bp8m2ut1nmjbj" path="res://Art/custom assets/characters/walking/front/blackwalk_front1.png" id="11_6uc6c"]
 [ext_resource type="Script" uid="uid://cvoucn6vtfcil" path="res://Scripts/sfx.gd" id="11_uo7r7"]
 [ext_resource type="Texture2D" uid="uid://cl5ei4erd0d80" path="res://Art/custom assets/characters/building/Front/blackbuild_front1.png" id="11_yd2k7"]
-[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="12_0ipyx"]
 [ext_resource type="Texture2D" uid="uid://bf1bhorlrb8m3" path="res://Art/custom assets/characters/building/Front/blackbuild_front2.png" id="12_l4af4"]
 [ext_resource type="Texture2D" uid="uid://cs0ys5qrivoti" path="res://Art/custom assets/characters/walking/front/blackwalk_front2.png" id="12_wx8d1"]
 [ext_resource type="Texture2D" uid="uid://ccgrp14cw5n8c" path="res://Art/custom assets/characters/harvesting/Front/blackharvest_front1.png" id="13_cwmvx"]
@@ -52,6 +51,7 @@
 [ext_resource type="Texture2D" uid="uid://0508g0j4dm1d" path="res://Art/custom assets/characters/streaking/Front/whitestreak_front1.png" id="44_x6yew"]
 [ext_resource type="Texture2D" uid="uid://cpoinx8nnwggw" path="res://Art/custom assets/characters/streaking/Front/whitestreak_front2.png" id="45_n5wpi"]
 [ext_resource type="Texture2D" uid="uid://be8yrykh1gh6n" path="res://Art/custom assets/characters/streaking/Front/whitestreak_front3.png" id="46_lyot5"]
+[ext_resource type="FontFile" uid="uid://ospyqc05yd70" path="res://Art/fonts/UnZialish.ttf" id="52_x6yew"]
 
 [sub_resource type="Resource" id="Resource_px5sl"]
 script = ExtResource("2_i1l8f")
@@ -273,7 +273,7 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_2mse5"]
 
 [sub_resource type="Theme" id="Theme_l1rcp"]
-default_font = ExtResource("12_0ipyx")
+default_font = ExtResource("52_x6yew")
 
 [node name="Character" type="CharacterBody2D" groups=["character", "pausable"]]
 scale = Vector2(0.443294, 0.366278)

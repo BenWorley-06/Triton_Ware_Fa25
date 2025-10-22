@@ -1,7 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4lo5nuaxreh8"]
+[gd_scene load_steps=8 format=3 uid="uid://c4lo5nuaxreh8"]
 
 [ext_resource type="Script" uid="uid://cd4ad2a7nsn8b" path="res://end_day.gd" id="1_16otp"]
-[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="2_16otp"]
+[ext_resource type="FontFile" uid="uid://ospyqc05yd70" path="res://Art/fonts/UnZialish.ttf" id="2_c2gyb"]
+[ext_resource type="Texture2D" uid="uid://u5kc7c4cqtk0" path="res://Art/Temporary/continue pixel.png" id="3_1cowd"]
+[ext_resource type="Texture2D" uid="uid://3s57ho7oy8o1" path="res://Art/Temporary/continue pixel highlight.png" id="4_c2gyb"]
 
 [sub_resource type="Gradient" id="Gradient_ca7k3"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
@@ -11,7 +13,7 @@ metadata/_snap_enabled = true
 gradient = SubResource("Gradient_ca7k3")
 
 [sub_resource type="Theme" id="Theme_jfiae"]
-default_font = ExtResource("2_16otp")
+default_font = ExtResource("2_c2gyb")
 
 [node name="end_day" type="CanvasLayer"]
 script = ExtResource("1_16otp")
@@ -28,63 +30,73 @@ size_flags_vertical = 4
 texture = SubResource("GradientTexture1D_16otp")
 
 [node name="MarginContainer" type="MarginContainer" parent="TextureRect"]
+texture_filter = 1
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -82.9999
-offset_top = -102.0
-offset_right = 16.0001
-offset_bottom = 2.00003
+offset_left = -261.0
+offset_top = -131.0
+offset_right = 70.0
+offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(2.18626, 2.18626)
+scale = Vector2(1.5, 1.5)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="Button" type="Button" parent="TextureRect/MarginContainer/VBoxContainer"]
+[node name="Button" type="TextureButton" parent="TextureRect/MarginContainer/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = SubResource("Theme_jfiae")
-text = "Start Game"
+texture_normal = ExtResource("3_1cowd")
+texture_hover = ExtResource("4_c2gyb")
 
 [node name="Day" type="Label" parent="TextureRect/MarginContainer/VBoxContainer"]
+modulate = Color(0.54902, 0.478431, 0.258824, 1)
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_jfiae")
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="Faith" type="Label" parent="TextureRect/MarginContainer/VBoxContainer"]
+modulate = Color(0.54902, 0.478431, 0.258824, 1)
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_jfiae")
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="Bread" type="Label" parent="TextureRect/MarginContainer/VBoxContainer"]
+modulate = Color(0.54902, 0.478431, 0.258824, 1)
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_jfiae")
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [node name="Sinner" type="Label" parent="TextureRect/MarginContainer/VBoxContainer"]
+modulate = Color(0.54902, 0.478431, 0.258824, 1)
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme = SubResource("Theme_jfiae")
 horizontal_alignment = 1
 vertical_alignment = 1
+uppercase = true
 
 [connection signal="pressed" from="TextureRect/MarginContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=32 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character/character.tscn" id="1_ebmjs"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://xqjja68kex4r" path="res://Scripts/debugger.gd" id="14_1phco"]
 [ext_resource type="PackedScene" uid="uid://5dkarjg88tms" path="res://loss_layer.tscn" id="16_nnt18"]
 [ext_resource type="PackedScene" uid="uid://c8cksin46oc4k" path="res://gui.tscn" id="17_ewbju"]
+[ext_resource type="AudioStream" uid="uid://c654iy2hh5it7" path="res://Sounds/low-ambient-01-61547 (mp3cut.net).mp3" id="17_vm72l"]
 [ext_resource type="PackedScene" uid="uid://btlavy2wbou3w" path="res://win_layer.tscn" id="21_exi56"]
 [ext_resource type="Texture2D" uid="uid://dtp744fllsclw" path="res://Art/custom assets/Backdrop.png" id="23_mg4q0"]
 
@@ -96,7 +97,7 @@ position = Vector2(399, 376)
 fed = true
 
 [node name="Character3" parent="." instance=ExtResource("1_ebmjs")]
-position = Vector2(435, 179)
+position = Vector2(363, 456)
 fed = true
 
 [node name="Character8" parent="." instance=ExtResource("1_ebmjs")]
@@ -147,6 +148,13 @@ autoplay = true
 
 [node name="death" type="AudioStreamPlayer" parent="Managers/AudioManager"]
 
+[node name="day 7 amb" type="AudioStreamPlayer" parent="Managers/AudioManager"]
+stream = ExtResource("17_vm72l")
+volume_db = 10.306
+
+[node name="win_lose" type="AudioStreamPlayer" parent="Managers/AudioManager"]
+volume_db = 8.667
+
 [node name="Day Tint" type="ColorRect" parent="."]
 modulate = Color(1, 1, 1, 0.560784)
 z_index = 100
@@ -184,8 +192,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_right = 1152.0
-offset_bottom = 628.0
+offset_left = -23.0
+offset_top = 2.0
+offset_right = 1129.0
+offset_bottom = 630.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(1.03649, 1.03649)
 texture = ExtResource("23_mg4q0")

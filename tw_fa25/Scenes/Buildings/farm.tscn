@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bj0kuytpqv41y"]
+[gd_scene load_steps=19 format=3 uid="uid://bj0kuytpqv41y"]
 
 [ext_resource type="Script" uid="uid://bl7e7r1pdvlky" path="res://Scripts/building scripts/farm.gd" id="1_bw225"]
 [ext_resource type="Texture2D" uid="uid://ccu5xpyd8ty6h" path="res://Art/Temporary/farm_temp.png" id="1_ju177"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bek4o83l0a7qa" path="res://Art/custom assets/farm/wheat_4.png" id="7_spi0u"]
 [ext_resource type="Texture2D" uid="uid://bch1hxfucjr1c" path="res://Art/custom assets/farm/wheat_5.png" id="8_7yhpl"]
 [ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="9_imdyn"]
+[ext_resource type="AudioStream" uid="uid://bmyw0p2uphipr" path="res://Sounds/put_item-83043 (mp3cut.net).mp3" id="10_ixioq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tww1o"]
 
@@ -98,6 +99,7 @@ scale = Vector2(7.873, 7.873)
 shape = SubResource("RectangleShape2D_tww1o")
 
 [node name="bed" type="AnimatedSprite2D" parent="."]
+z_as_relative = false
 position = Vector2(0, 29.1005)
 scale = Vector2(4.36699, 2.68078)
 sprite_frames = SubResource("SpriteFrames_dmuu5")
@@ -108,7 +110,7 @@ position = Vector2(0, -3.63756)
 scale = Vector2(1.66062, 1.66062)
 
 [node name="crop7" type="AnimatedSprite2D" parent="crops"]
-z_index = 10
+z_as_relative = false
 texture_filter = 1
 position = Vector2(-33, -34.8426)
 scale = Vector2(0.858396, 0.858396)
@@ -116,14 +118,14 @@ sprite_frames = SubResource("SpriteFrames_gtt4x")
 frame_progress = 0.710248
 
 [node name="crop8" type="AnimatedSprite2D" parent="crops"]
-z_index = 10
+z_as_relative = false
 texture_filter = 1
 position = Vector2(-7, -34.8426)
 scale = Vector2(0.858396, 0.858396)
 sprite_frames = SubResource("SpriteFrames_gtt4x")
 
 [node name="crop9" type="AnimatedSprite2D" parent="crops"]
-z_index = 10
+z_as_relative = false
 texture_filter = 1
 position = Vector2(19, -34.8426)
 scale = Vector2(0.858396, 0.858396)
@@ -131,7 +133,7 @@ sprite_frames = SubResource("SpriteFrames_gtt4x")
 frame_progress = 0.324006
 
 [node name="crop4" type="AnimatedSprite2D" parent="crops"]
-z_index = 10
+z_as_relative = false
 texture_filter = 1
 position = Vector2(-19, -17.8426)
 scale = Vector2(0.858396, 0.858396)
@@ -139,7 +141,7 @@ sprite_frames = SubResource("SpriteFrames_gtt4x")
 frame_progress = 0.710248
 
 [node name="crop5" type="AnimatedSprite2D" parent="crops"]
-z_index = 10
+z_as_relative = false
 texture_filter = 1
 position = Vector2(7, -17.8426)
 scale = Vector2(0.858396, 0.858396)
@@ -147,7 +149,7 @@ sprite_frames = SubResource("SpriteFrames_gtt4x")
 frame_progress = 0.324006
 
 [node name="crop6" type="AnimatedSprite2D" parent="crops"]
-z_index = 10
+z_as_relative = false
 texture_filter = 1
 position = Vector2(33, -17.8426)
 scale = Vector2(0.858396, 0.858396)
@@ -155,7 +157,7 @@ sprite_frames = SubResource("SpriteFrames_gtt4x")
 frame_progress = 0.324006
 
 [node name="crop" type="AnimatedSprite2D" parent="crops"]
-z_index = 10
+z_as_relative = false
 texture_filter = 1
 position = Vector2(-26, 1.15741)
 scale = Vector2(0.858396, 0.858396)
@@ -164,7 +166,7 @@ frame = 3
 frame_progress = 0.596277
 
 [node name="crop2" type="AnimatedSprite2D" parent="crops"]
-z_index = 10
+z_as_relative = false
 texture_filter = 1
 position = Vector2(0, 1.15741)
 scale = Vector2(0.858396, 0.858396)
@@ -172,7 +174,7 @@ sprite_frames = SubResource("SpriteFrames_gtt4x")
 frame_progress = 0.324006
 
 [node name="crop3" type="AnimatedSprite2D" parent="crops"]
-z_index = 10
+z_as_relative = false
 texture_filter = 1
 position = Vector2(26, 1.15741)
 scale = Vector2(0.858396, 0.858396)
@@ -186,3 +188,7 @@ z_as_relative = false
 position = Vector2(-1.81878, 32.738)
 scale = Vector2(0.153971, 0.116859)
 texture = ExtResource("9_imdyn")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_ixioq")
+autoplay = true

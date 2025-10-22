@@ -16,7 +16,7 @@ var jobs: Array = []            # all open jobs
 var prophet_spawned=false
 
 var sinner_count: int = 0
-@export var people_before_sinner_correction: int = 15
+@export var people_before_sinner_correction: int = 10
 
 var breed_timer: float = 0
 var breed_cooldown: float = 10

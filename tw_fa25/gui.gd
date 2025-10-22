@@ -21,6 +21,7 @@ extends CanvasLayer
 @onready var population: Label = $Indicators/HBoxContainer/Population
 @onready var bread: Label = $Indicators/HBoxContainer/Bread
 @onready var faith_bar: TextureProgressBar = $faith_bar
+@onready var hotkey_text: Label = $Hotkey_text
 
 @export var t_data: TutorialData
 @onready var tutorial_container: MarginContainer = $tutorial_container
@@ -28,6 +29,7 @@ extends CanvasLayer
 @onready var t_dir: Label = $tutorial_container/VBoxContainer/t_dir
 @onready var t_prog: Label = $tutorial_container/VBoxContainer/t_prog
 @onready var skip_tutorial: Button = $skip_tutorial
+@onready var tutorial_sfx: AudioStreamPlayer = $"tutorial sfx"
 
 @export var button_offset: float = 100.0
 @export var tween_time: float = 0.3
@@ -64,6 +66,12 @@ var tutorial_text: Dictionary = {
 	}
 }
 
+var p_pressed = false
+var b_pressed = false
+var f_pressed = false
+var d_pressed = false
+var m_pressed = false
+
 func _ready() -> void:
 	if tutorial_active:
 		set_tutorial_state(tutorial_state)
@@ -72,6 +80,12 @@ func _ready() -> void:
 	faith_bar.max_value=game.faith_win
 	seconds = game.day_timer;
 	old_day = 0;
+	var white_flash_base_y = white_flash.position.y
+	var bob_tween = create_tween()
+	bob_tween.set_loops() # infinite loop
+	bob_tween.tween_property(white_flash, "position:y", white_flash_base_y - 1, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	bob_tween.tween_property(white_flash, "position:y", white_flash_base_y + 1, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	await get_tree().create_timer(3.0).timeout
 	handle_flash()
 	
 func handle_flash():
@@ -88,6 +102,19 @@ func _process(delta: float) -> void:
 	check_hover_area()
 	seconds = seconds + delta
 	$Hand.rotation = -(fmod(seconds, 120.0) * TAU / 120.0) + deg_to_rad(-90)
+	check_press()
+	
+func check_press():
+	if Input.is_action_just_pressed("p"):
+		p_pressed=true
+	elif Input.is_action_just_pressed("b"):
+		b_pressed=true
+	elif Input.is_action_just_pressed("f"):
+		f_pressed=true
+	elif Input.is_action_just_pressed("d"):
+		d_pressed=true
+	elif Input.is_action_just_pressed("m"):
+		m_pressed=true
 
 func _on_pickup_button_pressed() -> void:
 	ability_manager.signal_change("pickup")
@@ -107,8 +134,24 @@ func _on_marker_button_pressed() -> void:
 	
 func update_display():
 	update_stats()
+	update_hotkey_text()
 	
-
+func update_hotkey_text():
+	var text=""
+	if not p_pressed:
+		text=text+"P-Pickup "
+	if not b_pressed:
+		text=text+"B-House "
+	if not f_pressed:
+		text=text+"F-Farm "
+	if not d_pressed:
+		text=text+"D-Destroy "
+	if not m_pressed:
+		text=text+"M-Maker"
+	if text!="":
+		hotkey_text.text="Hotkeys: "+text
+	else:
+		hotkey_text.text=""
 func update_stats():
 	faith_bar.value = resource_manager.faith
 	bread.text="Bread: %d"%resource_manager.bread
@@ -117,6 +160,8 @@ func update_stats():
 		day_counter.frame=game.day
 	
 func set_tutorial_state(state: String):
+	if state!="house":
+		tutorial_sfx.play()
 	if state=="over":
 		tutorial_active=false
 		tutorial_container.visible=false
@@ -132,6 +177,7 @@ func set_tutorial_state(state: String):
 		person.global_position=prophet_spawn_location.global_position
 		population_manager.register_character(person)
 		person.change_name("Sinner")
+		person.time_to_sin=15
 
 	tutorial_state=state
 	t_ob.text=tutorial_text["objective"][tutorial_state]
@@ -152,10 +198,12 @@ func tutorial_process():
 			t_prog.text="%d/%d"%[t_data.farms,t_data.farms_needed]
 			if t_data.farms>=t_data.farms_needed:
 				set_tutorial_state("fire")
+				game.boost_fires=true
 		"fire":
 			t_prog.text="%d/%d"%[t_data.fires,t_data.fires_needed]
 			if t_data.fires>=t_data.fires_needed:
 				set_tutorial_state("mark")
+				game.boost_fires=false
 		"mark":
 			t_prog.text=""
 			if ability_manager.used_marker:

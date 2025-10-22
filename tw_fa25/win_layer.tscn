@@ -1,12 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://btlavy2wbou3w"]
 
 [ext_resource type="Script" uid="uid://cpg1wgfh2gr3u" path="res://win_layer.gd" id="1_nfk5u"]
-[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="2_nfk5u"]
 [ext_resource type="Texture2D" uid="uid://cpj2j38sr16ue" path="res://Art/Temporary/clouds.png" id="2_v2tm7"]
 [ext_resource type="Texture2D" uid="uid://dwuu0gbt446or" path="res://you win pixel.png" id="3_v2tm7"]
+[ext_resource type="FontFile" uid="uid://ospyqc05yd70" path="res://Art/fonts/UnZialish.ttf" id="4_v2tm7"]
 
 [sub_resource type="Theme" id="Theme_v2tm7"]
-default_font = ExtResource("2_nfk5u")
+default_font = ExtResource("4_v2tm7")
+default_font_size = 30
 
 [node name="win_layer" type="CanvasLayer"]
 script = ExtResource("1_nfk5u")
@@ -43,11 +44,11 @@ grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
-offset_left = 412.0
-offset_top = 383.0
-offset_right = 544.0
-offset_bottom = 455.0
-scale = Vector2(2.78682, 2.78682)
+offset_left = 428.0
+offset_top = 363.0
+offset_right = 687.0
+offset_bottom = 449.0
+scale = Vector2(1.41618, 1.41618)
 
 [node name="return" type="Button" parent="Control/VBoxContainer"]
 modulate = Color(0.254902, 0.239216, 0.109804, 1)

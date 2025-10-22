@@ -28,5 +28,5 @@ func _on_play_again_pressed() -> void:
 
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/main.tscn")
+	get_tree().change_scene_to_file("res://Scenes/ui/main.tscn")
 	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bt7pirj3f0vj"]
+[gd_scene load_steps=16 format=3 uid="uid://bt7pirj3f0vj"]
 
 [ext_resource type="Script" uid="uid://b0f754cyfhony" path="res://Scripts/main.gd" id="1_wa68x"]
 [ext_resource type="Script" uid="uid://dti8caylbdygq" path="res://splash_texts.gd" id="2_1d001"]
@@ -11,6 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://doljadxsrfilx" path="res://Sounds/epic-gregorian-choir-cinematic-soundtrack-355524.mp3" id="6_l0mmx"]
 [ext_resource type="Texture2D" uid="uid://dov1fum23u3nb" path="res://Art/Temporary/quit pixel highlight.png" id="6_v6mxk"]
 [ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="7_tvni8"]
+[ext_resource type="FontFile" uid="uid://ospyqc05yd70" path="res://Art/fonts/UnZialish.ttf" id="8_v6mxk"]
 
 [sub_resource type="Resource" id="Resource_8gbba"]
 script = ExtResource("2_1d001")
@@ -20,7 +21,7 @@ metadata/_custom_type_script = "uid://dti8caylbdygq"
 default_font = ExtResource("3_x4sv3")
 
 [sub_resource type="Theme" id="Theme_jjvhh"]
-default_font = ExtResource("3_x4sv3")
+default_font = ExtResource("8_v6mxk")
 default_font_size = 40
 
 [node name="Main" type="Node2D"]
@@ -28,10 +29,10 @@ script = ExtResource("1_wa68x")
 splash_data = SubResource("Resource_8gbba")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-offset_left = 407.0
+offset_left = 456.0
 offset_top = 304.0
-offset_right = 518.0
-offset_bottom = 376.0
+offset_right = 567.0
+offset_bottom = 380.0
 scale = Vector2(2.94846, 2.94846)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
@@ -63,11 +64,11 @@ uppercase = true
 [node name="splash" type="Label" parent="."]
 modulate = Color(0.372549, 0.321569, 0.215686, 1)
 texture_filter = 1
-offset_left = 611.0
-offset_top = 56.0
-offset_right = 651.0
-offset_bottom = 116.0
-rotation = 0.0650363
+offset_left = 371.0
+offset_top = 21.0
+offset_right = 411.0
+offset_bottom = 81.0
+rotation = 0.0280882
 scale = Vector2(9.68407, 9.68407)
 theme = SubResource("Theme_jjvhh")
 

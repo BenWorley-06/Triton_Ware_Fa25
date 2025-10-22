@@ -1,11 +1,10 @@
-[gd_scene load_steps=33 format=3 uid="uid://c8cksin46oc4k"]
+[gd_scene load_steps=39 format=3 uid="uid://c8cksin46oc4k"]
 
 [ext_resource type="Script" uid="uid://cku0shi3kyyih" path="res://gui.gd" id="1_q8o8l"]
 [ext_resource type="Script" uid="uid://3fnufw16oej8" path="res://tutorial_data.gd" id="2_cor1f"]
 [ext_resource type="PackedScene" uid="uid://ch01vo5dn6tuw" path="res://prophet_spawner.tscn" id="2_jf511"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character/character.tscn" id="3_0wv8u"]
 [ext_resource type="Texture2D" uid="uid://dopbri2fmwvjw" path="res://Art/Temporary/white_square.png" id="3_q8o8l"]
-[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="3_u77ya"]
 [ext_resource type="Texture2D" uid="uid://y1wo1s8e7xcx" path="res://Art/Temporary/arrow.png" id="5_u77ya"]
 [ext_resource type="Texture2D" uid="uid://g8u3wk7qh6sw" path="res://Art/Temporary/progress_bar_under.png" id="6_fxds3"]
 [ext_resource type="Texture2D" uid="uid://x4i601tpopf0" path="res://Art/Temporary/progress_bar_over.png" id="7_s1fa6"]
@@ -24,10 +23,20 @@
 [ext_resource type="Texture2D" uid="uid://dt67x6i06qg5x" path="res://Art/custom assets/icons/Day7.PNG" id="17_737bf"]
 [ext_resource type="Texture2D" uid="uid://w2pu0sex6aq1" path="res://faith_text pixel.png" id="17_s1fa6"]
 [ext_resource type="Texture2D" uid="uid://b6tha44a4v5d4" path="res://Art/Temporary/day pixel.png" id="18_xt5h2"]
+[ext_resource type="FontFile" uid="uid://ospyqc05yd70" path="res://Art/fonts/UnZialish.ttf" id="22_pmojh"]
+[ext_resource type="Texture2D" uid="uid://b5i787qv8qlrk" path="res://Art/Temporary/day 1 pixel.png" id="23_gk0bp"]
+[ext_resource type="Texture2D" uid="uid://340ldkqr2don" path="res://Art/Temporary/start directions pixel.png" id="24_ecd1l"]
+[ext_resource type="Texture2D" uid="uid://bgc45if7q6vb2" path="res://Art/Temporary/by day 7 pixel.png" id="25_3xomt"]
+[ext_resource type="AudioStream" uid="uid://cyw4xxhukt4t" path="res://Sounds/temporary/ding-101377.mp3" id="25_gbpkt"]
+[ext_resource type="Texture2D" uid="uid://bcuhqoi6s0k3b" path="res://Art/Temporary/or reap as you sow pizel.png" id="26_3xomt"]
 
 [sub_resource type="Resource" id="Resource_u77ya"]
 script = ExtResource("2_cor1f")
 metadata/_custom_type_script = "uid://3fnufw16oej8"
+
+[sub_resource type="Theme" id="Theme_3xomt"]
+default_font = ExtResource("22_pmojh")
+default_font_size = 20
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q8o8l"]
 size = Vector2(20, 62.2835)
@@ -35,7 +44,7 @@ size = Vector2(20, 62.2835)
 [sub_resource type="Theme" id="Theme_nf4fc"]
 
 [sub_resource type="Theme" id="Theme_q8o8l"]
-default_font = ExtResource("3_u77ya")
+default_font = ExtResource("22_pmojh")
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ni0mf"]
 animations = [{
@@ -67,19 +76,29 @@ animations = [{
 }]
 
 [sub_resource type="Theme" id="Theme_u77ya"]
-default_font = ExtResource("3_u77ya")
+default_font = ExtResource("22_pmojh")
 
 [sub_resource type="Theme" id="Theme_jf511"]
-default_font = ExtResource("3_u77ya")
+default_font = ExtResource("22_pmojh")
 
 [sub_resource type="Theme" id="Theme_0wv8u"]
-default_font = ExtResource("3_u77ya")
+default_font = ExtResource("22_pmojh")
 
 [node name="GUI" type="CanvasLayer"]
 script = ExtResource("1_q8o8l")
 prophet_spawner_scene = ExtResource("2_jf511")
 character_scene = ExtResource("3_0wv8u")
 t_data = SubResource("Resource_u77ya")
+
+[node name="Hotkey_text" type="Label" parent="."]
+modulate = Color(0.196196, 0.15113, 0.0686325, 1)
+texture_filter = 1
+offset_left = 110.0
+offset_top = 57.0
+offset_right = 239.0
+offset_bottom = 90.0
+theme = SubResource("Theme_3xomt")
+text = "hotkeys"
 
 [node name="Control" type="Control" parent="."]
 clip_contents = true
@@ -129,6 +148,7 @@ offset_right = 514.0
 offset_bottom = 605.0
 scale = Vector2(3.43846, 3.43846)
 theme = SubResource("Theme_nf4fc")
+max_value = 200.0
 value = 50.0
 nine_patch_stretch = true
 texture_under = ExtResource("6_fxds3")
@@ -223,10 +243,10 @@ texture = ExtResource("18_xt5h2")
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 34.0
-offset_top = -195.0
-offset_right = 134.0
-offset_bottom = -75.0
+offset_left = 17.0
+offset_top = -196.0
+offset_right = 117.0
+offset_bottom = -76.0
 grow_vertical = 0
 scale = Vector2(1.37391, 1.37391)
 
@@ -267,16 +287,16 @@ vertical_alignment = 1
 [node name="Sprite2D" type="Sprite2D" parent="tutorial_container"]
 z_index = 100
 z_as_relative = false
-position = Vector2(44.3989, 55.3167)
-scale = Vector2(0.158412, 0.201918)
+position = Vector2(64.2265, 56.9716)
+scale = Vector2(0.227926, 0.199132)
 texture = ExtResource("10_axmix")
 
 [node name="Sprite2D2" type="Sprite2D" parent="tutorial_container"]
 modulate = Color(0.898039, 0.443137, 0.4, 1)
 z_index = 99
 z_as_relative = false
-position = Vector2(44.3989, 55.3167)
-scale = Vector2(0.180884, 0.212205)
+position = Vector2(64.2265, 56.9716)
+scale = Vector2(0.260259, 0.209277)
 texture = ExtResource("10_axmix")
 
 [node name="tutorial_hover" type="Control" parent="."]
@@ -409,12 +429,93 @@ text = "Skip"
 
 [node name="white flash" type="TextureRect" parent="."]
 z_index = 1000
+texture_filter = 1
 offset_left = -162.0
 offset_top = -224.0
 offset_right = 862.0
 offset_bottom = 800.0
 scale = Vector2(1.51209, 1.08904)
 texture = ExtResource("3_q8o8l")
+
+[node name="Sprite2D9" type="Sprite2D" parent="white flash"]
+modulate = Color(1, 1, 1, 0.403922)
+texture_filter = 1
+position = Vector2(860.399, 685.925)
+scale = Vector2(11.3242, 11.3242)
+texture = ExtResource("8_67jta")
+
+[node name="Sprite2D10" type="Sprite2D" parent="white flash"]
+modulate = Color(1, 1, 1, 0.403922)
+texture_filter = 1
+position = Vector2(129.622, 205.686)
+scale = Vector2(11.3242, 11.3242)
+texture = ExtResource("8_67jta")
+
+[node name="Sprite2D11" type="Sprite2D" parent="white flash"]
+modulate = Color(1, 1, 1, 0.403922)
+texture_filter = 1
+position = Vector2(31.0828, 773.158)
+scale = Vector2(11.3242, 11.3242)
+texture = ExtResource("8_67jta")
+
+[node name="Sprite2D12" type="Sprite2D" parent="white flash"]
+modulate = Color(1, 1, 1, 0.403922)
+texture_filter = 1
+position = Vector2(1023.75, 234.151)
+scale = Vector2(11.3242, 11.3242)
+texture = ExtResource("8_67jta")
+
+[node name="Sprite2D5" type="Sprite2D" parent="white flash"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(495, 302.742)
+scale = Vector2(1.39684, 1.39684)
+texture = ExtResource("23_gk0bp")
+
+[node name="Sprite2D6" type="Sprite2D" parent="white flash"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(495, 444.403)
+scale = Vector2(1.04763, 1.04763)
+texture = ExtResource("24_ecd1l")
+
+[node name="Sprite2D7" type="Sprite2D" parent="white flash"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(495, 523.372)
+scale = Vector2(1.04763, 1.04763)
+texture = ExtResource("25_3xomt")
+
+[node name="Sprite2D8" type="Sprite2D" parent="white flash"]
+modulate = Color(0, 0, 0, 1)
+texture_filter = 1
+position = Vector2(495, 704.931)
+scale = Vector2(1.04763, 1.04763)
+texture = ExtResource("26_3xomt")
+
+[node name="Sprite2D" type="Sprite2D" parent="white flash"]
+texture_filter = 1
+position = Vector2(494.018, 303.019)
+scale = Vector2(1.39684, 1.39684)
+texture = ExtResource("23_gk0bp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="white flash"]
+texture_filter = 1
+position = Vector2(494.018, 444.68)
+scale = Vector2(1.04763, 1.04763)
+texture = ExtResource("24_ecd1l")
+
+[node name="Sprite2D3" type="Sprite2D" parent="white flash"]
+texture_filter = 1
+position = Vector2(494.018, 523.648)
+scale = Vector2(1.04763, 1.04763)
+texture = ExtResource("25_3xomt")
+
+[node name="Sprite2D4" type="Sprite2D" parent="white flash"]
+texture_filter = 1
+position = Vector2(494.018, 705.208)
+scale = Vector2(1.04763, 1.04763)
+texture = ExtResource("26_3xomt")
 
 [node name="Clouds" type="Node2D" parent="."]
 
@@ -601,6 +702,9 @@ position = Vector2(1277.51, 454.027)
 scale = Vector2(7.37667, 7.37667)
 texture = ExtResource("8_67jta")
 script = ExtResource("9_p8208")
+
+[node name="tutorial sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_gbpkt")
 
 [connection signal="mouse_entered" from="tutorial_hover" to="." method="_on_tutorial_hover_mouse_entered"]
 [connection signal="mouse_exited" from="tutorial_hover" to="." method="_on_tutorial_hover_mouse_exited"]

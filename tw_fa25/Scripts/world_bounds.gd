@@ -4,7 +4,7 @@ var bounds: Rect2
 
 func _ready() -> void:
 	await get_tree().process_frame # wait for all boundary nodes to enter scene
-	bounds = Rect2(Vector2.ZERO,Vector2(1000,640))
+	bounds = Rect2(Vector2(50,0),Vector2(950,640))
 	
 func get_world_bounds() -> Rect2:
 	var left = INF

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://cuptthik5fbdt"]
+[gd_scene load_steps=11 format=3 uid="uid://cuptthik5fbdt"]
 
 [ext_resource type="Script" uid="uid://uget1kn4puty" path="res://fire.gd" id="1_x0kke"]
 [ext_resource type="Texture2D" uid="uid://5m7rtjgwa6v5" path="res://Art/Temporary/fire pixel animated.png" id="2_x0kke"]
+[ext_resource type="AudioStream" uid="uid://dwd2ai8pey57e" path="res://Sounds/short-fire-whoosh_1-317280 (mp3cut.net).mp3" id="3_aux0q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ufe0f"]
 
@@ -68,6 +69,10 @@ collision_mask = 7
 texture_filter = 1
 scale = Vector2(11.384, 3.27902)
 shape = SubResource("CircleShape2D_x0kke")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_aux0q")
+autoplay = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="scare_area" to="." method="_on_scare_area_body_entered"]

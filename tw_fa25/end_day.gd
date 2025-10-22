@@ -1,5 +1,5 @@
 extends CanvasLayer
-@onready var button: Button = $TextureRect/MarginContainer/VBoxContainer/Button
+@onready var button: TextureButton = $TextureRect/MarginContainer/VBoxContainer/Button
 @onready var game = get_node("/root/Game")
 @onready var day: Label = $TextureRect/MarginContainer/VBoxContainer/Day
 @onready var faith: Label = $TextureRect/MarginContainer/VBoxContainer/Faith
@@ -32,7 +32,7 @@ func start_day():
 	texture_rect.modulate.a=1
 
 func update_labels(bread_loss:int,faith_gain:int):
-	day.text = "Day: %d" % game.day
+	day.text = "Day: %d" % (game.day)
 	faith.text = "Faith: +%d" % faith_gain
 	bread.text = "Bread: %d" % bread_loss
 	if population_manager.sinner_count>0:

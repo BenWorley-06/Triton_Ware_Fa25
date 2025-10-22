@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bmyw0p2uphipr"
+path="res://.godot/imported/put_item-83043 (mp3cut.net).mp3-ae5f93f9eedecf5afd45df0624bb13a4.mp3str"
+
+[deps]
+
+source_file="res://Sounds/put_item-83043 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/put_item-83043 (mp3cut.net).mp3-ae5f93f9eedecf5afd45df0624bb13a4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

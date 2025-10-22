@@ -1,6 +1,7 @@
 extends Area2D
 class_name Fire
 
+@onready var game = get_node("/root/Game")
 @export var lifetime: float = 5.0
 @export var spread_time: float = 3
 @onready var building_manager = get_node("/root/Game/Managers/BuildingManager")
@@ -13,6 +14,7 @@ var lower_bound=700
 var timer: float = 0
 var spread_timer: float = 0
 func _ready() -> void:
+	game.fires+=1
 	spread_time=spread_time*randf_range(0.5,2)
 	if global_position.x>right_bound or global_position.x<left_bound or global_position.y>lower_bound or global_position.y<up_bound:
 		queue_free()
@@ -20,12 +22,15 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	timer+=delta
 	spread_timer+=delta
+	if game.day==6:
+		spread_timer+=delta*0.8
 	if timer>=lifetime:
 		queue_free()
 
 	# occasionally spread
 	if spread_timer>=spread_time:
-		spread_fire()
+		if game.fires<game.max_fires:
+			spread_fire()
 		spread_timer=0
 		
 func spread_fire() -> void:
@@ -49,3 +54,6 @@ func _on_body_entered(body: Node2D) -> void:
 func _on_scare_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("character"):
 			body.initiate_scared(global_position)
+			
+func _exit_tree() -> void:
+	game.fires-=1
