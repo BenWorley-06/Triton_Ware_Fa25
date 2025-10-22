@@ -20,7 +20,7 @@ extends CanvasLayer
 @onready var indicators: Node2D = $Indicators
 @onready var population: Label = $Indicators/HBoxContainer/Population
 @onready var bread: Label = $Indicators/HBoxContainer/Bread
-@onready var faith_bar: TextureProgressBar = $Indicators/faith_bar
+@onready var faith_bar: TextureProgressBar = $faith_bar
 
 @export var t_data: TutorialData
 @onready var tutorial_container: MarginContainer = $tutorial_container
@@ -114,7 +114,7 @@ func update_stats():
 	bread.text="Bread: %d"%resource_manager.bread
 	population.text="Population: %d"%resource_manager.population
 	if game.day<=7:
-		day_counter.frame=game.day-1
+		day_counter.frame=game.day
 	
 func set_tutorial_state(state: String):
 	if state=="over":
@@ -203,13 +203,13 @@ func _on_tutorial_hover_mouse_exited() -> void:
 
 
 func _on_stats_hover_mouse_entered() -> void:
-	_fade(true, $Timer)
+	_fade(true, $Control/Timer)
 	_fade(true,indicators)
 	_fade(true, $Hand)
 
 
 func _on_stats_hover_mouse_exited() -> void:
-	_fade(false, $Timer)
+	_fade(false, $Control/Timer)
 	_fade(false,indicators)
 	_fade(false, $Hand)
 
@@ -217,3 +217,4 @@ func _on_stats_hover_mouse_exited() -> void:
 func _on_skip_tutorial_pressed() -> void:
 	if tutorial_active:
 		set_tutorial_state("over")
+	faith_bar.position.x = 175;
