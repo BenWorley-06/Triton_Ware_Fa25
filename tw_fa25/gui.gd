@@ -163,6 +163,7 @@ func tutorial_process():
 		"kill":
 			if has_killed:
 				set_tutorial_state("over")
+				faith_bar.position.x = 175;
 
 func check_hover_area():
 	var mouse_pos = game.get_global_mouse_position()
