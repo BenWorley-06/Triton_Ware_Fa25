@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://bni15epyyxgeu"]
 
 [ext_resource type="Script" uid="uid://4wbbpjwkaarw" path="res://lava.gd" id="1_3dejo"]
-[ext_resource type="Texture2D" uid="uid://clatjin4tut0v" path="res://Art/Temporary/lava temporary.png" id="1_gu245"]
 [ext_resource type="PackedScene" uid="uid://cuptthik5fbdt" path="res://Scenes/Hazards/fire.tscn" id="2_yrdue"]
+[ext_resource type="Texture2D" uid="uid://b4d3avabba6mx" path="res://Art/custom assets/Lavapit pixel.png" id="3_yrdue"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3dejo"]
 
@@ -14,20 +14,22 @@ script = ExtResource("1_3dejo")
 fire_scene = ExtResource("2_yrdue")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1.17227, 1.17227)
+scale = Vector2(5.94262, 3.31532)
 shape = SubResource("CircleShape2D_3dejo")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
 position = Vector2(-2.98023e-08, -1.19209e-07)
-scale = Vector2(0.0204497, 0.0204497)
-texture = ExtResource("1_gu245")
+scale = Vector2(1.30764, 1.36672)
+texture = ExtResource("3_yrdue")
 
 [node name="scare_area" type="Area2D" parent="."]
+scale = Vector2(1.30764, 1.36672)
 collision_layer = 7
 collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="scare_area"]
-scale = Vector2(2.54686, 2.15664)
+scale = Vector2(18.17, 7.68996)
 shape = SubResource("CircleShape2D_yrdue")
 
 [connection signal="body_entered" from="scare_area" to="." method="_on_scare_area_body_entered"]

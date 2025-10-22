@@ -120,7 +120,7 @@ func add_job(job):
 func request_job(person):
 	for job in jobs:
 		jobs.erase(job)
-		print("job recieved")
+		
 		return job
 	return {}
 
@@ -164,6 +164,7 @@ func request_stork():
 	stork.global_position.y = randi_range(200,400)
 	
 func new_day() -> Array:
+	print("Sinners %d"%sinner_count)
 	# Feeding
 	for person in people:
 		person.fed=false
@@ -176,6 +177,7 @@ func new_day() -> Array:
 		availiable_food-=1
 	#	Praying
 	var pray_amount = min(building_manager.get_total_housing_capacity(),people.size())
+	pray_amount = max(0, pray_amount-(sinner_count*10))
 	#	Update Resources
 	resource_manager.add_bread(availiable_food-total_food)
 	resource_manager.add_faith(pray_amount)

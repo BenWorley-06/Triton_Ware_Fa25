@@ -6,6 +6,8 @@ extends CanvasLayer
 @export var prophet_spawner_scene: PackedScene
 @export var character_scene: PackedScene
 @onready var prophet_spawn_location: Marker2D = $Prophet_Spawn_Location
+@onready var white_flash: TextureRect = $"white flash"
+@onready var day_counter: AnimatedSprite2D = $Indicators/day_counter
 
 
 @onready var button_container: MarginContainer = $button_container
@@ -15,11 +17,10 @@ extends CanvasLayer
 @onready var farm_button: Button = $MarginContainer/VBoxContainer/FarmButton
 @onready var marker_button: Button = $button_container/VBoxContainer/MarkerButton
 
-@onready var indicators: MarginContainer = $Indicators
-@onready var faith_bar: ProgressBar = $Indicators/HBoxContainer/VBoxContainer/faith_bar
-@onready var bread: Label = $Indicators/HBoxContainer/VBoxContainer/HBoxContainer/Bread
-@onready var population: Label = $Indicators/HBoxContainer/VBoxContainer/HBoxContainer/Population
-@onready var time_label: Label = $Indicators/HBoxContainer/time_label
+@onready var indicators: Node2D = $Indicators
+@onready var population: Label = $Indicators/HBoxContainer/Population
+@onready var bread: Label = $Indicators/HBoxContainer/Bread
+@onready var faith_bar: TextureProgressBar = $Indicators/faith_bar
 
 @export var t_data: TutorialData
 @onready var tutorial_container: MarginContainer = $tutorial_container
@@ -78,6 +79,13 @@ func _ready() -> void:
 	faith_bar.max_value=game.faith_win
 	seconds = game.day_timer;
 	old_day = 0;
+	handle_flash()
+	
+func handle_flash():
+	var tween = create_tween()
+	white_flash.modulate.a = 1.0
+	tween.tween_property(white_flash, "modulate:a", 0, 2)
+	tween.tween_callback(func(): white_flash.visible = false)
 
 func _process(delta: float) -> void:
 	update_display()
@@ -117,7 +125,8 @@ func update_stats():
 	faith_bar.value = resource_manager.faith
 	bread.text="Bread: %d"%resource_manager.bread
 	population.text="Population: %d"%resource_manager.population
-	time_label.text="Time:\n%d"%game.day_timer
+	if game.day<=7:
+		day_counter.frame=game.day-1
 	
 func set_tutorial_state(state: String):
 	if state=="over":

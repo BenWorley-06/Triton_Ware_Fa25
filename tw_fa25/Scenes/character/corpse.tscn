@@ -2,22 +2,21 @@
 
 [ext_resource type="Script" uid="uid://dpdx4byltrqrv" path="res://Scripts/corpse.gd" id="1_n68bf"]
 [ext_resource type="PackedScene" uid="uid://cfccc0mhd2c4r" path="res://Scenes/blood_particle.tscn" id="2_dnttv"]
-[ext_resource type="Texture2D" uid="uid://4ggls74chslx" path="res://Art/Temporary/minion_vance.webp" id="2_sda0q"]
+[ext_resource type="Texture2D" uid="uid://cj3bxhgm36f7m" path="res://Art/custom assets/characters/dead/grey_dead.png" id="3_v6gf7"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_eqq5c"]
 
 [node name="corpse" type="Area2D" groups=["corpse"]]
-scale = Vector2(1.52742, 1.52742)
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_n68bf")
 blood_scene = ExtResource("2_dnttv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-rotation = -1.5708
-scale = Vector2(0.0365022, 0.062951)
-texture = ExtResource("2_sda0q")
+texture_filter = 1
+position = Vector2(0, -5.23759)
+scale = Vector2(3.2, 3.2)
+texture = ExtResource("3_v6gf7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(7.20529, 5.14347)

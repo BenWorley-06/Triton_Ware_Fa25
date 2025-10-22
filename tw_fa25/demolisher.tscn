@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dr7wj5sucpq80" path="res://Scripts/demolisher.gd" id="1_21eog"]
 [ext_resource type="Texture2D" uid="uid://eg41w38eqey1" path="res://Art/Temporary/white_circle.png" id="2_dnaad"]
-[ext_resource type="Texture2D" uid="uid://vsj761gyofab" path="res://Art/Temporary/hand.png" id="3_pvi58"]
+[ext_resource type="Texture2D" uid="uid://j44curdgre7i" path="res://Art/custom assets/Hand/Hand.png" id="3_dnaad"]
 [ext_resource type="AudioStream" uid="uid://du5usipmju7l8" path="res://Sounds/slam.mp3" id="4_dnaad"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5jp6u"]
@@ -22,10 +22,10 @@ scale = Vector2(0.140786, -0.03636)
 texture = ExtResource("2_dnaad")
 
 [node name="hand" type="Sprite2D" parent="."]
-position = Vector2(126, -213)
-rotation = -3.04455
-scale = Vector2(0.63442, 0.63442)
-texture = ExtResource("3_pvi58")
+position = Vector2(117, -209)
+rotation = 0.23911
+scale = Vector2(3.01251, 3.01251)
+texture = ExtResource("3_dnaad")
 
 [node name="audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_dnaad")

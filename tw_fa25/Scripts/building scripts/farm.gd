@@ -1,7 +1,6 @@
 extends StaticBody2D
 class_name Farm
-
-@onready var sprite: AnimatedSprite2D = $sprite
+@onready var crops: Node2D = $crops
 @export var pickup_scene: PackedScene
 
 var max_state: int = 4
@@ -22,8 +21,15 @@ func _ready() -> void:
 	z_index=-1
 	original_state_change_time=state_change_time
 	state_change_time*=randf_range(0.8,2)
+	await get_tree().process_frame
+	for crop in crops.get_children():
+		crop.frame=0
+
+	
 
 func _process(delta: float) -> void:
+	if crops.global_position!=global_position:
+		crops.global_position=global_position
 	if growing:
 		change_timer += delta
 		if change_timer >= state_change_time:
@@ -32,7 +38,8 @@ func _process(delta: float) -> void:
 			growth_state = clamp(growth_state + 1, 0, max_state)
 			if growth_state == max_state:
 				request_harvest()
-	sprite.frame = growth_state
+		for crop in crops.get_children():
+			crop.frame=growth_state
 
 func request_harvest():
 	growing = false

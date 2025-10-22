@@ -26,3 +26,5 @@ class_name Character_Stats
 @export var steak_time: float = 6
 @export var talk_timer: float = 1
 @export var time_scared: float = 1
+
+@export var steal_distance: float = 20

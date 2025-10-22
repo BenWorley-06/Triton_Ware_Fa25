@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cah1gdlpwbn5i"]
+[gd_scene load_steps=58 format=3 uid="uid://cah1gdlpwbn5i"]
 
 [ext_resource type="Script" uid="uid://unpx8fm2f83l" path="res://Scripts/character - scripts/Character_Class.gd" id="1_3e1sl"]
 [ext_resource type="Script" uid="uid://c3i3i32v4ta6k" path="res://Scripts/character - scripts/character_stats.gd" id="2_i1l8f"]
@@ -9,11 +9,49 @@
 [ext_resource type="PackedScene" uid="uid://dmdfeb0e77u5p" path="res://streak_area.tscn" id="7_gjemp"]
 [ext_resource type="Texture2D" uid="uid://bdwbtvmdmi7yu" path="res://Art/Temporary/black_circle.png" id="8_kswrj"]
 [ext_resource type="PackedScene" uid="uid://gs61o36tu8px" path="res://blood_spawner.tscn" id="9_bp14d"]
-[ext_resource type="Texture2D" uid="uid://4ggls74chslx" path="res://Art/Temporary/minion_vance.webp" id="9_ojug4"]
 [ext_resource type="Script" uid="uid://b1ai862ae1s1y" path="res://Scripts/character - scripts/voicebox.gd" id="10_cjyvl"]
+[ext_resource type="Texture2D" uid="uid://bp8m2ut1nmjbj" path="res://Art/custom assets/characters/walking/front/blackwalk_front1.png" id="11_6uc6c"]
 [ext_resource type="Script" uid="uid://cvoucn6vtfcil" path="res://Scripts/sfx.gd" id="11_uo7r7"]
+[ext_resource type="Texture2D" uid="uid://cl5ei4erd0d80" path="res://Art/custom assets/characters/building/Front/blackbuild_front1.png" id="11_yd2k7"]
 [ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="12_0ipyx"]
+[ext_resource type="Texture2D" uid="uid://bf1bhorlrb8m3" path="res://Art/custom assets/characters/building/Front/blackbuild_front2.png" id="12_l4af4"]
+[ext_resource type="Texture2D" uid="uid://cs0ys5qrivoti" path="res://Art/custom assets/characters/walking/front/blackwalk_front2.png" id="12_wx8d1"]
+[ext_resource type="Texture2D" uid="uid://ccgrp14cw5n8c" path="res://Art/custom assets/characters/harvesting/Front/blackharvest_front1.png" id="13_cwmvx"]
+[ext_resource type="Texture2D" uid="uid://bhjg37r7x23k3" path="res://Art/custom assets/characters/walking/front/blackwalk_front3.png" id="13_gjemp"]
 [ext_resource type="PackedScene" uid="uid://dxc4mij87yw8w" path="res://sinner_marker.tscn" id="13_i1l8f"]
+[ext_resource type="Texture2D" uid="uid://bf0juu6krrohg" path="res://Art/custom assets/characters/harvesting/Front/blackharvest_front2.png" id="14_t2vvd"]
+[ext_resource type="Texture2D" uid="uid://bcc3d45f75551" path="res://Art/custom assets/characters/walking/front/greywalk_front1.png" id="14_uo7r7"]
+[ext_resource type="Texture2D" uid="uid://b31plahw8jdww" path="res://Art/custom assets/characters/walking/front/greywalk_front2.png" id="15_0ipyx"]
+[ext_resource type="Texture2D" uid="uid://coe3bi0ff8i4b" path="res://Art/custom assets/characters/killing/Front/blackkill_front1.png" id="15_xu82c"]
+[ext_resource type="Texture2D" uid="uid://be15gn8xd6nh7" path="res://Art/custom assets/characters/killing/Front/blackkill_front2.png" id="16_r2670"]
+[ext_resource type="Texture2D" uid="uid://cdctrwe0h0fyc" path="res://Art/custom assets/characters/building/Front/greybuild_front1.png" id="16_u6lid"]
+[ext_resource type="Texture2D" uid="uid://blwk24neiw3bd" path="res://Art/custom assets/characters/walking/front/greywalk_front3.png" id="16_yd2k7"]
+[ext_resource type="Texture2D" uid="uid://calsj5rffqo3x" path="res://Art/custom assets/characters/building/Front/greybuild_front2.png" id="17_6p5e5"]
+[ext_resource type="Texture2D" uid="uid://c4qnknranq54j" path="res://Art/custom assets/characters/killing/Front/blackkill_front3.png" id="17_ehdhx"]
+[ext_resource type="Texture2D" uid="uid://sn313v1gvuxy" path="res://Art/custom assets/characters/walking/front/whitewalk_front1.png" id="17_l4af4"]
+[ext_resource type="Texture2D" uid="uid://de3ndpt0w8c12" path="res://Art/custom assets/characters/streaking/Front/blackstreak_front1.png" id="18_oyep2"]
+[ext_resource type="Texture2D" uid="uid://dp54a7fw5milo" path="res://Art/custom assets/characters/walking/front/whitewalk_front2.png" id="18_ykovj"]
+[ext_resource type="Texture2D" uid="uid://cdo6hvdmbp326" path="res://Art/custom assets/characters/walking/front/whitewalk_front3.png" id="19_p7ocs"]
+[ext_resource type="Texture2D" uid="uid://c76i4m1ppmkks" path="res://Art/custom assets/characters/streaking/Front/blackstreak_front2.png" id="19_w7atx"]
+[ext_resource type="Texture2D" uid="uid://b3i4ss1p6x1nw" path="res://Art/custom assets/characters/streaking/Front/blackstreak_front3.png" id="20_7kdl2"]
+[ext_resource type="Texture2D" uid="uid://dt83koedelxwn" path="res://Art/custom assets/characters/building/Front/whitebuild_front1.png" id="21_cwmvx"]
+[ext_resource type="Texture2D" uid="uid://wu7jn44st1t6" path="res://Art/custom assets/characters/building/Front/whitebuild_front2.png" id="22_t2vvd"]
+[ext_resource type="Texture2D" uid="uid://bqhcj4mry808j" path="res://Art/custom assets/characters/harvesting/Front/greyharvest_front1.png" id="23_oyep2"]
+[ext_resource type="Texture2D" uid="uid://bmtgp0rhi4lhc" path="res://Art/custom assets/characters/harvesting/Front/greyharvest_front2.png" id="24_w7atx"]
+[ext_resource type="Texture2D" uid="uid://bpwwrjwuvcpe" path="res://Art/custom assets/characters/killing/Front/greykill_front1.png" id="25_7kdl2"]
+[ext_resource type="Texture2D" uid="uid://d0vfkwstmqgvq" path="res://Art/custom assets/characters/killing/Front/greykill_front2.png" id="26_mn21p"]
+[ext_resource type="Texture2D" uid="uid://ce8fd0b5fc0si" path="res://Art/custom assets/characters/killing/Front/greykill_front3.png" id="27_dova1"]
+[ext_resource type="Texture2D" uid="uid://cqukciykjqx0m" path="res://Art/custom assets/characters/streaking/Front/greystreak_front1.png" id="31_mn21p"]
+[ext_resource type="Texture2D" uid="uid://cptu5tgdec1pp" path="res://Art/custom assets/characters/streaking/Front/greystreak_front2.png" id="32_dova1"]
+[ext_resource type="Texture2D" uid="uid://l6u8jsgt5wmh" path="res://Art/custom assets/characters/harvesting/Front/whiteharvest_front1.png" id="33_1exli"]
+[ext_resource type="Texture2D" uid="uid://dgjdvjs8ca5xv" path="res://Art/custom assets/characters/streaking/Front/greystreak_front3.png" id="33_x6yew"]
+[ext_resource type="Texture2D" uid="uid://o8a25lboxoka" path="res://Art/custom assets/characters/harvesting/Front/whiteharvest_front2.png" id="34_x6yew"]
+[ext_resource type="Texture2D" uid="uid://p02ujodtf8va" path="res://Art/custom assets/characters/killing/Front/whitekill_front1.png" id="35_n5wpi"]
+[ext_resource type="Texture2D" uid="uid://dqrel4bkkwi3a" path="res://Art/custom assets/characters/killing/Front/whitekill_front2.png" id="36_lyot5"]
+[ext_resource type="Texture2D" uid="uid://d3dox4fbmv3o3" path="res://Art/custom assets/characters/killing/Front/whitekill_front3.png" id="37_m1mj4"]
+[ext_resource type="Texture2D" uid="uid://0508g0j4dm1d" path="res://Art/custom assets/characters/streaking/Front/whitestreak_front1.png" id="44_x6yew"]
+[ext_resource type="Texture2D" uid="uid://cpoinx8nnwggw" path="res://Art/custom assets/characters/streaking/Front/whitestreak_front2.png" id="45_n5wpi"]
+[ext_resource type="Texture2D" uid="uid://be8yrykh1gh6n" path="res://Art/custom assets/characters/streaking/Front/whitestreak_front3.png" id="46_lyot5"]
 
 [sub_resource type="Resource" id="Resource_px5sl"]
 script = ExtResource("2_i1l8f")
@@ -32,9 +70,205 @@ sleep_time = 4.0
 steak_time = 6.0
 talk_timer = 1.0
 time_scared = 1.0
+steal_distance = 20.0
 metadata/_custom_type_script = "uid://c3i3i32v4ta6k"
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_wfnr8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kswrj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_yd2k7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_l4af4")
+}],
+"loop": true,
+"name": &"black-building",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_cwmvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_t2vvd")
+}],
+"loop": true,
+"name": &"black-harvest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_xu82c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_r2670")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_ehdhx")
+}],
+"loop": true,
+"name": &"black-killing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_oyep2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_w7atx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_7kdl2")
+}],
+"loop": true,
+"name": &"black-streaking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_6uc6c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_wx8d1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_gjemp")
+}],
+"loop": true,
+"name": &"black-walking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_u6lid")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_6p5e5")
+}],
+"loop": true,
+"name": &"grey-building",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("23_oyep2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_w7atx")
+}],
+"loop": true,
+"name": &"grey-harvest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_7kdl2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_mn21p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_dova1")
+}],
+"loop": true,
+"name": &"grey-killing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("31_mn21p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_dova1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_x6yew")
+}],
+"loop": true,
+"name": &"grey-streaking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_uo7r7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_0ipyx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_yd2k7")
+}],
+"loop": true,
+"name": &"grey-walking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_cwmvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_t2vvd")
+}],
+"loop": true,
+"name": &"white-building",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("33_1exli")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_x6yew")
+}],
+"loop": true,
+"name": &"white-harvest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("35_n5wpi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_lyot5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_m1mj4")
+}],
+"loop": true,
+"name": &"white-killing",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("44_x6yew")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_n5wpi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_lyot5")
+}],
+"loop": true,
+"name": &"white-streaking",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_l4af4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_ykovj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_p7ocs")
+}],
+"loop": true,
+"name": &"white-walking",
+"speed": 5.0
+}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2mse5"]
 
@@ -66,10 +300,12 @@ position = Vector2(0, 45.2846)
 scale = Vector2(0.164815, 0.0957011)
 texture = ExtResource("8_kswrj")
 
-[node name="Sprite" type="Sprite2D" parent="."]
-position = Vector2(1, 1)
-scale = Vector2(0.0986301, 0.179402)
-texture = ExtResource("9_ojug4")
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -5.46033)
+scale = Vector2(8, 8)
+sprite_frames = SubResource("SpriteFrames_kswrj")
+animation = &"white-streaking"
 
 [node name="voicebox" type="AudioStreamPlayer2D" parent="."]
 script = ExtResource("10_cjyvl")

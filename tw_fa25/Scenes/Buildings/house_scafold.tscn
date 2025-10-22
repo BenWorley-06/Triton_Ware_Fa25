@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b2bacbsv6vksv"]
+[gd_scene load_steps=5 format=3 uid="uid://b2bacbsv6vksv"]
 
 [ext_resource type="Script" uid="uid://batttehfy8jdj" path="res://Scripts/building scripts/house_scafold.gd" id="1_ti147"]
-[ext_resource type="Texture2D" uid="uid://b8wvvrlufj5va" path="res://Art/Temporary/house_scafold.png" id="2_op5p7"]
+[ext_resource type="Texture2D" uid="uid://c1edmgyw11m3c" path="res://Art/custom assets/house/building_house.png" id="2_sljcn"]
+[ext_resource type="Texture2D" uid="uid://eg41w38eqey1" path="res://Art/Temporary/white_circle.png" id="3_wygym"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_op5p7"]
 
@@ -12,9 +13,18 @@ collision_mask = 2
 script = ExtResource("1_ti147")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.389186, 0.44714)
-texture = ExtResource("2_op5p7")
+position = Vector2(1.53117, 0)
+scale = Vector2(1.35717, 1.50298)
+texture = ExtResource("2_sljcn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(5.2065, 4.94112)
 shape = SubResource("RectangleShape2D_op5p7")
+
+[node name="shadow" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.458824)
+z_index = -10
+z_as_relative = false
+position = Vector2(1.53117, 21.4364)
+scale = Vector2(0.126643, 0.0976164)
+texture = ExtResource("3_wygym")
