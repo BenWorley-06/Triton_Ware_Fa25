@@ -381,7 +381,6 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_jf511")
-text = "Pickup"
 text = "Pickup [P]"
 
 [node name="DestroyButton" type="Button" parent="button_container/VBoxContainer"]
@@ -391,7 +390,6 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_jf511")
-text = "Destroy"
 text = "Destroy [D]"
 
 [node name="HouseButton" type="Button" parent="button_container/VBoxContainer"]
@@ -401,7 +399,6 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_jf511")
-text = "House"
 text = "House [B]"
 
 [node name="FarmButton" type="Button" parent="button_container/VBoxContainer"]
@@ -411,7 +408,6 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_jf511")
-text = "Farm"
 text = "Farm [F]"
 
 [node name="MarkerButton" type="Button" parent="button_container/VBoxContainer"]
@@ -421,7 +417,6 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_jf511")
-text = "MARKER"
 text = "Marker  [M]"
 
 [node name="GUI Background2" type="Sprite2D" parent="button_container"]
