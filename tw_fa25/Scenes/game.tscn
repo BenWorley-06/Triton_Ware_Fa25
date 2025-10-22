@@ -22,7 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://5dkarjg88tms" path="res://loss_layer.tscn" id="16_nnt18"]
 [ext_resource type="PackedScene" uid="uid://c8cksin46oc4k" path="res://gui.tscn" id="17_ewbju"]
 [ext_resource type="PackedScene" uid="uid://btlavy2wbou3w" path="res://win_layer.tscn" id="21_exi56"]
-[ext_resource type="Texture2D" uid="uid://c26i0d2pblryg" path="res://Art/Temporary/grass.png" id="23_mg4q0"]
+[ext_resource type="Texture2D" uid="uid://dtp744fllsclw" path="res://Art/custom assets/Backdrop.png" id="23_mg4q0"]
 
 [sub_resource type="Resource" id="Resource_ldgsr"]
 script = ExtResource("2_h4fw4")
@@ -73,15 +73,16 @@ position = Vector2(687, 233)
 script = ExtResource("4_7t8sx")
 
 [node name="top" type="CollisionShape2D" parent="world_bounds" groups=["world_boundaries"]]
+position = Vector2(8, 43)
 rotation = 3.14159
 shape = SubResource("WorldBoundaryShape2D_ebmjs")
 
 [node name="bottom" type="CollisionShape2D" parent="world_bounds" groups=["world_boundaries"]]
-position = Vector2(654, 649)
+position = Vector2(654, 604)
 shape = SubResource("WorldBoundaryShape2D_qxrlw")
 
 [node name="left" type="CollisionShape2D" parent="world_bounds" groups=["world_boundaries"]]
-position = Vector2(-123, 0)
+position = Vector2(-33, 113)
 rotation = 1.5708
 shape = SubResource("WorldBoundaryShape2D_wrm1d")
 
@@ -160,10 +161,10 @@ script = ExtResource("14_1phco")
 environment = SubResource("Environment_1phco")
 
 [node name="lava" parent="." instance=ExtResource("6_i6g32")]
-position = Vector2(130, 130)
+position = Vector2(209, 129)
 
 [node name="lava2" parent="." instance=ExtResource("6_i6g32")]
-position = Vector2(1045, 587)
+position = Vector2(961, 534)
 
 [node name="GUI" parent="." instance=ExtResource("17_ewbju")]
 
@@ -178,14 +179,13 @@ visible = false
 [node name="background" type="TextureRect" parent="."]
 z_index = -100
 z_as_relative = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -12.0
-offset_top = -9.0
-offset_right = 628.0
-offset_bottom = 351.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 1152.0
+offset_bottom = 628.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1.84046, 1.84046)
 texture = ExtResource("23_mg4q0")

@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6g38t7qihimf"]
+
+[ext_resource type="Texture2D" uid="uid://djxdit6lyaulu" path="res://Art/Temporary/trees.png" id="1_el68p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_slfv4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6hpk1"]
+atlas = ExtResource("1_el68p")
+region = Rect2(0, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3hic0"]
+atlas = ExtResource("1_el68p")
+region = Rect2(64, 0, 64, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yjby8"]
+atlas = ExtResource("1_el68p")
+region = Rect2(128, 0, 64, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_182br"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6hpk1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3hic0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yjby8")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="trees" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -7)
+scale = Vector2(1.78735, 2.26574)
+shape = SubResource("CircleShape2D_slfv4")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -53)
+scale = Vector2(1.10156, 1.10156)
+sprite_frames = SubResource("SpriteFrames_182br")
+frame = 1
+frame_progress = 0.211912

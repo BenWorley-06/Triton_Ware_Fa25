@@ -180,7 +180,7 @@ sprite_frames = SubResource("SpriteFrames_gtt4x")
 frame_progress = 0.324006
 
 [node name="path" type="Sprite2D" parent="."]
-modulate = Color(0.65098, 0.54902, 0.298039, 1)
+modulate = Color(1, 0.803922, 0.501961, 1)
 z_index = -50
 z_as_relative = false
 position = Vector2(-1.81878, 32.738)

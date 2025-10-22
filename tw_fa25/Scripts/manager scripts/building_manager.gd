@@ -16,7 +16,7 @@ func create_path(from: Vector2, to: Vector2) -> void:
 	# Create line and style it
 	var line := Line2D.new()
 	line.width = 28                                # wider
-	line.default_color = Color(0.65, 0.55, 0.3)
+	line.default_color = Color(1.0, 0.8039, 0.502)
 	line.z_as_relative = false
 	line.z_index = -50
 
