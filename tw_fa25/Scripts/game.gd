@@ -11,13 +11,14 @@ var character_scene = preload("res://Scenes/character/character.tscn")
 
 # ---- End day variables ----
 @onready var end_day_layer: CanvasLayer = $end_day
+@onready var start_day_layer: CanvasLayer = $start_day
 @onready var end_day_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Day
 @onready var faith_label: Label = $end_day/TextureRect/MarginContainer/VBoxContainer/Faith
 
 @onready var win_layer: CanvasLayer = $win_layer
 
 # ---- loss
-@onready var loss_layer: CanvasLayer = $loss_layer
+@onready var loss_layer: CanvasLayer = $loss_layer	
 
 # ---- Day/Night Tint Colors ----
 var morning_color: Color = Color(0.2, 0.3, 0.5, 0.5)
@@ -35,7 +36,9 @@ var has_won=false
 
 var passive_faith_loss = 5
 func _ready():
+	start_day_layer.update_labels(resource_manager.bread,resource_manager.faith)
 	print(resource_manager.bread)
+
 
 # ---- Process ----
 func _process(delta: float) -> void:

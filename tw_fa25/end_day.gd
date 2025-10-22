@@ -15,21 +15,23 @@ func _on_button_pressed() -> void:
 func end_day(bread_loss:int,faith_gain:int):
 	update_labels(bread_loss,faith_gain)
 	visible=true
-	var color = texture_rect.modulate
-	texture_rect.modulate.a=0
-	color.a=1
-	var tween = create_tween()
-	tween.tween_property(texture_rect, "modulate", color, 0.3)
 	
-func start_day():
-	var color = texture_rect.modulate
-	color.a=0
+	# Set initial alpha to 0 for all elements
+	var elements = [texture_rect, faith, bread, sinner, day, button]
+	for element in elements:
+		var color = element.modulate
+		color.a = 0
+		element.modulate = color
+	
+	# Create tween to fade in all elements simultaneously
+	var target_color = Color(1, 1, 1, 1)
 	var tween = create_tween()
-	tween.tween_property(texture_rect, "modulate", color, 0.3)
-	tween.tween_callback(func():
-		visible = false
-	)
-	texture_rect.modulate.a=1
+	tween.tween_property(texture_rect, "modulate", target_color, 0.3)
+	tween.parallel().tween_property(faith, "modulate", target_color, 0.3)
+	tween.parallel().tween_property(bread, "modulate", target_color, 0.3)
+	tween.parallel().tween_property(sinner, "modulate", target_color, 0.3)
+	tween.parallel().tween_property(day, "modulate", target_color, 0.3)
+	tween.parallel().tween_property(button, "modulate", target_color, 0.3)
 
 func update_labels(bread_loss:int,faith_gain:int):
 	day.text = "Day: %d" % game.day

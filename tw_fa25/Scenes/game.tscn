@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cifelub41grjx"]
+[gd_scene load_steps=32 format=3 uid="uid://cifelub41grjx"]
 
 [ext_resource type="Script" uid="uid://cssm568bylg6q" path="res://Scripts/game.gd" id="1_1l0tm"]
 [ext_resource type="PackedScene" uid="uid://cah1gdlpwbn5i" path="res://Scenes/character/character.tscn" id="1_ebmjs"]
@@ -22,7 +22,12 @@
 [ext_resource type="PackedScene" uid="uid://5dkarjg88tms" path="res://loss_layer.tscn" id="16_nnt18"]
 [ext_resource type="PackedScene" uid="uid://c8cksin46oc4k" path="res://gui.tscn" id="17_ewbju"]
 [ext_resource type="PackedScene" uid="uid://btlavy2wbou3w" path="res://win_layer.tscn" id="21_exi56"]
+<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://dtp744fllsclw" path="res://Art/custom assets/Backdrop.png" id="23_mg4q0"]
+=======
+[ext_resource type="Texture2D" uid="uid://c26i0d2pblryg" path="res://Art/Temporary/grass.png" id="23_mg4q0"]
+[ext_resource type="PackedScene" uid="uid://bqvkuy8wsgraa" path="res://start_day.tscn" id="24_vm72l"]
+>>>>>>> Stashed changes
 
 [sub_resource type="Resource" id="Resource_ldgsr"]
 script = ExtResource("2_h4fw4")
@@ -189,3 +194,5 @@ offset_bottom = 628.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("23_mg4q0")
+
+[node name="start_day" parent="." instance=ExtResource("24_vm72l")]

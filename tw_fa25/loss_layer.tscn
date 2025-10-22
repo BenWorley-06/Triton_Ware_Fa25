@@ -1,18 +1,23 @@
 [gd_scene load_steps=6 format=3 uid="uid://5dkarjg88tms"]
 
 [ext_resource type="Script" uid="uid://kijrrg4f2mej" path="res://loss_layer.gd" id="1_hu6et"]
+<<<<<<< Updated upstream
 [ext_resource type="Texture2D" uid="uid://cp8avt3se14hp" path="res://Art/Temporary/hell.png" id="2_4pddb"]
 [ext_resource type="Texture2D" uid="uid://bas1xrth3rvp1" path="res://Art/Temporary/you lost pixel.png" id="3_0nlmu"]
 [ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="3_ecr0y"]
 
 [sub_resource type="Theme" id="Theme_fyuus"]
 default_font = ExtResource("3_ecr0y")
+=======
+[ext_resource type="Texture2D" uid="uid://bdwbtvmdmi7yu" path="res://Art/Temporary/black_circle.png" id="2_4pddb"]
+>>>>>>> Stashed changes
 
 [node name="loss_layer" type="CanvasLayer"]
 visible = false
 script = ExtResource("1_hu6et")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+<<<<<<< Updated upstream
 modulate = Color(0.255659, 0.255659, 0.255659, 1)
 texture_filter = 1
 offset_right = 40.0
@@ -26,27 +31,62 @@ offset_top = 317.0
 offset_right = 544.0
 offset_bottom = 387.0
 scale = Vector2(2.50362, 2.50362)
+=======
+offset_left = -540.0
+offset_top = -505.0
+offset_right = 60.0
+offset_bottom = 95.0
+scale = Vector2(3.4, 2.76)
+texture = ExtResource("2_4pddb")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.5
+offset_top = -35.0
+offset_right = 52.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+>>>>>>> Stashed changes
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 
+<<<<<<< Updated upstream
 [node name="play_again" type="Button" parent="MarginContainer/VBoxContainer"]
 modulate = Color(0.709804, 0, 0.0117647, 1)
+=======
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+>>>>>>> Stashed changes
 layout_mode = 2
 theme = SubResource("Theme_fyuus")
 text = "Play Again"
 
+<<<<<<< Updated upstream
 [node name="start" type="Button" parent="MarginContainer/VBoxContainer"]
 modulate = Color(0.709804, 0, 0.0117647, 1)
+=======
+[node name="play_again" type="Button" parent="MarginContainer/VBoxContainer"]
+>>>>>>> Stashed changes
 layout_mode = 2
 theme = SubResource("Theme_fyuus")
 text = "Menu"
 
+<<<<<<< Updated upstream
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(576, 235)
 scale = Vector2(3.76782, 3.76782)
 texture = ExtResource("3_0nlmu")
+=======
+[node name="start" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Main Menu"
+>>>>>>> Stashed changes
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/play_again" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/play_again" to="." method="_on_play_again_pressed"]

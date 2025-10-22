@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqvkuy8wsgraa"]
+
+[ext_resource type="Script" uid="uid://buo7or1vfjl16" path="res://start_day.gd" id="1_o8pi2"]
+[ext_resource type="Texture2D" uid="uid://bdwbtvmdmi7yu" path="res://Art/Temporary/black_circle.png" id="1_x4l0g"]
+[ext_resource type="FontFile" uid="uid://6pgigoxourx" path="res://Art/fonts/Minecraft.ttf" id="1_xuetn"]
+
+[sub_resource type="Theme" id="Theme_x4l0g"]
+default_font = ExtResource("1_xuetn")
+
+[node name="start_day" type="CanvasLayer"]
+script = ExtResource("1_o8pi2")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -466.0
+offset_top = -244.0
+offset_right = 1638.0
+offset_bottom = 937.0
+texture = ExtResource("1_x4l0g")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -21.0
+offset_top = -38.0
+offset_right = 21.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Day" type="Label" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_x4l0g")
+text = "Day 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Faith" type="Label" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_x4l0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Bread" type="Label" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_x4l0g")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sinner" type="Label" parent="MarginContainer/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_x4l0g")
+horizontal_alignment = 1
+vertical_alignment = 1

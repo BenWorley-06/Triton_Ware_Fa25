@@ -143,7 +143,58 @@ position = Vector2(18.613, 6.68904)
 scale = Vector2(0.190455, 0.190455)
 texture = ExtResource("17_s1fa6")
 
+<<<<<<< Updated upstream
 [node name="Indicators" type="Node2D" parent="."]
+=======
+[node name="Day1" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.097, 1.097)
+texture = ExtResource("5_78ls4")
+
+[node name="Day2" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("6_ia15a")
+
+[node name="Day3" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("7_nf4fc")
+
+[node name="Day4" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("8_vwnqe")
+
+[node name="Day5" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("9_fxds3")
+
+[node name="Day6" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("10_s1fa6")
+
+[node name="Day7" type="Sprite2D" parent="Days"]
+position = Vector2(2641.34, -1105.89)
+scale = Vector2(1.09675, 1.09675)
+texture = ExtResource("11_xt5h2")
+
+[node name="Hand" type="Node2D" parent="."]
+position = Vector2(956, 69)
+rotation = -1.5708
+scale = Vector2(0.109508, 0.080804)
+
+[node name="arrow" type="Sprite2D" parent="Hand"]
+modulate = Color(1, 1, 1, 0.545098)
+z_index = 60
+z_as_relative = false
+position = Vector2(272.342, -0.000976563)
+texture = ExtResource("5_u77ya")
+
+[node name="Indicators" type="MarginContainer" parent="."]
+>>>>>>> Stashed changes
 z_index = 120
 z_as_relative = false
 position = Vector2(946, 29)
@@ -331,6 +382,7 @@ layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_jf511")
 text = "Pickup"
+text = "Pickup [P]"
 
 [node name="DestroyButton" type="Button" parent="button_container/VBoxContainer"]
 modulate = Color(0.813172, 0.678178, 0.364068, 1)
@@ -340,6 +392,7 @@ layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_jf511")
 text = "Destroy"
+text = "Destroy [D]"
 
 [node name="HouseButton" type="Button" parent="button_container/VBoxContainer"]
 modulate = Color(0.813172, 0.678178, 0.364068, 1)
@@ -349,6 +402,7 @@ layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_jf511")
 text = "House"
+text = "House [B]"
 
 [node name="FarmButton" type="Button" parent="button_container/VBoxContainer"]
 modulate = Color(0.813172, 0.678178, 0.364068, 1)
@@ -358,6 +412,7 @@ layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_jf511")
 text = "Farm"
+text = "Farm [F]"
 
 [node name="MarkerButton" type="Button" parent="button_container/VBoxContainer"]
 modulate = Color(0.813172, 0.678178, 0.364068, 1)
@@ -367,6 +422,7 @@ layout_mode = 2
 mouse_filter = 1
 theme = SubResource("Theme_jf511")
 text = "MARKER"
+text = "Marker  [M]"
 
 [node name="GUI Background2" type="Sprite2D" parent="button_container"]
 z_index = 100
